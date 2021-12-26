@@ -1,0 +1,16 @@
+{
+  "name": "election-voting-system",
+  "version": "1.0.0",
+  "description": "Major project",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node backend/server.js"
+  },
+  "author": "Saurav, irfan, prateek",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.3"
+  }
+}
