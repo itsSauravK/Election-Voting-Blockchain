@@ -7,7 +7,7 @@ exports.addElection = catchAsyncError(async (req, res, next) => {
         success: true,
         message: `route working`
     })  
-})
+} )
 
 
 //function to show one election /api/election/:id    - can be accessed by user and admin
