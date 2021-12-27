@@ -23,3 +23,18 @@ SMTP_FROM_NAME = Admin
 > Put your own JWT_SECRET, SMTP_AUTH_USER, SMTP_AUTH_PASS
 
 `npm start` at the root folder to start the application  
+
+# To contribute 
+
+## Setting up Branch
+```
+git checkout -b <branch name>
+git push --set-upstream origin <branch name>
+
+```
+
+## If you are behind main branch in commit, run this
+
+`git pull origin master`
+
+>There might be conflicts which you have to fix manually
