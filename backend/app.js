@@ -11,9 +11,10 @@ app.use(cookieParser());
 
 //Importing routes
 const users = require('./routes/user')
+const routes = require('./routes/route')
 
 app.use('/api/election', users )
-
+app.use('/api/election', routes)
 
 //Middleware to handle errors
 app.use(errorMiddleware);
