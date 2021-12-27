@@ -33,8 +33,10 @@ git push --set-upstream origin <branch name>
 
 ```
 
-## If you are behind main branch in commit, run this
+## If you are behind main branch in commits, run this
 
 `git pull origin master`
+
+After you have pushed your commit. Go to github, repository and create a pull request
 
 >There might be conflicts which you have to fix manually
