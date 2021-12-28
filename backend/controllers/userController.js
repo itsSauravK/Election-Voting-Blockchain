@@ -7,6 +7,7 @@ const sendEmail = require('../utils/sendEmail');
 
 const crypto = require('crypto');
 const { send } = require('process');
+const user = require('../models/user');
 
 
 //Access -> Admin
@@ -151,9 +152,29 @@ exports.allUsers = catchAsyncError( async (req, res, next) => {
     })
 })
 
-//Vote
+//Vote a candidate
 //Acess -> allusers
 // api/election/vote
+exports.vote = catchAsyncError( async( req, res, next) => {
+
+    const userId = req.user._id;
+    //console.log(req.user);
+    const newUserData = {
+        hasVoted: true
+    }
+
+    const user = await User.findByIdAndUpdate(userId, newUserData, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+
+    res.status(200).json({
+        success: true,
+        user
+    })
+})
+
 
 //Delete a user 
 //Access -> admin
@@ -167,8 +188,6 @@ exports.deleteUser = catchAsyncError( async (req, res, next) => {
     }
 
     await user.remove();
-
-    //Remove avatar from cloudinary
 
     res.status(200).json({
         success: true,
