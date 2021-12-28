@@ -48,14 +48,15 @@ userSchema.pre('save', async function(next) {
         next()
     }
 
-    this.otp = await bcrypt.hash(this.otp, 10)
+   //this.otp = await bcrypt.hash(this.otp, 10)
 })
 
 //Compare user password
 userSchema.methods.compareOtp = async function(enteredOtp) {
     
-    console.log(crypto.createHash('sha256').update(enteredOtp).digest('hex')+ "  "+ this.otp);
-    return await bcrypt.compare(enteredOtp, this.otp);
+   // console.log(crypto.createHash('sha256').update(enteredOtp).digest('hex')+ "  "+ this.otp);
+   // return await bcrypt.compare(enteredOtp, this.otp);
+   return(enteredOtp == this.otp)
 }
 
 // Return jsonwebtoken 
@@ -69,15 +70,14 @@ userSchema.methods.getJwtToken = function () {
 userSchema.methods.getOtp = function () {
 
     //genereate otp
-    const newOtp = crypto.randomBytes(5).toString('hex');
+    this.otp = crypto.randomBytes(5).toString('hex');
 
     //hashing the otp
-    this.otp = crypto.createHash('sha256').update(newOtp).digest('hex');
-
+    //this.otp = crypto.createHash('sha256').update(newOtp).digest('hex');
+    //this.otp = newOtp;
     //set otp expire time
-    this.otpExpire = Date.now() + 300 * 60 * 1000;  //5mins
-    console.log(newOtp);
-    return newOtp;
+    this.otpExpire = Date.now() + 5 * 60 * 1000;  //5mins
+    return this.otp;
 
 }
 

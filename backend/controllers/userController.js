@@ -55,7 +55,7 @@ exports.generateOTP = catchAsyncError( async (req, res, next) => {
     const user = await User.findOne({email});
 
     if(!user) {
-        return next(new ErrorHandler('Invalid Email or password', 401));
+        return next(new ErrorHandler('Invalid Email', 401));
     }
 
     //Generating Otp
@@ -105,7 +105,7 @@ exports.loginUser = catchAsyncError( async(req, res, next) =>{
         otpExpire: { $gt: Date.now() }
     }).select('+otp');;
 
-    console.log(user);
+    //console.log(user);
     // console.log(user.createdAt + "      " + user.otpExpire);
     if(!user) {
         return next( new ErrorHandler('Otp is invalid or expired or email id is wrong', 400))
@@ -125,7 +125,17 @@ exports.loginUser = catchAsyncError( async(req, res, next) =>{
 //Logout a user
 //Access -> allusers
 // api/election/logout
+exports.logoutUser = catchAsyncError( async (req, res, next) => {
+    res.cookie('token', null, {
+        expires: new Date(Date.now()),
+        httpOnly: true
+    })
 
+    res.status(200).json({
+        success: true,
+        message: 'Logged out'
+    })
+})
 
 
 //Get all users
