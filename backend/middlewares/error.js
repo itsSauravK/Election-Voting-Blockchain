@@ -20,11 +20,11 @@ module.exports = (err, req, res, next ) => {
             error = new ErrorHandler(message, 400);
         }
 
-        //Handling duplicate key error. Registering with same email
-        if(err.code = 11000) {
-            const message = `Duplicate ${Object.keys(err.keyValue)} entered`;
-            error = new ErrorHandler(message, 400);
-        }
+        // //Handling duplicate key error. Registering with same email
+        // if(err.code = 11000) {
+        //     const message = `Duplicate ${Object.keys(err.keyValue)} entered`;
+        //     error = new ErrorHandler(message, 400);
+        // }
 
         //Handling wrong JWT token
         if(err.name === 'JsonWebTokenError') {

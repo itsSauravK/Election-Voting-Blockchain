@@ -36,9 +36,6 @@ exports.registerUser = catchAsyncError( async (req, res, next) => {
 })
 
 
-
-
-
 //Access -> Everyone
 //Route -> /api/election/generateOtp
 //Description -> Generating Otp to login 
@@ -88,4 +85,83 @@ exports.generateOTP = catchAsyncError( async (req, res, next) => {
         return(next( new ErrorHandler('Internal Server Error', 500)));
     }
   
+})
+
+
+//Login a user
+//Access -> everyone
+// api/election/login
+exports.loginUser = catchAsyncError( async(req, res, next) =>{
+
+    const {email, otp} = req.body;
+
+    if(!email || !otp) {
+        return next(new ErrorHandler('Please enter email and otp'));
+    }
+
+    //finding user in database
+    const user = await User.findOne({
+        email,
+        otpExpire: { $gt: Date.now() }
+    }).select('+otp');;
+
+    console.log(user);
+    // console.log(user.createdAt + "      " + user.otpExpire);
+    if(!user) {
+        return next( new ErrorHandler('Otp is invalid or expired or email id is wrong', 400))
+    }
+    
+    //checking otp is correct or not
+    const isOtpMatched = await user.compareOtp(otp);
+    console.log(isOtpMatched);
+    if(!isOtpMatched){
+        return next(new ErrorHandler('Invalid Email or otp', 401));
+    }
+
+    sendToken(user, 200, res);
+})
+
+
+//Logout a user
+//Access -> allusers
+// api/election/logout
+
+
+
+//Get all users
+//Access -> admin
+// api/election/allUsers
+exports.allUsers = catchAsyncError( async (req, res, next) => {
+
+    const users= await User.find();
+
+    res.status(200).json({
+        success: true,
+        users
+    })
+})
+
+//Vote
+//Acess -> allusers
+// api/election/vote
+
+//Delete a user 
+//Access -> admin
+//api/election/delete/:id
+exports.deleteUser = catchAsyncError( async (req, res, next) => {
+
+    const user = await User.findById(req.params.id);
+
+    if(!user) {
+        return next(new ErrorHandler(`User not found with id ${req.params.id}`))
+    }
+
+    await user.remove();
+
+    //Remove avatar from cloudinary
+
+    res.status(200).json({
+        success: true,
+    })
+
 })
