@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema({
     },
     otp: {
         type: String,
-        required: [true, 'Please enter your otp'],
         select: false
     },
     otpExpire: String,
@@ -33,7 +32,7 @@ const userSchema = new mongoose.Schema({
     },
     hasVoted: {
         type: Boolean,
-        defualt: false
+        default: false
     },
     electionOngoing: {
         type: Boolean,
@@ -64,7 +63,7 @@ userSchema.methods.getJwtToken = function () {
     } )  //store id as paylod
 }
 
-//Generate password reset token
+//Generate OTP
 userSchema.methods.getOtp = function () {
 
     //genereate otp
