@@ -158,7 +158,7 @@ exports.allUsers = catchAsyncError( async (req, res, next) => {
 exports.vote = catchAsyncError( async( req, res, next) => {
 
     const userId = req.user._id;
-    //console.log(req.user);
+  //  console.log(req.user._id);
     const newUserData = {
         hasVoted: true
     }
@@ -193,4 +193,26 @@ exports.deleteUser = catchAsyncError( async (req, res, next) => {
         success: true,
     })
 
+})
+
+//Check if there is an ongoing election where user can vote
+//Access -> All users
+//api/election/electionStatus
+exports.electionStatus = catchAsyncError( async (req, res, next) => {
+
+    const user = await User.findById(req.user._id);
+    //console.log(user);
+    if(user.electionOngoing){
+        res.status(200).json({
+            success: true,
+            message: "Election ongoing",
+            user
+        })
+    }
+        res.status(200).json({
+            success: true,
+            message: "No election ongoing",
+            user
+        })
+    
 })
