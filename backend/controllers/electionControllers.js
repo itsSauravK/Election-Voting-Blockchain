@@ -36,7 +36,7 @@ exports.startElection = catchAsyncError(async (req, res, next) => {
         electionEmail(user, "Election has started. Login to vote", next);
 
         //Updating each user ongoing variable to true
-        updateUser(user);
+        updateUser(user, true);
     });
 
     res.status(200).json({
@@ -45,28 +45,6 @@ exports.startElection = catchAsyncError(async (req, res, next) => {
 
 })
 
-async function updateUser(user){
-
-    await User.findByIdAndUpdate(user.id, {electionOngoing: true}, {
-            new: true,
-            runValidators: true,
-            useFindAndModify: false
-        })
-}
-//function to send email that election has started
-async function electionEmail(user, message ,next){
-    
-    try{
-        await sendEmail({
-            email: user.email,
-            subject: "Election",
-            message
-        })
-
-    }catch(error){
-        return(next( new ErrorHandler('Internal Server Error', 500)));
-    }
-}
 
 //Function to show current election
 // => api/electron/showElection
@@ -90,7 +68,59 @@ exports.showCurrentElection = catchAsyncError(async (req, res, next) => {
 //Function to end election
 // => api/election/endElection
 // admin access
+exports.endElection = catchAsyncError(async (req, res, next) => {
 
+    let { candidates } = req.body;
+
+    const election = await Election.findOne({isOngoing:true});
+
+    if(!election){
+        return next(new ErrorHandler('No ongoing elections', 401));
+    }
+    //make election ongoing false in user model
+    const users = await User.find();
+    let isDraw = false;
+    users.forEach(user => {
+        
+        //sending an email to each user that election has ended
+        electionEmail(user, `Election has ended. Visit http://localhost:4000/api/election/${election.id}`, next);
+
+        //Updating each user ongoing variable to false
+        updateUser(user, false);
+    });
+
+    //sort canddiates
+
+    candidates = sortCandidate(candidates, next);
+
+    //checking if there is a draw 
+
+    if(candidates[candidates.length - 2].votes == candidates[candidates.length - 1].votes){
+        isDraw = true;
+        
+    }
+
+    //update in datbase 
+
+    const newData = {
+        isOngoing: false,
+        candidates : candidates,
+        isDraw: isDraw
+    }
+    
+    const updatedElection = await Election.findByIdAndUpdate(election.id, newData,{
+        
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    });
+
+    res.status(200).json({
+        success:true,
+        updatedElection
+    })
+
+})
 
 //function to show one election result
 ///api/election/:id    
@@ -125,3 +155,37 @@ exports.showAllElection = catchAsyncError(async (req, res, next) => {
         elections
     })
 })
+
+//function to chcnage user onGoing
+async function updateUser(user, bool){
+
+    await User.findByIdAndUpdate(user.id, {electionOngoing: bool}, {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false
+        })
+}
+//function to send email that election has started
+async function electionEmail(user, message ,next){
+    
+    try{
+        await sendEmail({
+            email: user.email,
+            subject: "Election",
+            message
+        })
+
+    }catch(error){
+        return(next( new ErrorHandler('Internal Server Error', 500)));
+    }
+}
+
+//function to find winner
+function sortCandidate(candidates, next){
+
+    candidates.sort((a,b) => a.votes - b.votes);
+    return candidates;
+    //arr.sort((a,b) => new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime());
+
+
+}
