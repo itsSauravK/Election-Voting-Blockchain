@@ -28,16 +28,19 @@ const productSchema = new mongoose.Schema({
 
     },
     winner: {
+
+        isDraw: {
+            type: Boolean,
+            default: false
+        },  //to check if election is draw or not
         winnerName: String,
         winnerVotes: Number,
         winnerImage: {
             public_id: {
                 type: String,
-                required: true
             },
             url: {
                 type: String,
-                required: true
             }
         }
     },
@@ -51,20 +54,18 @@ const productSchema = new mongoose.Schema({
         image: {
             public_id: {
                 type: String,
-                required: true
             },
             url: {
                 type: String,
-                required: true
             }
         }
     } ],
-
-    isDraw: {
-        type: boolean,
-        default: false
-    },
     
+    isOngoing: {  //to check if election is ongoing
+        type: Boolean,
+        default: true
+    },
+
     createdAt: {
         type: Date,
         default: Date.now
