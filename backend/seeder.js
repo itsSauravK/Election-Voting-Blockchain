@@ -7,6 +7,8 @@ const User = require('./models/user');
 const { deleteUser } = require('./controllers/userController');
 const {emails} = require('./data/data')
 
+const sendEmail = require('./utils/sendEmail');
+
 //deleting all users
 async function deleteUsers(){
     await User.deleteMany();
@@ -26,6 +28,16 @@ async function registered(email){
     const user = await User.create(
         email
     )
+    try{
+        await sendEmail({
+            email: user.email,
+            subject: "Election",
+            message: "Account has been registered"
+        })
+
+    }catch(error){
+        return(next( new ErrorHandler('Internal Server Error', 500)));
+    }
 }
 
 //handle uncaught exceptions
