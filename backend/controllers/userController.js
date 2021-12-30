@@ -206,10 +206,12 @@ exports.electionStatus = catchAsyncError( async (req, res, next) => {
     if(user.electionOngoing){
             message: "Election ongoing";
     
-        res.status(200).json({
-            success: true,
-            message,
-            user
-        })
+        
     }
+    res.status(200).json({
+        success: true,
+        message,
+        user
+    })
+    
 })

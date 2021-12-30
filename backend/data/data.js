@@ -1,7 +1,7 @@
 exports.emails = [{
     email: "as@gmail.com",
     name: "as",
-    role: "Admin"
+    role: "admin"
 },{
     email: "as1@gmail.com",
     name: "as1"
