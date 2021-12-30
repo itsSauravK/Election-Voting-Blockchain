@@ -27,23 +27,6 @@ const productSchema = new mongoose.Schema({
         required: [true, 'Please enter election description'],
 
     },
-    // winner: {
-
-    //     isDraw: {
-    //         type: Boolean,
-    //         default: false
-    //     },  //to check if election is draw or not
-    //     winnerName: String,
-    //     winnerVotes: Number,
-    //     winnerImage: {
-    //         public_id: {
-    //             type: String,
-    //         },
-    //         url: {
-    //             type: String,
-    //         }
-    //     }
-    // },
     candidates: [ {
         name: String,
         votes: Number,
