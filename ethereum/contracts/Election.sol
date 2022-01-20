@@ -10,10 +10,12 @@ contract ElectionFactory{
     address public deployedElection;
     address[] public elections;
     uint public count = 0;
+    uint i;
 
     function createElection(string memory name) public{
         require(count<1);
         deployedElection = address(new Election(name, msg.sender));
+        //elections[i++] = deployedElection;
         elections.push(deployedElection);
         count++;
     }
