@@ -22,7 +22,21 @@ SMTP_FROM_NAME = Admin
 
 > Put your own JWT_SECRET, SMTP_AUTH_USER, SMTP_AUTH_PASS
 
-`npm start` at the root folder to start the application  
+`npm start` at the root folder to start the backend of the application  
+
+Go to root folder and make .env file
+## .env variables
+
+ACCOUNT_MNEMONIC=
+RINKEBY_ENDPOINT=
+CONTRACT = 
+
+> Put your own account mnemoic and rinkeby endpoint
+
+### To get the contract address, do the following in root folder
+
+ `node ethereum/compile.js`
+ `node ethereum/deploy.js`
 
 # To contribute 
 
