@@ -4,7 +4,10 @@
   "description": "Major project",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/server.js"
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Saurav, irfan, prateek",
   "license": "ISC",
@@ -24,5 +27,9 @@
     "solc": "^0.8.11",
     "validator": "^13.7.0",
     "web3": "^1.7.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "nodemon": "^2.0.15"
   }
 }

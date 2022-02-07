@@ -15,7 +15,7 @@ const user = require('../models/user');
 //Description -> Register a user 
 exports.registerUser = catchAsyncError( async (req, res, next) => {
 
-    const { name, email } = req.body;
+    const { name, email, eAddress } = req.body;
     if(!email){
 
         res.status(200).json({
@@ -28,6 +28,8 @@ exports.registerUser = catchAsyncError( async (req, res, next) => {
     const user = await User.create({
         name,
         email,
+        eAddress
+        
     })
     res.status(200).json({
         success:true,
