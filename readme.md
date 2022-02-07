@@ -1,7 +1,7 @@
 # Instructions to run the project
 
 `npm i` at the root folder
-
+`npm i` in the frontend folder
 Go to backend/config/ and make a file 'config.env'
 
 ## config.env variables  
@@ -23,6 +23,8 @@ SMTP_FROM_NAME = Admin
 > Put your own JWT_SECRET, SMTP_AUTH_USER, SMTP_AUTH_PASS
 
 `npm start` at the root folder to start the backend of the application  
+`npm run client` to start the fronend
+`npm run dev` to start both frontend and backend
 
 Go to root folder and make .env file
 ## .env variables
