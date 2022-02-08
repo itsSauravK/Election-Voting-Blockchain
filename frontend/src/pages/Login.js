@@ -42,7 +42,6 @@ const Login = () => {
             })
             notify('Logged in succesfully', 'success');
             setUser(response.data.user);
-            console.log(user);
         }catch(err){
             notify(err.response.data.errMessage, 'error');
         }
@@ -54,7 +53,6 @@ const Login = () => {
         if(user){
             navigate('/');
         }
-        console.log(user);
         
     },[user]);
     return(
