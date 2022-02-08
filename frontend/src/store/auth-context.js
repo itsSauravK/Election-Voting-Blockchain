@@ -4,20 +4,39 @@ import {toast} from 'react-toastify'
 import React from 'react'
 import Loading from "../components/Loading";
 import factory from '../ethereum/factory'
+import web3 from "../ethereum/web3";
 const AuthContext = React.createContext({
     user : {},
     election : '',
     loading: false,
+    validAccount: false,
     setUser: () => {},
-    notify:() => {}
+    notify:() => {},
+    getAccount: () =>{},
+    setElection: () => {}
 })
 
 export const AuthContextProvider = (props) => {
 
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(false);
-    let election;
+    const [validAccount, setValidAccount] = useState(false);
+    const [election, setElection] = useState('0x0000000000000000000000000000000000000000');
+    let account;
     
+    window.ethereum.on('accountsChanged', function (accounts) {
+        // Time to reload your interface with accounts[0]!
+        getAccount();
+  })
+  async function getAccount() {
+    const accounts = await window.ethereum.enable();
+    account = accounts[0];
+    if(user){
+      //accounts = await web3.eth.getAccounts();
+      setValidAccount(accounts[0].toUpperCase() === user.eAddress.toUpperCase()) 
+    }
+    // do something with new account here
+  }
     useEffect( ()=> {
         console.log('useEffect');
         (async () => {
@@ -27,22 +46,34 @@ export const AuthContextProvider = (props) => {
                 withCredentials: true,
             });
             setUser(response.data.user);
-            console.log(user);
             }
             catch(err){
 
             }
             
+                const accounts = await web3.eth.getAccounts();
+                account = accounts[0]
+              
         })()
+        
         setLoading(false);
         }, [setUser])
     
     useEffect( async () => {
         setLoading(true);
-        election = await factory.methods.deployedElection().call();
+        setElection(await factory.methods.deployedElection().call());
         console.log(election);
         setLoading(false);
-    },[election])
+    },[])
+
+    // useEffect( async() => {
+    //     if(user){
+    //         const accounts = await web3.eth.getAccounts();
+    //         setValidAccount(accounts[0].toUpperCase() === user.eAddress.toUpperCase()) 
+    //         console.log(validAccount)
+    //       }
+    // },[account])
+
 
     const notify = (message, status) => {
 
@@ -72,7 +103,10 @@ export const AuthContextProvider = (props) => {
                 setUser: setUser,
                 notify: notify,
                 election: election,
-                loading: loading
+                loading: loading,
+                validAccount: validAccount,
+                getAccount: getAccount,
+                setElection: setElection
             }} >
                 {props.children}
         </AuthContext.Provider>}

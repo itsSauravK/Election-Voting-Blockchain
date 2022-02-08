@@ -15,15 +15,13 @@ const LandingPage = () => {
             notify('Please login first','error');
             //navigate('/login');
         }
-        if(user)
-        console.log(user.role);
     },[user])
     
     return(
         <>
             {/* No user */}
             {!user&&<Link to ='/login'><button>Login</button></Link>}
-            
+
             {/*User and election ongoing */}
             {user&& user.electionOngoing && 
             <Link to= '/election'><button>Vote now</button></Link>}
@@ -34,10 +32,9 @@ const LandingPage = () => {
 
             {/* Admin role and no election ongoing */}
             {user && user.role==='admin' && !user.electionOngoing &&
-             <Link to= '/startElection'><button>Start Election</button></Link> }
+             <Link to= '/addElection'><button>Start Election</button></Link> }
 
 
-            
             {!!election && <p>wrwr</p>}
             <p>Landing page</p>
         </>

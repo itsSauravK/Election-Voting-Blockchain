@@ -1,7 +1,7 @@
 import './App.css';
 import Login from './pages/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SideBar from './components/Sidebar';
@@ -11,10 +11,11 @@ import Loading from './components/Loading';
 import Election from './pages/Election';
 import AddElection from './pages/AddElection';
 import AddCandidate from './pages/AddCandidate';
+import web3 from 'web3';
+import AuthContext from './store/auth-context';
 
 function App() {
-
-  
+      
   return (
     <BrowserRouter>
     

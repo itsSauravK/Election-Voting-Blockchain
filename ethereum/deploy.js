@@ -3,7 +3,7 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 const Web3 = require("web3");
 const mnemonicPhrase = process.env.ACCOUNT_MNEMONIC;
 const network = process.env.RINKEBY_ENDPOINT;
-const compiledFactory = require('./build/ElectionFactory.json');
+const compiledFactory = require('../frontend/src/ethereum/build/ElectionFactory.json');
 
 const provider = new HDWalletProvider(
     mnemonicPhrase,
