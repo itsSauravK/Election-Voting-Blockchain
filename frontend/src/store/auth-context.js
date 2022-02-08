@@ -3,8 +3,11 @@ import axios from 'axios';
 import {toast} from 'react-toastify'
 import React from 'react'
 import Loading from "../components/Loading";
+import factory from '../ethereum/factory'
 const AuthContext = React.createContext({
     user : {},
+    election : '',
+    loading: false,
     setUser: () => {},
     notify:() => {}
 })
@@ -13,6 +16,7 @@ export const AuthContextProvider = (props) => {
 
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(false);
+    let election;
     
     useEffect( ()=> {
         console.log('useEffect');
@@ -23,6 +27,7 @@ export const AuthContextProvider = (props) => {
                 withCredentials: true,
             });
             setUser(response.data.user);
+            console.log(user);
             }
             catch(err){
 
@@ -31,6 +36,13 @@ export const AuthContextProvider = (props) => {
         })()
         setLoading(false);
         }, [setUser])
+    
+    useEffect( async () => {
+        setLoading(true);
+        election = await factory.methods.deployedElection().call();
+        console.log(election);
+        setLoading(false);
+    },[election])
 
     const notify = (message, status) => {
 
@@ -58,7 +70,9 @@ export const AuthContextProvider = (props) => {
             value={{
                 user: user,
                 setUser: setUser,
-                notify: notify
+                notify: notify,
+                election: election,
+                loading: loading
             }} >
                 {props.children}
         </AuthContext.Provider>}

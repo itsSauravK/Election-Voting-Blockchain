@@ -8,29 +8,37 @@ import factory from '../ethereum/factory'
 
 const LandingPage = () => {
 
-    const {user, notify} = useContext(AuthContext);
+    const {user, notify, loading, election} = useContext(AuthContext);
     const navigate = useNavigate();
     useEffect(  () =>{
         if(!user){
             notify('Please login first','error');
             //navigate('/login');
         }
+        if(user)
+        console.log(user.role);
     },[user])
-    useEffect( async () => {
-        const election = await factory.methods.deployedElection().call();
-        console.log(election)
-    })
+    
     return(
         <>
+            {/* No user */}
             {!user&&<Link to ='/login'><button>Login</button></Link>}
-            {user&&
-                //check if election has started
-                    //vote 
-                //election not started
-                    //add if admin
-                    //display message if user
-                    <p>Welcome</p>
-            }
+            
+            {/*User and election ongoing */}
+            {user&& user.electionOngoing && 
+            <Link to= '/election'><button>Vote now</button></Link>}
+
+            {/* User role and no election ongoing */}
+            {user && user.role==='user' && !user.electionOngoing && 
+            <p>No election ongoing</p>}
+
+            {/* Admin role and no election ongoing */}
+            {user && user.role==='admin' && !user.electionOngoing &&
+             <Link to= '/startElection'><button>Start Election</button></Link> }
+
+
+            
+            {!!election && <p>wrwr</p>}
             <p>Landing page</p>
         </>
     )
