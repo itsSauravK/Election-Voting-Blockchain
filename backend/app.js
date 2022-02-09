@@ -21,6 +21,19 @@ app.use(function (req, res, next) {
 app.use(express.json());  //instead of body-parser
 app.use(cookieParser());
 
+//document uplaod
+const upload = require('./middlewares/upload')
+const catchAsyncError = require('./middlewares/catchAsyncErrors')
+
+app.post( 
+        '/api/upload',
+        upload.single('image'),
+        catchAsyncError(async(req, res, next) => {
+          res.json({file: req.file.path});
+          
+        })
+      );
+
 //Importing routes
 const users = require('./routes/user')
 const routes = require('./routes/election')
@@ -28,17 +41,7 @@ const routes = require('./routes/election')
 app.use('/api/election', users )
 app.use('/api/election', routes)
 
-//document uplaod
-const upload = require('./middlewares/upload')
-const catchAsyncError = require('./middlewares/catchAsyncErrors')
 
-app.post( 
-        '/api/upload',
-        upload.single('document'),
-        catchAsyncError(async(req, res, next) => {
-          res.json({file: req.file.path});
-        })
-      );
 //Middleware to handle errors
 app.use(errorMiddleware);
 

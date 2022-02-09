@@ -205,23 +205,3 @@ exports.deleteUser = catchAsyncError( async (req, res, next) => {
 
 })
 
-//Check if there is an ongoing election where user can vote
-//Access -> All users
-//api/election/electionStatus
-exports.electionStatus = catchAsyncError( async (req, res, next) => {
-
-    const user = await User.findById(req.user._id);
-    let message = "No election ongoing";
-    //console.log(user);
-    if(user.electionOngoing){
-            message: "Election ongoing";
-    
-        
-    }
-    res.status(200).json({
-        success: true,
-        message,
-        user
-    })
-    
-})

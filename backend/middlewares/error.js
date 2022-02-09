@@ -2,7 +2,8 @@ const ErrorHandler = require("../utils/errorHandler.js");
 
 module.exports = (err, req, res, next ) => {
 
-    err.statusCode = err.statusCode || 500;
+    let statusCode = err.statusCode;
+        statusCode = err.statusCode || 500;
 
         let error = {...err};
         
@@ -37,8 +38,9 @@ module.exports = (err, req, res, next ) => {
             const message = 'JSON Web Token is expired. Try again';
             error = new ErrorHandler(message, 400);
         }
-
-        res.status(err.statusCode).json({
+        
+    
+        res.status(statusCode).json({
             success: false,
             error: err,
             errMessage: err.message,   
