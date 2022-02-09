@@ -27,6 +27,12 @@ export const useUserValidation = (electionStarted) => {
                 navigate(-1)
             }
         }
+        if(electionStarted){
+            if(election==='0x0000000000000000000000000000000000000000'){
+                notify('You need to start and election first', 'error');
+                navigate('/addElection')
+            }
+        }
         
     },[user])
 }

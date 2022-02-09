@@ -1,10 +1,10 @@
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router";
-import web3 from "../ethereum/web3";
-import factory from '../ethereum/factory'
-import AuthContext from "../store/auth-context";
-import Loading from "../components/Loading";
-import { useUserValidation } from "../components/hooks/user-validation";
+import web3 from "../../ethereum/web3";
+import factory from '../../ethereum/factory'
+import AuthContext from "../../store/auth-context";
+import Loading from "../../components/Loading";
+import { useUserValidation } from "../../components/hooks/user-validation";
 
 const AddElection = () => {
     const navigate = useNavigate();

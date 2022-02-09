@@ -31,13 +31,13 @@ contract Election {
     struct Candidate{
         string name;
         string description; 
-        string id;
+        string url;
         uint votes;
     }
 
     //Candidate[] public candidates;
     mapping(uint => Candidate) public candidates;
-    uint candidateCount;
+    uint public candidateCount;
     address public admin;
     mapping(address => bool) public voters;
     string public electionName;
@@ -67,14 +67,14 @@ contract Election {
     }
 
     //add candidate 
-    function addCandidate(string memory name, string memory description, string memory id) public restricted{
+    function addCandidate(string memory name, string memory description, string memory url) public restricted{
         require(!ended);
         require(!started);
 
         Candidate storage c = candidates[candidateCount++];
         c.name = name;
         c.description = description;
-        c.id = id;
+        c.url = url;
         c.votes = 0;
     }
 

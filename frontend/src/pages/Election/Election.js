@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import AuthContext from "../store/auth-context";
+import AuthContext from "../../store/auth-context";
 
 const Election = () => {
     const {user} = useContext(AuthContext);
