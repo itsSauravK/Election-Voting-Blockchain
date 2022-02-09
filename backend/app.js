@@ -28,6 +28,17 @@ const routes = require('./routes/election')
 app.use('/api/election', users )
 app.use('/api/election', routes)
 
+//document uplaod
+const upload = require('./middlewares/upload')
+const catchAsyncError = require('./middlewares/catchAsyncErrors')
+
+app.post( 
+        '/api/upload',
+        upload.single('document'),
+        catchAsyncError(async(req, res, next) => {
+          res.json({file: req.file.path});
+        })
+      );
 //Middleware to handle errors
 app.use(errorMiddleware);
 
