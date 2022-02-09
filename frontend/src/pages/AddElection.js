@@ -1,15 +1,16 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router";
 import web3 from "../ethereum/web3";
 import factory from '../ethereum/factory'
 import AuthContext from "../store/auth-context";
 import Loading from "../components/Loading";
+import { useUserValidation } from "../components/hooks/user-validation";
 
 const AddElection = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState();
     const [electionName, setElectionName] = useState('');
-    const {user, notify, validAccount, getAccount, setElection, election} = useContext(AuthContext);
+    const {notify, validAccount, setElection} = useContext(AuthContext);
     
     const addElectionHandler = async (event) => {
         event.preventDefault();
@@ -35,26 +36,8 @@ const AddElection = () => {
         }
         setLoading(false);
     }
-    useEffect(  () =>{
-        if(!user){
-            notify('Please login first','error');
-            navigate('/login');
-        }else{
-            if(user.role !== 'admin'){
-                notify('You do not have access to this route', 'error');
-                navigate('/');
-            }
-            if(user.electionOngoing === true){
-                notify('There is already an election in progress', 'error');
-                navigate('/');
-            }
-            getAccount();
-        }
-        if(election!=='0x0000000000000000000000000000000000000000'){
-            notify('You have already started an election', 'error');
-            navigate('/election')
-        }
-    },[user])
+
+    useUserValidation(false);
 
     return(
         <>
