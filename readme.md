@@ -35,14 +35,15 @@ Go to root folder and make .env file
 ACCOUNT_MNEMONIC=
 RINKEBY_ENDPOINT=  
  
-Go to React root folder and make .env file
+Go to React root folder and make .env file. 
+## .env variables. 
 REACT_APP_Contract =
 > Put your own account mnemoic and rinkeby endpoint
 
 ### To get the contract address, do the following in root folder
 
- `node ethereum/compile.js`  
- `node ethereum/deploy.js`
+ `node ethereum/compile.js`.   
+ `node ethereum/deploy.js`. 
 
 # To contribute 
 
