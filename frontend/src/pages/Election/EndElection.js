@@ -35,6 +35,7 @@ const EndElection = ({setLoading}) => {
         }catch(err){
             notify(err.message,'error');
             setLoading(false)
+            navigate('/')
             return
         }
           //changing electionOngoing to false and hasVoted to false
