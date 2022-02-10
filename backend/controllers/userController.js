@@ -7,7 +7,6 @@ const sendEmail = require('../utils/sendEmail');
 
 const crypto = require('crypto');
 const { send } = require('process');
-const user = require('../models/user');
 
 
 //Access -> Admin
@@ -38,6 +37,16 @@ exports.registerUser = catchAsyncError( async (req, res, next) => {
 
 })
 
+//Acess -> Everyone
+//Route -> api/election/getUser
+//Description -> Getting one user
+exports.getUser = catchAsyncError( async (req, res, next) => {
+    const user = await User.findById(req.user._id);
+    res.status(200).json({
+        success: true,
+        user
+    })
+})
 
 //Access -> Everyone
 //Route -> /api/election/generateOtp
@@ -58,7 +67,7 @@ exports.generateOTP = catchAsyncError( async (req, res, next) => {
     const user = await User.findOne({email});
 
     if(!user) {
-        return next(new ErrorHandler('Invalid Email', 401));
+        return next(new ErrorHandler('Invalid Email', 404));
     }
 
     //Generating Otp
@@ -97,7 +106,7 @@ exports.generateOTP = catchAsyncError( async (req, res, next) => {
 exports.loginUser = catchAsyncError( async(req, res, next) =>{
 
     const {email, otp} = req.body;
-
+    
     if(!email || !otp) {
         return next(new ErrorHandler('Please enter email and otp'));
     }
@@ -116,11 +125,10 @@ exports.loginUser = catchAsyncError( async(req, res, next) =>{
     
     //checking otp is correct or not
     const isOtpMatched = await user.compareOtp(otp);
-    console.log(isOtpMatched);
     if(!isOtpMatched){
         return next(new ErrorHandler('Invalid Email or otp', 401));
     }
-
+    user.otp = null;
     sendToken(user, 200, res);
 })
 
@@ -197,23 +205,3 @@ exports.deleteUser = catchAsyncError( async (req, res, next) => {
 
 })
 
-//Check if there is an ongoing election where user can vote
-//Access -> All users
-//api/election/electionStatus
-exports.electionStatus = catchAsyncError( async (req, res, next) => {
-
-    const user = await User.findById(req.user._id);
-    let message = "No election ongoing";
-    //console.log(user);
-    if(user.electionOngoing){
-            message: "Election ongoing";
-    
-        
-    }
-    res.status(200).json({
-        success: true,
-        message,
-        user
-    })
-    
-})

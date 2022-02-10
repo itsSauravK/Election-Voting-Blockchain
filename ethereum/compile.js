@@ -3,8 +3,9 @@ const solc = require('solc');
 const fs = require('fs-extra');
 
 //getting build path
-const buildPath = path.resolve(__dirname, 'build');
-
+const buildPath = path.resolve(__dirname, '..', 'frontend', 'src' ,'ethereum', 'build');
+console.log(buildPath);
+//console.log(__dirname, '..', 'frontend', 'src' ,'ethereum', 'build');
 //removing build folder
 fs.removeSync(buildPath);
 

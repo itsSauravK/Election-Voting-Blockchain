@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 
 const { 
-    generateOTP, registerUser, loginUser, allUsers, deleteUser, logoutUser, vote, electionStatus
+    getUser, generateOTP, registerUser, loginUser, allUsers, deleteUser, logoutUser, vote
  } = require('../controllers/userController');
 
  const {
@@ -17,7 +17,7 @@ router.route('/login').post(loginUser);
 //all users
 router.route('/logout').get(logoutUser);
 router.route('/vote').put(isAuthenticatedUser,vote);
-router.route('/electionStatus').get(isAuthenticatedUser, electionStatus);
+router.route('/getUser').get(isAuthenticatedUser,getUser)
 
 //admin
 router.route('/register').post(isAuthenticatedUser, authorizeRoles('admin'), registerUser);
