@@ -19,6 +19,7 @@ const AddElection = () => {
         
         if(!validAccount){
             notify('You are using wrong ethereum account', 'error');
+            setLoading(false);
             return;
         }
         try{

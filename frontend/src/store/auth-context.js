@@ -6,14 +6,14 @@ import Loading from "../components/Loading";
 import factory from '../ethereum/factory'
 import web3 from "../ethereum/web3";
 const AuthContext = React.createContext({
-    user : {},
-    election : '',
-    loading: false,
-    validAccount: false,
-    setUser: () => {},
-    notify:() => {},
-    getAccount: () =>{},
-    setElection: () => {}
+    user : {}, //get user
+    election : '', //get election address
+    loading: false, //check if its loading
+    validAccount: false, //check if user is using correct ethereum account
+    setUser: () => {}, //changes user value
+    notify:() => {}, //for snackbar
+    getAccount: () =>{}, //to change valid account value
+    setElection: () => {} // to change election address
 })
 
 export const AuthContextProvider = (props) => {

@@ -13,7 +13,7 @@ const AddCandidate = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [pic, setPic] = useState();
-    const [url, setUrl] = useState('');
+    const [link, setLink] = useState('');
     const navigate = useNavigate();
     useUserValidation(true);
 
@@ -22,6 +22,7 @@ const AddCandidate = () => {
         setLoading(true);
         if(!validAccount){
             notify('You are using wrong ethereum account', 'error');
+            setLoading(false);
             return;
         }
         //cloudinary
@@ -32,13 +33,18 @@ const AddCandidate = () => {
                 'Content-Type': 'multipart/form-data',
             },
         });
-        setUrl(resource.data.file);
+        let url = resource.data.file
+        setLink(url);
 
         //adding data to smart contract
         //name, description, id: image
         const Election = Electioneth(election)
         try{
             const accounts = await web3.eth.getAccounts();
+            if(!url){
+                notify('err','error');
+                }
+                
             await Election.methods
                 .addCandidate(
                     name,
@@ -69,7 +75,7 @@ const AddCandidate = () => {
         </form>
         }
         {loading && <Loading />}
-        <p>{url}</p>
+        <p>{link}</p>
         </>
     )
 }

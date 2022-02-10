@@ -13,10 +13,12 @@ export const useUserValidation = (electionStarted) => {
             if(user.role !== 'admin'){
                 notify('You do not have access to this route', 'error');
                 navigate(-1);
+                return;
             }
             if(user.electionOngoing === true){
                 notify('There is already an election in progress', 'error');
                 navigate(-1);
+                return;
             }
             if(!electionStarted){
                 if(election!=='0x0000000000000000000000000000000000000000'){
