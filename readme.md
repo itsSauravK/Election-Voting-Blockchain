@@ -32,7 +32,7 @@ CLOUDINARY_API_SECRET =
 Go to root folder and make .env file
 ## .env variables
 
-ACCOUNT_MNEMONIC=
+ACCOUNT_MNEMONIC= <br>
 RINKEBY_ENDPOINT=  
  
 Go to React root folder and make .env file. 
