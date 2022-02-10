@@ -7,6 +7,7 @@ import {useNavigate} from 'react-router'
 import axios from "axios";
 import StartElection from "./StartElection";
 import EndElection from "./EndElection";
+
 const Election = () => {
     const {user, election, notify, getAccount, validAccount} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
@@ -14,6 +15,7 @@ const Election = () => {
     const navigate = useNavigate();
     const [candidates, setCandidates] = useState([]);
     const [candidateCount, setCount] = useState(0);
+    const [electionName, setElectionName] = useState('');
 
     useEffect( () => {
         (async () => {
@@ -26,9 +28,8 @@ const Election = () => {
                  getAccount();
 
                 if(election==='0x0000000000000000000000000000000000000000'){
-                    notify('There is no ongoing election', 'error');
-                    navigate(-1);
-                }
+                    navigate('/');
+                 }
                 if(user.electionOngoing === false && user.role !== 'admin'){
                     notify('There is no ongoing election', 'error');
                     navigate(-1);
@@ -41,10 +42,14 @@ const Election = () => {
             setLoading(true);
             if(election!=='0x0000000000000000000000000000000000000000'){
                 const Election = Electioneth(election);
-            //getting candidate count
+                //getting candidate count
                 let count = await Election.methods.candidateCount().call();
                 setCount(+count);
                 console.log({candidateCount});
+
+                //getting election name
+                let name = await Election.methods.electionName().call()
+                setElectionName(name);
                 //getting all candidates
                 
                 tempCandidate = await Promise.all(
@@ -63,8 +68,9 @@ const Election = () => {
     console.log(tempCandidate);
     return(
         <>
-            {!loading && 
+            {!loading && election!=='0x0000000000000000000000000000000000000000'&&
             <>
+                <h1>{electionName}</h1>
                 <p>Candidates{candidateCount}</p>
                 <table>
                     <thead>
@@ -72,7 +78,7 @@ const Election = () => {
                         <th>Name</th>  
                         <th>Description</th>
                         <th>Votes</th>
-                        {user&&user.electionOngoing&&<th>Vote</th>}
+                        {user&&user.electionOngoing&&!user.hasVoted&&<th>Vote</th>}
                         {/* <th>Vote</th> */}
                         <th>Image</th>
                     </tr>
