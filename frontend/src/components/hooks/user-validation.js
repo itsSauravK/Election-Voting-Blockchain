@@ -18,21 +18,22 @@ export const useUserValidation = (electionStarted) => {
                 notify('There is already an election in progress', 'error');
                 navigate(-1);
             }
+            if(!electionStarted){
+                if(election!=='0x0000000000000000000000000000000000000000'){
+                    notify('You have already started an election', 'error');
+                    navigate(-1)
+                }
+            }
+            if(electionStarted){
+                if(election==='0x0000000000000000000000000000000000000000'){
+                    notify('You need to start and election first', 'error');
+                    navigate('/addElection')
+                }
+            }
             getAccount();
         }
         //if electionStarted false - this runs for /addElection page
-        if(!electionStarted){
-            if(election!=='0x0000000000000000000000000000000000000000'){
-                notify('You have already started an election', 'error');
-                navigate(-1)
-            }
-        }
-        if(electionStarted){
-            if(election==='0x0000000000000000000000000000000000000000'){
-                notify('You need to start and election first', 'error');
-                navigate('/addElection')
-            }
-        }
+        
         
     },[user])
 }

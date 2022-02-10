@@ -11,6 +11,7 @@ const AddElection = () => {
     const [loading, setLoading] = useState();
     const [electionName, setElectionName] = useState('');
     const {notify, validAccount, setElection} = useContext(AuthContext);
+    useUserValidation(false);
     
     const addElectionHandler = async (event) => {
         event.preventDefault();
@@ -37,7 +38,7 @@ const AddElection = () => {
         setLoading(false);
     }
 
-    useUserValidation(false);
+    
 
     return(
         <>

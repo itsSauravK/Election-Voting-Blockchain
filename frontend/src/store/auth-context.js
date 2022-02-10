@@ -59,11 +59,15 @@ export const AuthContextProvider = (props) => {
         setLoading(false);
         }, [setUser])
     
-    useEffect( async () => {
-        setLoading(true);
-        setElection(await factory.methods.deployedElection().call());
-        console.log(election);
-        setLoading(false);
+    useEffect( () => { 
+        const getAddress = async() => {
+            setLoading(true);
+            let address = await factory.methods.deployedElection().call()
+            setElection(address);
+            console.log(election);
+            setLoading(false);
+        }
+        getAddress();
     },[])
 
     // useEffect( async() => {
