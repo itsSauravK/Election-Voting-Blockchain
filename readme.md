@@ -1,7 +1,7 @@
 # Instructions to run the project
 
-`npm i` at the root folder
-`npm i` in the frontend folder
+`npm i` at the root folder. 
+`npm i` in the frontend folder. 
 Go to backend/config/ and make a file 'config.env'
 
 ## config.env variables  
@@ -41,7 +41,7 @@ REACT_APP_Contract =
 
 ### To get the contract address, do the following in root folder
 
- `node ethereum/compile.js`
+ `node ethereum/compile.js`  
  `node ethereum/deploy.js`
 
 # To contribute 
