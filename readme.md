@@ -42,8 +42,10 @@ REACT_APP_Contract =
 
 ### To get the contract address, do the following in root folder
 
- `node ethereum/compile.js`.   
- `node ethereum/deploy.js`. 
+ ```
+ node ethereum/compile.js  
+ node ethereum/deploy.js
+ ```
 
 # To contribute 
 
