@@ -26,10 +26,11 @@ const Election = () => {
             }else{
                  //get intial value of validAccount, if the user is using right ethereum ot not
                  getAccount();
-
+                //checking if there is no ongoing election
                 if(election==='0x0000000000000000000000000000000000000000'){
                     navigate('/');
                  }
+                 //election.ongoing is only true if admin adds an election
                 if(user.electionOngoing === false && user.role !== 'admin'){
                     notify('There is no ongoing election', 'error');
                     navigate(-1);

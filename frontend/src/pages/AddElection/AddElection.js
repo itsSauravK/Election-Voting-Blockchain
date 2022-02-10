@@ -25,6 +25,8 @@ const AddElection = () => {
         try{
             const accounts = await web3.eth.getAccounts();
             await factory.methods
+            //adding an election in smart contract
+            //here election.omGoing is still false since admin did not start elction
             .createElection(electionName)
             .send({
                 from: accounts[0]

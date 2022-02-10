@@ -22,23 +22,26 @@ export const AuthContextProvider = (props) => {
     const [loading, setLoading] = useState(false);
     const [validAccount, setValidAccount] = useState(false);
     const [election, setElection] = useState('0x0000000000000000000000000000000000000000');
-    let account;
     
+    //whenever user changes ethereum account, this function runs
     window.ethereum.on('accountsChanged', function (accounts) {
-        // Time to reload your interface with accounts[0]!
+        
         getAccount();
   })
+
+  //function to make sure user is using correct ethereum account
   async function getAccount() {
+      //getting current account
     const accounts = await window.ethereum.enable();
-    account = accounts[0];
     if(user){
       //accounts = await web3.eth.getAccounts();
       setValidAccount(accounts[0].toUpperCase() === user.eAddress.toUpperCase()) 
     }
-    // do something with new account here
+
   }
+  //this use effect is to get user data from http cookie
     useEffect( ()=> {
-        console.log('useEffect');
+       
         (async () => {
             setLoading(true);
             try{
@@ -51,14 +54,15 @@ export const AuthContextProvider = (props) => {
 
             }
             
-                const accounts = await web3.eth.getAccounts();
-                account = accounts[0]
+                // const accounts = await web3.eth.getAccounts();
+                // account = accounts[0]
               
         })()
         
         setLoading(false);
         }, [setUser])
-    
+
+    //this use effect is to get deployed election
     useEffect( () => { 
         const getAddress = async() => {
             setLoading(true);
@@ -70,15 +74,7 @@ export const AuthContextProvider = (props) => {
         getAddress();
     },[])
 
-    // useEffect( async() => {
-    //     if(user){
-    //         const accounts = await web3.eth.getAccounts();
-    //         setValidAccount(accounts[0].toUpperCase() === user.eAddress.toUpperCase()) 
-    //         console.log(validAccount)
-    //       }
-    // },[account])
-
-
+    //react notifier
     const notify = (message, status) => {
 
             switch(status){

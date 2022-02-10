@@ -32,7 +32,7 @@ const LandingPage = () => {
             {user && user.role==='admin' && !user.electionOngoing && election==='0x0000000000000000000000000000000000000000' &&
              <Link to= '/addElection'><button>Start Election</button></Link> }
 
-            {/*Admin role and added an election */}
+            {/*Admin role and added an election but did not start it*/}
             {user && user.role==='admin' && !user.electionOngoing && election!=='0x0000000000000000000000000000000000000000' &&
             <Link to= '/election'><button>Go to Election</button></Link>}
 

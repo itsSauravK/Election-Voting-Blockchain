@@ -16,6 +16,7 @@ const deploy = async () => {
     const accounts = await web3.eth.getAccounts();
   
     console.log('Attempting to deploy from account', accounts[0]);
+    //contract deployment
     const result = await new web3.eth.Contract(compiledFactory.abi)
       .deploy({ data: compiledFactory.evm.bytecode.object })
       .send({ gas: '3000000', from: accounts[0] });

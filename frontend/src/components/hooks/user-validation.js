@@ -15,26 +15,31 @@ export const useUserValidation = (electionStarted) => {
                 navigate(-1);
                 return;
             }
+            //checking if there is an ongoing election
             if(user.electionOngoing === true){
                 notify('There is already an election in progress', 'error');
                 navigate(-1);
                 return;
             }
+            //this condition is for /addElection
             if(!electionStarted){
                 if(election!=='0x0000000000000000000000000000000000000000'){
                     notify('You have already started an election', 'error');
                     navigate(-1)
                 }
             }
+            //this condition is for /addCandidate
             if(electionStarted){
                 if(election==='0x0000000000000000000000000000000000000000'){
                     notify('You need to start and election first', 'error');
                     navigate('/addElection')
                 }
             }
+            //getAccount() compares the address stored in user with etheremum account address of user
+            //it sets intial value of valid account
             getAccount();
         }
-        //if electionStarted false - this runs for /addElection page
+       
         
         
     },[user])

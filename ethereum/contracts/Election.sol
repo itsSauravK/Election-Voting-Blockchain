@@ -9,11 +9,11 @@ contract ElectionFactory{
 
     address public deployedElection;
     address[] public elections;
-    uint public count = 0;
+    uint public count = 0; //keeping track and making sure there is only one deployed election
     uint i;
 
     function createElection(string memory name) public{
-        require(count<1);
+        require(count<1); //checking if there are more than 1 deployed election
         deployedElection = address(new Election(name, msg.sender));
         //elections[i++] = deployedElection;
         elections.push(deployedElection);
@@ -21,6 +21,7 @@ contract ElectionFactory{
     }
 
     function clearFactory() public{
+        //removing current deployed election
         count =0;
         deployedElection =0x0000000000000000000000000000000000000000;
     }
@@ -41,10 +42,11 @@ contract Election {
     address public admin;
     mapping(address => bool) public voters;
     string public electionName;
-    bool public started;
-    bool public ended;
+    bool public started; //true when election starts
+    //this variable is only used to make sure candidates cant be after starting and after ending election
+    bool public ended;  //ended indicates time to add candidate has ended
     
-    //modifier to check election has ended
+    //modifier to check election has started
     modifier electionStarted() {
         require(started);
         _;
@@ -66,10 +68,11 @@ contract Election {
         ended = true;
     }
 
+
     //add candidate 
     function addCandidate(string memory name, string memory description, string memory url) public restricted{
-        require(!ended);
-        require(!started);
+        require(!ended); //checking if time to add candidates has ended
+        require(!started); 
 
         Candidate storage c = candidates[candidateCount++];
         c.name = name;
@@ -93,7 +96,7 @@ contract Election {
 
     //end election
     function endElection() public restricted electionStarted{
-
+        //A finished election will always have started = false, ended = true
         started = false;
         ended = true;
     }

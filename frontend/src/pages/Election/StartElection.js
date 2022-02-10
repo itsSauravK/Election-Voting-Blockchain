@@ -17,7 +17,7 @@ const StartElection = ({setLoading}) => {
                 setLoading(false);
                 return;
             }
-        //changing election ongoing to true
+        
         
         //starting election in contract
         const Election = Electioneth(election);
@@ -33,8 +33,9 @@ const StartElection = ({setLoading}) => {
             setLoading(false)
             return;
         }
-
+        
         try{
+            //changing electionOngoing to true for all user accounts
             await axios.get('http://localhost:4000/api/election/startElection',{
             withCredentials: true,
              })
