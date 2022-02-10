@@ -18,6 +18,22 @@ const StartElection = ({setLoading}) => {
                 return;
             }
         //changing election ongoing to true
+        
+        //starting election in contract
+        const Election = Electioneth(election);
+        const accounts = await web3.eth.getAccounts();
+
+        try{
+            await Election.methods.startElection().send({
+                from: accounts[0]
+            })
+            notify('Election has been started', 'success');
+        }catch(err){
+            notify(err.message,'error');
+            setLoading(false)
+            return;
+        }
+
         try{
             await axios.get('http://localhost:4000/api/election/startElection',{
             withCredentials: true,
@@ -32,18 +48,6 @@ const StartElection = ({setLoading}) => {
             notify(err.response.data.errMessage,'error');
             setLoading(false);
             return
-        }
-        //starting election in contract
-        const Election = Electioneth(election);
-        const accounts = await web3.eth.getAccounts();
-
-        try{
-            await Election.methods.startElection().send({
-                from: accounts[0]
-            })
-            notify('Election has been started', 'success');
-        }catch(err){
-            notify(err.message,'error');
         }
         setLoading(false);
     }
