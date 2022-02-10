@@ -14,6 +14,7 @@ const SideBar = () => {
                 <li><Link to ='/addElection '>Add election</Link></li>
                 <li><Link to ='/addCandidate '>Add candidate</Link></li>
                 <li><Link to='/election'>Election</Link></li>
+                <li><Link to='/results'>All results</Link></li>
             </ul>
         </div>
     );

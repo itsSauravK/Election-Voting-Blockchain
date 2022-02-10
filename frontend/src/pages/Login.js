@@ -9,7 +9,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('');
     const [loading,setLoading] = useState(false);
-    //variable to show input otp
+    //variable to show otp input and button
     const [sent, setSent] = useState(false);
     const navigate = useNavigate();
 
@@ -17,6 +17,7 @@ const Login = () => {
         event.preventDefault();
         setSent(true);
         setLoading(true);
+        //sending OTP
         try{
                 const response = await axios.post('http://localhost:4000/api/election/generateOtp', {
                     email
@@ -28,7 +29,7 @@ const Login = () => {
         }
         setLoading(false);
     }
-
+    //logging in account
     const loginHandler = async (event) =>{
         event.preventDefault();
         setLoading(true);
@@ -41,6 +42,7 @@ const Login = () => {
                 headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}
             })
             notify('Logged in succesfully', 'success');
+            //setting user useStae defined in context
             setUser(response.data.user);
         }catch(err){
             notify(err.response.data.errMessage, 'error');

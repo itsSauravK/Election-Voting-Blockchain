@@ -9,6 +9,17 @@ const ShowCandidate = ({id,candidate, candidateCount, setLoading}) =>{
     const {user, validAccount, notify , election, setUser} = useContext(AuthContext)
     const [vote, setVote] = useState(+candidate.votes);
     const navigate = useNavigate();
+    useEffect( ()=>{
+        (async()=>{
+
+            const Election = Electioneth(election);
+            let newCandidate = await Election.methods.candidates(id).call()
+            let candidateVote = newCandidate.votes;
+            setVote(candidateVote);
+            console.log(vote);
+
+        })()
+    })
     const voteHandler= async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -51,7 +62,7 @@ const ShowCandidate = ({id,candidate, candidateCount, setLoading}) =>{
         console.log(vote);
         
         setLoading(false);
-        navigate('/election')
+       // navigate('/election')
     }
     return(
         <>
