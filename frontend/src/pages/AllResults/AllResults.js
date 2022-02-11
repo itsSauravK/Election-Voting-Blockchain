@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect ,useContext, useState } from "react";
 
 const AllResults = () => {
 
+    const [loading, setLoading] = useState(false);
     useEffect( ()=>{
         (async() => {
 

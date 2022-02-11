@@ -40,7 +40,7 @@ const EndElection = ({setLoading}) => {
         }
           //changing electionOngoing to false and hasVoted to false
           try{
-            axios.put('http://localhost:4000/api/election/endElection',{
+            await axios.put('http://localhost:4000/api/election/endElection',{
             address: election
             },{
                 withCredentials: true,
