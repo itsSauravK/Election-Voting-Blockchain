@@ -95,7 +95,7 @@ const Election = () => {
                     </thead>
 
                     <tbody>
-                    
+                    {candidateCount === 0 && <p>No candidates</p>}
                     {candidateCount && (candidates.map((candidate, index) => (
                         <ShowCandidate 
                         key={index}

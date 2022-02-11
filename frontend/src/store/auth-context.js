@@ -5,6 +5,8 @@ import React from 'react'
 import Loading from "../components/Loading";
 import factory from '../ethereum/factory'
 import web3 from "../ethereum/web3";
+import { useGetResults } from "../components/hooks/get-results";
+
 const AuthContext = React.createContext({
     user : {}, //get user
     election : '', //get election address
@@ -13,21 +15,30 @@ const AuthContext = React.createContext({
     setUser: () => {}, //changes user value
     notify:() => {}, //for snackbar
     getAccount: () =>{}, //to change valid account value
-    setElection: () => {} // to change election address
+    setElection: () => {}, // to change election address
+    results: [], //to store all election results address
+    setResults: () => {}, //to change election results
+    names: [], //Store all election names
+    setNames: () => {}
 })
+
 
 export const AuthContextProvider = (props) => {
 
-    const [user, setUser] = useState();
+    const [results, setResults] = useState([]);
+    const [user, setUser] = useState({});
     const [loading, setLoading] = useState(false);
     const [validAccount, setValidAccount] = useState(false);
     const [election, setElection] = useState('0x0000000000000000000000000000000000000000');
-    
+    const [names, setNames] = useState([]);
     //whenever user changes ethereum account, this function runs
     window.ethereum.on('accountsChanged', function (accounts) {
         
         getAccount();
   })
+
+    //To get intial address of all previous elections
+    useGetResults(setLoading);
 
   //function to make sure user is using correct ethereum account
   async function getAccount() {
@@ -106,7 +117,11 @@ export const AuthContextProvider = (props) => {
                 loading: loading,
                 validAccount: validAccount,
                 getAccount: getAccount,
-                setElection: setElection
+                setElection: setElection,
+                results,
+                setResults,
+                names,
+                setNames
             }} >
                 {props.children}
         </AuthContext.Provider>}
