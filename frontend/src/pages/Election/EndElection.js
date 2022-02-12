@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import AuthContext from "../../store/auth-context";
 import Electioneth from '../../ethereum/election';
 import Factory from '../../ethereum/factory'
@@ -7,7 +7,7 @@ import web3 from "../../ethereum/web3";
 import {useNavigate} from 'react-router-dom'
 const EndElection = ({setLoading}) => {
 
-    const {user, election, notify, validAccount, setUser, setElection} = useContext(AuthContext);
+    const { election, notify, validAccount, setUser, setElection} = useContext(AuthContext);
     //fetch api that election has ended
     const navigate = useNavigate();
     const endElectionHandler = async(e) => {
@@ -40,7 +40,7 @@ const EndElection = ({setLoading}) => {
         }
           //changing electionOngoing to false and hasVoted to false
           try{
-            axios.put('http://localhost:4000/api/election/endElection',{
+            await axios.put('http://localhost:4000/api/election/endElection',{
             address: election
             },{
                 withCredentials: true,

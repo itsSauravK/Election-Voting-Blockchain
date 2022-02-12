@@ -4,14 +4,12 @@ import Electioneth from '../../ethereum/election'
 import ShowCandidate from "./ShowCandidate";
 import Loading from "../../components/Loading";
 import {useNavigate} from 'react-router'
-import axios from "axios";
 import StartElection from "./StartElection";
 import EndElection from "./EndElection";
-import Factory from '../../ethereum/factory'
-import web3 from "../../ethereum/web3";
+import { useEndElection } from "../../components/hooks/end-election";
 
 const Election = () => {
-    const {user, election, notify, getAccount, validAccount, setElection, setUser} = useContext(AuthContext);
+    const {user, election, notify} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     let tempCandidate;
     const navigate = useNavigate();
@@ -28,7 +26,7 @@ const Election = () => {
                 navigate('/login')
             }else{
                  //get intial value of validAccount, if the user is using right ethereum ot not
-                 getAccount();
+                 //getAccount();
                 //checking if there is no ongoing election
                 if(election==='0x0000000000000000000000000000000000000000'){
                     navigate('/');
@@ -36,7 +34,7 @@ const Election = () => {
                  //election.ongoing is only true if admin adds an election
                 if(user.electionOngoing === false && user.role !== 'admin'){
                     notify('There is no ongoing election', 'error');
-                    navigate(-1);
+                    navigate('/');
                 }
             }
         })()
@@ -71,68 +69,19 @@ const Election = () => {
         })()
     },[])
 
-    //use effect to remove bug where user rejects second transaction while ending election
-    useEffect(()=>{
-        (async()=>{
-            
-            if(election!=='0x0000000000000000000000000000000000000000')
-            {
-                setLoading(true);   
-                const Election = Electioneth(election);
-                const accounts = await web3.eth.getAccounts();
-                let started = await Election.methods.started().call();
-                let ended = await Election.methods.ended().call();
-                //checking if correct election has ended
-                if(!started && ended){
-                    //removing election from factory
-                    try{
-                        await Factory.methods.clearFactory().send({
-                            from: accounts[0]
-                        })
-                        notify('Election has ended', 'success');
-                    }
-                    catch(err){
-                        notify('You need to end the election to proceed', 'error')
-                        navigate('/')
-                        return;
-                    }
-                    
-                //changing electionOngoing to false and hasVoted to false
-                    try{
-                        setLoading(true);
-                        axios.put('http://localhost:4000/api/election/endElection',{
-                        address: election
-                        },{
-                            withCredentials: true,
-                        })
-                        //get updated user back
-                        const response = await axios.get('http://localhost:4000/api/election/getUser',{
-                            withCredentials: true,
-                        });
-                        setUser(response.data.user);
-                        setElection('0x0000000000000000000000000000000000000000');
-                        navigate(`/`);
-                    
-
-                    }catch(err){
-                        notify(err.response.data.errMessage,'error');
-                        setLoading(false);
-                        return
-                    }
-                }
-                setLoading(false);
-                
-            }
-
-        })()
-    },[])
+    // //use effect to remove bug where user rejects second transaction while ending election
+    useEndElection('election', setLoading)
+    
     console.log(tempCandidate);
     return(
+
         <>
-            {!loading && election!=='0x0000000000000000000000000000000000000000'&&
+            {!loading && candidateCount === 0 && <p>No candidates</p>}
+            {!loading && election!=='0x0000000000000000000000000000000000000000'&& candidateCount>=0 &&
             <>
                 <h1>{electionName}</h1>
                 <p>Candidates{candidateCount}</p>
+                
                 <table>
                     <thead>
                     <tr>

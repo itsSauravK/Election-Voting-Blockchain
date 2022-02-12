@@ -4,7 +4,8 @@ import {toast} from 'react-toastify'
 import React from 'react'
 import Loading from "../components/Loading";
 import factory from '../ethereum/factory'
-import web3 from "../ethereum/web3";
+
+
 const AuthContext = React.createContext({
     user : {}, //get user
     election : '', //get election address
@@ -13,36 +14,57 @@ const AuthContext = React.createContext({
     setUser: () => {}, //changes user value
     notify:() => {}, //for snackbar
     getAccount: () =>{}, //to change valid account value
-    setElection: () => {} // to change election address
+    setElection: () => {}, // to change election address
+    results: [], //to store all election results address, so if user
+    //directly goes to /results/address, we have data to compare if its not a fake address
+    setResults: () => {}, //to change election results
+    names: [], //Store all election names
+    setNames: () => {}
 })
+
 
 export const AuthContextProvider = (props) => {
 
+    const [results, setResults] = useState([]);
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(false);
     const [validAccount, setValidAccount] = useState(false);
     const [election, setElection] = useState('0x0000000000000000000000000000000000000000');
-    
+    const [names, setNames] = useState([]);
     //whenever user changes ethereum account, this function runs
-    window.ethereum.on('accountsChanged', function (accounts) {
+    window.ethereum&&window.ethereum.on('accountsChanged', function (accounts) {
         
         getAccount();
   })
 
+    //To get intial address of all previous elections
+    //useGetResults(setLoading);
+  //to check if metamask is installed
+  useEffect( () => {
+    if(!window.ethereum){
+        alert('Please Intall metamask');
+    }
+  })
+  //to set setValidAccount value
+  useEffect( ()=>{
+      getAccount();
+  })
   //function to make sure user is using correct ethereum account
   async function getAccount() {
       //getting current account
     const accounts = await window.ethereum.enable();
     if(user){
-      //accounts = await web3.eth.getAccounts();
-      setValidAccount(accounts[0].toUpperCase() === user.eAddress.toUpperCase()) 
+      //accounts = await web3.eth.getAccounts()
+      console.log(user);
+      if(accounts[0] && user.eAddress)
+        setValidAccount(accounts[0].toUpperCase() === user.eAddress.toUpperCase()) 
     }
 
   }
   //this use effect is to get user data from http cookie
     useEffect( ()=> {
        
-        (async () => {
+        const b = async () => {
             setLoading(true);
             try{
             const response = await axios.get('http://localhost:4000/api/election/getUser',{
@@ -57,9 +79,10 @@ export const AuthContextProvider = (props) => {
                 // const accounts = await web3.eth.getAccounts();
                 // account = accounts[0]
               
-        })()
-        
+        }
+        b();
         setLoading(false);
+        return () => b
         }, [setUser])
 
     //this use effect is to get deployed election
@@ -72,25 +95,26 @@ export const AuthContextProvider = (props) => {
             setLoading(false);
         }
         getAddress();
+        return () => getAddress;
     },[])
 
     //react notifier
     const notify = (message, status) => {
-
+        
             switch(status){
-            case 'error': 
-            toast.error(message,{
-                autoClose:3000,
-                position: toast.POSITION.BOTTOM_RIGHT,
-            })
-            break;
+                case 'error': 
+                toast.error(message,{
+                    autoClose:3000,
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                })
+                break;
 
-            case 'success':
-            toast.success(message, {
-                autoClose:3000,
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
-            break;
+                case 'success':
+                toast.success(message, {
+                    autoClose:3000,
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+                break;
 
 
             };
@@ -105,8 +129,11 @@ export const AuthContextProvider = (props) => {
                 election: election,
                 loading: loading,
                 validAccount: validAccount,
-                getAccount: getAccount,
-                setElection: setElection
+                setElection: setElection,
+                results,
+                setResults,
+                names,
+                setNames
             }} >
                 {props.children}
         </AuthContext.Provider>}

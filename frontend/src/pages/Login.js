@@ -19,7 +19,7 @@ const Login = () => {
         setLoading(true);
         //sending OTP
         try{
-                const response = await axios.post('http://localhost:4000/api/election/generateOtp', {
+                 await axios.post('http://localhost:4000/api/election/generateOtp', {
                     email
                 })
                 notify('OTP has been sent to the email', 'success');
@@ -56,16 +56,16 @@ const Login = () => {
             navigate('/');
         }
         
-    },[user]);
+    });
     return(
         <>
         {!loading&&<form onSubmit={loginHandler}>
             <label>Email</label>
             <input value= {email} onChange={(e) => setEmail(e.target.value)}></input>
             <label>Otp</label>
-            {/*sent&&*/(<input value={otp} onChange={(e) => setOtp(e.target.value)}></input>)}
+            {sent&&(<input value={otp} onChange={(e) => setOtp(e.target.value)}></input>)}
             <button type='button' onClick={sendOTP}>Send OTP</button>
-            {/* {sent && */(<button type='submit'>Login</button>)}
+            { sent && (<button type='submit'>Login</button>)}
         </form>}
         {loading&& <Loading />}
         </>

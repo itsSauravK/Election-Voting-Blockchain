@@ -8,21 +8,32 @@ pragma solidity ^0.8.9;
 contract ElectionFactory{
 
     address public deployedElection;
+    string public deployedElectionName;
     address[] public elections;
+    string[] public names;
     uint public count = 0; //keeping track and making sure there is only one deployed election
-    uint i;
 
     function createElection(string memory name) public{
         require(count<1); //checking if there are more than 1 deployed election
         deployedElection = address(new Election(name, msg.sender));
-        //elections[i++] = deployedElection;
-        elections.push(deployedElection);
+        deployedElectionName = name;
         count++;
+    }
+
+    function getAllResults() public view returns (address[] memory){
+        return elections;
+    }
+
+    function getAllName() public view returns (string[] memory){
+        return names;
     }
 
     function clearFactory() public{
         //removing current deployed election
+        require(deployedElection!= 0x0000000000000000000000000000000000000000);
         count =0;
+        elections.push(deployedElection);
+        names.push(deployedElectionName);
         deployedElection =0x0000000000000000000000000000000000000000;
     }
 
