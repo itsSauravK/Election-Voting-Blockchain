@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import AuthContext from "../../store/auth-context";
 import Electioneth from '../../ethereum/election';
 import Factory from '../../ethereum/factory'
@@ -7,7 +7,7 @@ import web3 from "../../ethereum/web3";
 import {useNavigate} from 'react-router-dom'
 const EndElection = ({setLoading}) => {
 
-    const {user, election, notify, validAccount, setUser, setElection} = useContext(AuthContext);
+    const { election, notify, validAccount, setUser, setElection} = useContext(AuthContext);
     //fetch api that election has ended
     const navigate = useNavigate();
     const endElectionHandler = async(e) => {

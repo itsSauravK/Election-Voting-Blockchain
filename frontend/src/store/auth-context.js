@@ -4,8 +4,7 @@ import {toast} from 'react-toastify'
 import React from 'react'
 import Loading from "../components/Loading";
 import factory from '../ethereum/factory'
-import web3 from "../ethereum/web3";
-import { useGetResults } from "../components/hooks/get-results";
+
 
 const AuthContext = React.createContext({
     user : {}, //get user
@@ -40,11 +39,15 @@ export const AuthContextProvider = (props) => {
 
     //To get intial address of all previous elections
     //useGetResults(setLoading);
-
+  //to check if metamask is installed
   useEffect( () => {
     if(!window.ethereum){
         alert('Please Intall metamask');
     }
+  })
+  //to set setValidAccount value
+  useEffect( ()=>{
+      getAccount();
   })
   //function to make sure user is using correct ethereum account
   async function getAccount() {
@@ -97,7 +100,7 @@ export const AuthContextProvider = (props) => {
 
     //react notifier
     const notify = (message, status) => {
-        console.log('caled');
+        
             switch(status){
                 case 'error': 
                 toast.error(message,{
@@ -126,7 +129,6 @@ export const AuthContextProvider = (props) => {
                 election: election,
                 loading: loading,
                 validAccount: validAccount,
-                getAccount: getAccount,
                 setElection: setElection,
                 results,
                 setResults,

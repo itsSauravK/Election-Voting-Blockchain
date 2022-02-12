@@ -4,15 +4,12 @@ import Electioneth from '../../ethereum/election'
 import ShowCandidate from "./ShowCandidate";
 import Loading from "../../components/Loading";
 import {useNavigate} from 'react-router'
-import axios from "axios";
 import StartElection from "./StartElection";
 import EndElection from "./EndElection";
-import Factory from '../../ethereum/factory'
-import web3 from "../../ethereum/web3";
 import { useEndElection } from "../../components/hooks/end-election";
 
 const Election = () => {
-    const {user, election, notify, getAccount, validAccount, setElection, setUser} = useContext(AuthContext);
+    const {user, election, notify} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     let tempCandidate;
     const navigate = useNavigate();
@@ -29,7 +26,7 @@ const Election = () => {
                 navigate('/login')
             }else{
                  //get intial value of validAccount, if the user is using right ethereum ot not
-                 getAccount();
+                 //getAccount();
                 //checking if there is no ongoing election
                 if(election==='0x0000000000000000000000000000000000000000'){
                     navigate('/');
@@ -37,7 +34,7 @@ const Election = () => {
                  //election.ongoing is only true if admin adds an election
                 if(user.electionOngoing === false && user.role !== 'admin'){
                     notify('There is no ongoing election', 'error');
-                    navigate(-1);
+                    navigate('/');
                 }
             }
         })()
@@ -80,7 +77,7 @@ const Election = () => {
 
         <>
             {!loading && candidateCount === 0 && <p>No candidates</p>}
-            {!loading && election!=='0x0000000000000000000000000000000000000000'&& candidateCount>0 &&
+            {!loading && election!=='0x0000000000000000000000000000000000000000'&& candidateCount>=0 &&
             <>
                 <h1>{electionName}</h1>
                 <p>Candidates{candidateCount}</p>
