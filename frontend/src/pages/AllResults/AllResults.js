@@ -1,8 +1,7 @@
-import { useEffect ,useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useGetResults } from "../../components/hooks/get-results";
 import Loading from "../../components/Loading";
-import Factory from '../../ethereum/factory'
 import AuthContext from "../../store/auth-context";
 const AllResults = () => {
 
@@ -27,12 +26,14 @@ const AllResults = () => {
                     </thead>
                     <tbody>
                     {names.map((electionName, i) => (
+                        results[i] !== '0x0000000000000000000000000000000000000000' && 
                         <tr key = {i}>
                             <td>{names[i]}</td>
                             <td>{results[i]}</td>
                             <td><button><Link to = {`/results/${results[i]}`}>Result</Link></button></td>
                         </tr>
                         ))
+                    
 
                     }
                     </tbody>

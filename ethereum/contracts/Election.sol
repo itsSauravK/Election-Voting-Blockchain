@@ -30,6 +30,7 @@ contract ElectionFactory{
 
     function clearFactory() public{
         //removing current deployed election
+        require(deployedElection!= 0x0000000000000000000000000000000000000000);
         count =0;
         elections.push(deployedElection);
         names.push(deployedElectionName);
