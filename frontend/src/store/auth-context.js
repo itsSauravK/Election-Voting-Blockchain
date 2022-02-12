@@ -27,13 +27,13 @@ const AuthContext = React.createContext({
 export const AuthContextProvider = (props) => {
 
     const [results, setResults] = useState([]);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState();
     const [loading, setLoading] = useState(false);
     const [validAccount, setValidAccount] = useState(false);
     const [election, setElection] = useState('0x0000000000000000000000000000000000000000');
     const [names, setNames] = useState([]);
     //whenever user changes ethereum account, this function runs
-    window.ethereum.on('accountsChanged', function (accounts) {
+    window.ethereum&&window.ethereum.on('accountsChanged', function (accounts) {
         
         getAccount();
   })
@@ -41,13 +41,20 @@ export const AuthContextProvider = (props) => {
     //To get intial address of all previous elections
     //useGetResults(setLoading);
 
+  useEffect( () => {
+    if(!window.ethereum){
+        alert('Please Intall metamask');
+    }
+  })
   //function to make sure user is using correct ethereum account
   async function getAccount() {
       //getting current account
     const accounts = await window.ethereum.enable();
     if(user){
-      //accounts = await web3.eth.getAccounts();
-      setValidAccount(accounts[0].toUpperCase() === user.eAddress.toUpperCase()) 
+      //accounts = await web3.eth.getAccounts()
+      console.log(user);
+      if(accounts[0] && user.eAddress)
+        setValidAccount(accounts[0].toUpperCase() === user.eAddress.toUpperCase()) 
     }
 
   }
@@ -72,7 +79,7 @@ export const AuthContextProvider = (props) => {
         }
         b();
         setLoading(false);
-        return () => b;
+        return () => b
         }, [setUser])
 
     //this use effect is to get deployed election
