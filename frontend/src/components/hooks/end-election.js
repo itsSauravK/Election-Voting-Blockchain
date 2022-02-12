@@ -1,5 +1,5 @@
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect} from "react";
 import Electioneth from "../../ethereum/election";
 import Factory from '../../ethereum/factory'
 import web3 from "../../ethereum/web3";
@@ -10,7 +10,7 @@ import AuthContext from "../../store/auth-context";
 
 export const useEndElection = (page, setLoading) => {
     const navigate = useNavigate();
-    const {user, notify, election, setUser, setElection} = useContext(AuthContext);
+    const {notify, election, setUser, setElection} = useContext(AuthContext);
     //use effect to remove bug where user rejects second transaction while ending election
     useEffect(()=>{
         (async()=>{

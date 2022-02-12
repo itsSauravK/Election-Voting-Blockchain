@@ -1,11 +1,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Electioneth from "../../ethereum/election";
-import Factory from '../../ethereum/factory'
-import web3 from "../../ethereum/web3";
 import {useNavigate} from 'react-router'
-import axios from "axios";
 import AuthContext from "../../store/auth-context";
 import Loading from "../../components/Loading";
 import { useEndElection } from "../../components/hooks/end-election";
@@ -13,8 +9,7 @@ import { useEndElection } from "../../components/hooks/end-election";
 const LandingPage = () => {
 
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
-    const {user, notify, election, setUser, setElection} = useContext(AuthContext);
+    const {user, notify, election} = useContext(AuthContext);
     useEffect(  () =>{
         if(!user){
             notify('Please login first','error');

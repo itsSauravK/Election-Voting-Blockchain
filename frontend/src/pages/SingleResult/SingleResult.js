@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router";
 import { useGetResults } from "../../components/hooks/get-results";
 import Loading from "../../components/Loading";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Electioneth from "../../ethereum/election";
 import AuthContext from "../../store/auth-context";
 import ShowResult from "./ShowResult";
@@ -54,7 +54,7 @@ const SingleResult = () => {
           //checking for draw
           if (
             +count >= 2 &&
-            +tempCandidate[0].votes == +tempCandidate[1].votes
+            +tempCandidate[0].votes === +tempCandidate[1].votes
           ) {
             setIsDraw(true);
           }

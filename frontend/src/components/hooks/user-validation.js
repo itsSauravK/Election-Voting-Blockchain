@@ -3,7 +3,7 @@ import AuthContext from "../../store/auth-context";
 import { useNavigate } from "react-router";
 export const useUserValidation = (electionStarted) => {
 
-    const {user, notify, getAccount, election} = useContext(AuthContext);
+    const {user, notify, election} = useContext(AuthContext);
     const navigate = useNavigate();
     useEffect(  () =>{
         if(!user){
@@ -37,7 +37,7 @@ export const useUserValidation = (electionStarted) => {
             }
             //getAccount() compares the address stored in user with etheremum account address of user
             //it sets intial value of valid account
-            getAccount();
+            //getAccount();
         }
        
         
