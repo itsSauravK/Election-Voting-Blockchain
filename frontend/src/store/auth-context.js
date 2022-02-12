@@ -16,7 +16,8 @@ const AuthContext = React.createContext({
     notify:() => {}, //for snackbar
     getAccount: () =>{}, //to change valid account value
     setElection: () => {}, // to change election address
-    results: [], //to store all election results address
+    results: [], //to store all election results address, so if user
+    //directly goes to /results/address, we have data to compare if its not a fake address
     setResults: () => {}, //to change election results
     names: [], //Store all election names
     setNames: () => {}
@@ -38,7 +39,7 @@ export const AuthContextProvider = (props) => {
   })
 
     //To get intial address of all previous elections
-    useGetResults(setLoading);
+    //useGetResults(setLoading);
 
   //function to make sure user is using correct ethereum account
   async function getAccount() {
@@ -53,7 +54,7 @@ export const AuthContextProvider = (props) => {
   //this use effect is to get user data from http cookie
     useEffect( ()=> {
        
-        (async () => {
+        const b = async () => {
             setLoading(true);
             try{
             const response = await axios.get('http://localhost:4000/api/election/getUser',{
@@ -68,9 +69,10 @@ export const AuthContextProvider = (props) => {
                 // const accounts = await web3.eth.getAccounts();
                 // account = accounts[0]
               
-        })()
-        
+        }
+        b();
         setLoading(false);
+        return () => b;
         }, [setUser])
 
     //this use effect is to get deployed election
@@ -83,25 +85,26 @@ export const AuthContextProvider = (props) => {
             setLoading(false);
         }
         getAddress();
+        return () => getAddress;
     },[])
 
     //react notifier
     const notify = (message, status) => {
-
+        console.log('caled');
             switch(status){
-            case 'error': 
-            toast.error(message,{
-                autoClose:3000,
-                position: toast.POSITION.BOTTOM_RIGHT,
-            })
-            break;
+                case 'error': 
+                toast.error(message,{
+                    autoClose:3000,
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                })
+                break;
 
-            case 'success':
-            toast.success(message, {
-                autoClose:3000,
-                position: toast.POSITION.BOTTOM_RIGHT
-            });
-            break;
+                case 'success':
+                toast.success(message, {
+                    autoClose:3000,
+                    position: toast.POSITION.BOTTOM_RIGHT
+                });
+                break;
 
 
             };

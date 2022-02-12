@@ -10,16 +10,15 @@ import Factory from '../../ethereum/factory'
 import AuthContext from "../../store/auth-context";
 export const useGetResults = (setLoading) =>{
 
-    const {setResults,names, setNames, notify} = useContext(AuthContext);
+    const {setResults, setNames, notify} = useContext(AuthContext);
     
     useEffect( ()=>{
-        (async() => {
+        const b = async() => {
             setLoading(true);
             //get all results
             try{
                 let electionResults = await Factory.methods.getAllResults().call();
                 let electionNames = await Factory.methods.getAllName().call();
-                
                 setResults(electionResults);
                 setNames(electionNames);
                 
@@ -28,7 +27,9 @@ export const useGetResults = (setLoading) =>{
             }
             setLoading(false);
             
-        })()
+        }
+        b();
+        return () => b;
     },[]
 
     )

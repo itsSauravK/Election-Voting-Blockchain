@@ -7,13 +7,14 @@ import AuthContext from "../../store/auth-context";
 const AllResults = () => {
 
     const [loading, setLoading] = useState(false);
-    const {results, setResults, notify, names, setNames} = useContext(AuthContext);
+    const {results, names} = useContext(AuthContext);
 
     //hook to get results
     useGetResults(setLoading);
     
     return(
         <>
+            {!loading && <Link to='/results/efef'>Wrong result</Link>}
             <p>All results</p>
             
                 {!loading && results.length!==0 &&
@@ -26,7 +27,7 @@ const AllResults = () => {
                     </thead>
                     <tbody>
                     {names.map((electionName, i) => (
-                        <tr>
+                        <tr key = {i}>
                             <td>{names[i]}</td>
                             <td>{results[i]}</td>
                             <td><button><Link to = {`/results/${results[i]}`}>Result</Link></button></td>

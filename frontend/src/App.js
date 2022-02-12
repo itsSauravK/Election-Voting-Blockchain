@@ -9,6 +9,7 @@ import Election from './pages/Election/Election';
 import AddElection from './pages/AddElection/AddElection';
 import AddCandidate from './pages/AddCandidate/AddCandidate';
 import AllResults from './pages/AllResults/AllResults';
+import SingleResult from './pages/SingleResult/SingleResult';
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
         <Route path='/register' element={<p>Register user</p>}/>
         <Route path='/election' element={<Election />}/>
         <Route path='/results' element={<AllResults />}/>
-        <Route path='/results/:id' element={<p>Single result</p>}/>
+        <Route path='/results/:address' element={<SingleResult />}/>
         <Route path='/users' element={<p>All users</p>}/>
         <Route path='/users/:id' element={<p>Edit USer</p>}/>
         <Route path='/addElection' element={<AddElection />}/>
