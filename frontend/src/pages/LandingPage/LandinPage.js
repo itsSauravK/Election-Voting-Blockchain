@@ -67,7 +67,7 @@ const LandingPage = () => {
          {loading && <Loading />}
 
          {!!election && <p>wrwr</p>}
-         <p>Landing page</p>
+         <p class='text-lg'>Landing page</p>
       </>
    );
 };
