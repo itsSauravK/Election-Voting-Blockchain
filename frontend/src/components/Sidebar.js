@@ -48,6 +48,9 @@ const SideBar = (props) => {
                <li>
                   <Link to='/results'>All results</Link>
                </li>
+               <li>
+                  <link to='/users'>All users</link>
+               </li>
             </ul>
          </div>
          <div className='w-full'>{props.children}</div>
