@@ -1,62 +1,61 @@
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity ^0.8.9;
+
 /**
  * @title Owner
  * @dev Set & change owner
  */
-contract ElectionFactory{
-
+contract ElectionFactory {
     address public deployedElection;
     string public deployedElectionName;
     address[] public elections;
     string[] public names;
-    uint public count = 0; //keeping track and making sure there is only one deployed election
+    uint256 public count = 0; //keeping track and making sure there is only one deployed election
 
-    function createElection(string memory name) public{
-        require(count<1); //checking if there are more than 1 deployed election
+    function createElection(string memory name) public {
+        require(count < 1); //checking if there are more than 1 deployed election
         deployedElection = address(new Election(name, msg.sender));
         deployedElectionName = name;
         count++;
     }
 
-    function getAllResults() public view returns (address[] memory){
+    function getAllResults() public view returns (address[] memory) {
         return elections;
     }
 
-    function getAllName() public view returns (string[] memory){
+    function getAllName() public view returns (string[] memory) {
         return names;
     }
 
-    function clearFactory() public{
+    function clearFactory() public {
         //removing current deployed election
-        require(deployedElection!= 0x0000000000000000000000000000000000000000);
-        count =0;
+        require(deployedElection != 0x0000000000000000000000000000000000000000);
+        count = 0;
         elections.push(deployedElection);
         names.push(deployedElectionName);
-        deployedElection =0x0000000000000000000000000000000000000000;
+        deployedElection = 0x0000000000000000000000000000000000000000;
     }
-
 }
-contract Election {
 
-    struct Candidate{
+contract Election {
+    struct Candidate {
         string name;
-        string description; 
+        string description;
         string url;
-        uint votes;
+        uint256 votes;
     }
 
     //Candidate[] public candidates;
-    mapping(uint => Candidate) public candidates;
-    uint public candidateCount;
+    mapping(uint256 => Candidate) public candidates;
+    uint256 public candidateCount;
     address public admin;
     mapping(address => bool) public voters;
     string public electionName;
     bool public started; //true when election starts
     //this variable is only used to make sure candidates cant be after starting and after ending election
-    bool public ended;  //ended indicates time to add candidate has ended
-    
+    bool public ended; //ended indicates time to add candidate has ended
+
     //modifier to check election has started
     modifier electionStarted() {
         require(started);
@@ -67,23 +66,28 @@ contract Election {
         require(msg.sender == admin);
         _;
     }
+
     //constructor
     constructor(string memory name, address creator) {
         admin = creator;
         electionName = name;
     }
+
     //start election
-    function startElection() public restricted{
+    function startElection() public restricted {
         require(!started);
         started = true;
         ended = true;
     }
 
-
-    //add candidate 
-    function addCandidate(string memory name, string memory description, string memory url) public restricted{
+    //add candidate
+    function addCandidate(
+        string memory name,
+        string memory description,
+        string memory url
+    ) public restricted {
         require(!ended); //checking if time to add candidates has ended
-        require(!started); 
+        require(!started);
 
         Candidate storage c = candidates[candidateCount++];
         c.name = name;
@@ -93,8 +97,7 @@ contract Election {
     }
 
     //vote candidate
-    function voteCandidate(uint id) public electionStarted{
-
+    function voteCandidate(uint256 id) public electionStarted {
         Candidate storage currentCandidate = candidates[id];
         //checking if user has already voted
         require(!voters[msg.sender]);
@@ -102,11 +105,10 @@ contract Election {
         currentCandidate.votes++;
         //adding user to mapping
         voters[msg.sender] = true;
-
-     }
+    }
 
     //end election
-    function endElection() public restricted electionStarted{
+    function endElection() public restricted electionStarted {
         //A finished election will always have started = false, ended = true
         started = false;
         ended = true;
