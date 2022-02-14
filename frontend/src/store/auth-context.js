@@ -1,16 +1,16 @@
 /**
  * @prettier
  */
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { toast } from "react-toastify";
-import React from "react";
-import Loading from "../components/Loading";
-import factory from "../ethereum/factory";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import React from 'react';
+import Loading from '../components/Loading';
+import factory from '../ethereum/factory';
 
 const AuthContext = React.createContext({
    user: {}, //get user
-   election: "", //get election address
+   election: '', //get election address
    loading: false, //check if its loading
    validAccount: false, //check if user is using correct ethereum account
    setUser: () => {}, //changes user value
@@ -29,11 +29,11 @@ export const AuthContextProvider = (props) => {
    const [user, setUser] = useState();
    const [loading, setLoading] = useState(false);
    const [validAccount, setValidAccount] = useState(false);
-   const [election, setElection] = useState("0x0000000000000000000000000000000000000000");
+   const [election, setElection] = useState('0x0000000000000000000000000000000000000000');
    const [names, setNames] = useState([]);
    //whenever user changes ethereum account, this function runs
    window.ethereum &&
-      window.ethereum.on("accountsChanged", function (accounts) {
+      window.ethereum.on('accountsChanged', function (accounts) {
          getAccount();
       });
 
@@ -41,9 +41,14 @@ export const AuthContextProvider = (props) => {
    //useGetResults(setLoading);
    //to check if metamask is installed
    useEffect(() => {
-      if (!window.ethereum) {
-         alert("Please Intall metamask");
-      }
+      const c = async () => {
+         if (!window.ethereum) {
+            alert('Please Intall metamask');
+            window.location.href = 'https://metamask.io/';
+         }
+      };
+      c();
+      return () => c;
    });
    //to set setValidAccount value
    useEffect(() => {
@@ -51,13 +56,19 @@ export const AuthContextProvider = (props) => {
    });
    //function to make sure user is using correct ethereum account
    async function getAccount() {
+      setLoading(false);
       //getting current account
-      const accounts = await window.ethereum.enable();
-      if (user) {
-         //accounts = await web3.eth.getAccounts()
-         console.log(user);
-         if (accounts[0] && user.eAddress)
-            setValidAccount(accounts[0].toUpperCase() === user.eAddress.toUpperCase());
+      try {
+         const accounts = await window.ethereum.enable();
+         if (user) {
+            //accounts = await web3.eth.getAccounts()
+            console.log(user);
+            if (accounts[0] && user.eAddress)
+               setValidAccount(accounts[0].toUpperCase() === user.eAddress.toUpperCase());
+         }
+      } catch (err) {
+         alert('Login metamask');
+         window.location.href = 'https://metamask.io/';
       }
    }
    //this use effect is to get user data from http cookie
@@ -65,7 +76,7 @@ export const AuthContextProvider = (props) => {
       const b = async () => {
          setLoading(true);
          try {
-            const response = await axios.get("http://localhost:4000/api/election/getUser", {
+            const response = await axios.get('http://localhost:4000/api/election/getUser', {
                withCredentials: true,
             });
             setUser(response.data.user);
@@ -95,14 +106,14 @@ export const AuthContextProvider = (props) => {
    //react notifier
    const notify = (message, status) => {
       switch (status) {
-         case "error":
+         case 'error':
             toast.error(message, {
                autoClose: 3000,
                position: toast.POSITION.BOTTOM_RIGHT,
             });
             break;
 
-         case "success":
+         case 'success':
             toast.success(message, {
                autoClose: 3000,
                position: toast.POSITION.BOTTOM_RIGHT,

@@ -49,7 +49,7 @@ const SideBar = (props) => {
                   <Link to='/results'>All results</Link>
                </li>
                <li>
-                  <link to='/users'>All users</link>
+                  <Link to='/users'>All users</Link>
                </li>
             </ul>
          </div>
