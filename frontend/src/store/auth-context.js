@@ -44,15 +44,11 @@ export const AuthContextProvider = (props) => {
       const c = async () => {
          if (!window.ethereum) {
             alert('Please Intall metamask');
-         } else {
-            try {
-               let account = window.ethereum.enable();
-            } catch (err) {
-               notify('Please login metamask');
-            }
+            window.location.href = 'https://metamask.io/';
          }
       };
       c();
+      return () => c;
    });
    //to set setValidAccount value
    useEffect(() => {
@@ -71,8 +67,8 @@ export const AuthContextProvider = (props) => {
                setValidAccount(accounts[0].toUpperCase() === user.eAddress.toUpperCase());
          }
       } catch (err) {
-         alert('Login metamask   ');
-         setLoading(true);
+         alert('Login metamask');
+         window.location.href = 'https://metamask.io/';
       }
    }
    //this use effect is to get user data from http cookie
