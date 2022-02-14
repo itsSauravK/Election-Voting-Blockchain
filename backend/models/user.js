@@ -1,19 +1,20 @@
-const mongoose = require("mongoose");
-const validator = require("validator");
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
+const mongoose = require('mongoose');
+const validator = require('validator');
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
    name: {
       type: String,
-      required: [true, "Please enter your name"],
-      maxLength: [30, "Your name cannot exceed 30 characters"],
+      required: [true, 'Please enter your name'],
+      maxLength: [30, 'Your name cannot exceed 30 characters'],
    },
    email: {
       type: String,
-      required: [true, "Please enter your email"],
+      required: [true, 'Please enter your email'],
       unique: true,
-      validate: [validator.isEmail, "Please enter valid email address"],
+      validate: [validator.isEmail, 'Please enter valid email address'],
    },
    otp: {
       type: String,
@@ -22,7 +23,7 @@ const userSchema = new mongoose.Schema({
    otpExpire: String,
    role: {
       type: String,
-      default: "user",
+      default: 'user',
    },
    createdAt: {
       type: Date,
@@ -34,7 +35,7 @@ const userSchema = new mongoose.Schema({
    },
    eAddress: {
       type: String,
-      required: [true, "Ethereum account address needed"],
+      required: [true, 'Ethereum account address needed'],
    },
    electionOngoing: {
       type: Boolean,
@@ -44,19 +45,19 @@ const userSchema = new mongoose.Schema({
 
 //Encrypting otp
 
-userSchema.pre("save", async function (next) {
-   if (!this.isModified("otp")) {
+userSchema.pre('save', async function (next) {
+   if (!this.isModified('otp')) {
       next();
    }
 
-   //this.otp = await bcrypt.hash(this.otp, 10)
+   this.otp = await bcrypt.hash(this.otp, 10);
 });
 
 //Compare user password
 userSchema.methods.compareOtp = async function (enteredOtp) {
    // console.log(crypto.createHash('sha256').update(enteredOtp).digest('hex')+ "  "+ this.otp);
-   // return await bcrypt.compare(enteredOtp, this.otp);
-   return enteredOtp == this.otp;
+   return await bcrypt.compare(enteredOtp, this.otp);
+   //return enteredOtp == this.otp;
 };
 
 // Return jsonwebtoken
@@ -69,7 +70,7 @@ userSchema.methods.getJwtToken = function () {
 //Generate OTP
 userSchema.methods.getOtp = function () {
    //genereate otp
-   this.otp = crypto.randomBytes(5).toString("hex");
+   this.otp = crypto.randomBytes(5).toString('hex');
 
    //hashing the otp
    //this.otp = crypto.createHash('sha256').update(newOtp).digest('hex');
@@ -79,4 +80,4 @@ userSchema.methods.getOtp = function () {
    return this.otp;
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);
