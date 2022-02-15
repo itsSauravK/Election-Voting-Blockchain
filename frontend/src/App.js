@@ -13,6 +13,7 @@ import AddElection from './pages/AddElection/AddElection';
 import AddCandidate from './pages/AddCandidate/AddCandidate';
 import AllResults from './pages/AllResults/AllResults';
 import SingleResult from './pages/SingleResult/SingleResult';
+import AllUser from './pages/AllUsers/AllUser';
 
 function App() {
    return (
@@ -25,7 +26,7 @@ function App() {
                <Route path='/election' element={<Election />} />
                <Route path='/results' element={<AllResults />} />
                <Route path='/results/:address' element={<SingleResult />} />
-               <Route path='/users' element={<p>ewew</p>} />
+               <Route path='/users' element={<AllUser />} />
                <Route path='/users/:id' element={<p>Edit USer</p>} />
                <Route path='/addElection' element={<AddElection />} />
                <Route path='/addCandidate' element={<AddCandidate />} />
