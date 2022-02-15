@@ -1,7 +1,9 @@
-const ShowUser = (key, id, user) => {
+const ShowUser = ({ id, user }) => {
    return (
       <>
-         <p>Single user</p>
+         <p>
+            {user.name} {user.email} {user.role} {user.eAddress}
+         </p>
       </>
    );
 };

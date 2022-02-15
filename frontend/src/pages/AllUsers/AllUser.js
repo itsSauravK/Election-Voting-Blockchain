@@ -45,7 +45,8 @@ const AllUser = () => {
                <ShowUser key={element} id={singleUser._id} user={singleUser} />
             ))}
          {!loading && users.length === 0 && <p>No user</p>}
-         {!loading && users && <p>{users.length}</p>}
+         {!loading && users && <p>{users.length} users</p>}
+         {!loading && <button>Register user</button>}
       </>
    );
 };
