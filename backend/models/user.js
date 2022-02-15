@@ -36,6 +36,7 @@ const userSchema = new mongoose.Schema({
    eAddress: {
       type: String,
       required: [true, 'Ethereum account address needed'],
+      unique: true,
    },
    electionOngoing: {
       type: Boolean,
