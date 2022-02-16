@@ -1,31 +1,35 @@
 /**
  * @prettier
  */
-import { useContext, useEffect, useState } from "react";
-import AuthContext from "../../store/auth-context";
-import Electioneth from "../../ethereum/election";
-import axios from "axios";
-import web3 from "../../ethereum/web3";
-import { useNavigate } from "react-router";
+import { useContext, useEffect, useState } from 'react';
+import AuthContext from '../../store/auth-context';
+import Electioneth from '../../ethereum/election';
+import axios from 'axios';
+import web3 from '../../ethereum/web3';
+import { useNavigate } from 'react-router';
 
 const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
    const { user, validAccount, notify, election, setUser } = useContext(AuthContext);
    const [vote, setVote] = useState(+candidate.votes);
    const navigate = useNavigate();
    useEffect(() => {
-      (async () => {
+      const b = async () => {
          const Election = Electioneth(election);
          let newCandidate = await Election.methods.candidates(id).call();
          let candidateVote = newCandidate.votes;
          setVote(candidateVote);
          console.log(vote);
-      })();
+      };
+      b();
+      return () => b;
    });
    const voteHandler = async (e) => {
       e.preventDefault();
       setLoading(true);
-      if (!validAccount) {
-         notify("You are using wrong ethereum account", "error");
+
+      const account = await web3.eth.getAccounts();
+      if (account[0] !== user.eAddress) {
+         notify('You are using wrong ethereum account', 'error');
          setLoading(false);
          return;
       }
@@ -37,16 +41,16 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
             from: accounts[0],
          });
          setVote((prevVote) => prevVote + 1);
-         notify("You have successfully voted a candidate", "success");
+         notify('You have successfully voted a candidate', 'success');
       } catch (err) {
-         notify(err.message, "error");
+         notify(err.message, 'error');
          setLoading(false);
          return;
       }
       try {
          //send a put request
          const response = await axios.put(
-            "http://localhost:4000/api/election/vote",
+            'http://localhost:4000/api/election/vote',
             {},
             {
                withCredentials: true,
@@ -54,7 +58,7 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
          );
          setUser(response.data.user);
       } catch (err) {
-         notify(err.response.data.errMessage, "error");
+         notify(err.response.data.errMessage, 'error');
          setLoading(false);
          return;
       }
