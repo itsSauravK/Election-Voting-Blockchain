@@ -47,7 +47,7 @@ const AllUser = () => {
             ))}
          {!loading && users.length === 0 && <p>No user</p>}
          {!loading && users && <p>{users.length} users</p>}
-         {!loading && (
+         {!loading && !user.electionOngoing && (
             <button>
                <Link to='/addUser'> Register user</Link>
             </button>

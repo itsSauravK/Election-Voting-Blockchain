@@ -19,6 +19,10 @@ const AddUser = () => {
             notify('You do not have access to this route', 'error');
             navigate('/');
          }
+         if (user.role === 'admin' && user.electionOngoing) {
+            notify('You cannot register a user after starting an election');
+            navigate('/');
+         }
       }
    });
 
