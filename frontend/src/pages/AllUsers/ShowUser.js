@@ -1,9 +1,38 @@
-const ShowUser = ({ id, user }) => {
+import axios from 'axios';
+import { useContext } from 'react';
+import AuthContext from '../../store/auth-context';
+const ShowUser = ({ id, user, setLoading, loading, setUsers }) => {
+   const { notify } = useContext(AuthContext);
+   const deleteUserHandler = async (e) => {
+      e.preventDefault();
+      setLoading(true);
+      try {
+         //deleting user
+         await axios.delete(`http://localhost:4000/api/election/delete/${id}`, {
+            withCredentials: true,
+         });
+         //retriving new user list
+         const response = await axios.get('http://localhost:4000/api/election/allUsers', {
+            withCredentials: true,
+         });
+         setUsers(response.data.users);
+         notify('User has been deleted', 'success');
+      } catch (err) {
+         notify(err.response.date.errMessage, 'error');
+      }
+      setLoading(false);
+   };
+
    return (
       <>
-         <p>
-            {user.name} {user.email} {user.role} {user.eAddress}
-         </p>
+         {!loading && (
+            <p>
+               {user.name} {user.email} {user.role} {user.eAddress}
+            </p>
+         )}
+         {!loading && !user.electionOngoing && (
+            <button onClick={deleteUserHandler}>Delete user</button>
+         )}
       </>
    );
 };
