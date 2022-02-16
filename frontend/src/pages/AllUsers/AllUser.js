@@ -43,7 +43,14 @@ const AllUser = () => {
          {!loading &&
             users.length > 0 &&
             users.map((singleUser, element) => (
-               <ShowUser key={element} id={singleUser._id} user={singleUser} />
+               <ShowUser
+                  key={element}
+                  id={singleUser._id}
+                  user={singleUser}
+                  setLoading={setLoading}
+                  loading={loading}
+                  setUsers={setUsers}
+               />
             ))}
          {!loading && users.length === 0 && <p>No user</p>}
          {!loading && users && <p>{users.length} users</p>}
