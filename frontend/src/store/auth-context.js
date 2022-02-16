@@ -51,9 +51,9 @@ export const AuthContextProvider = (props) => {
       return () => c;
    });
    //to set setValidAccount value
-   useEffect(() => {
-      getAccount();
-   });
+   // useEffect(() => {
+   //    getAccount();
+   // }, []);
    //function to make sure user is using correct ethereum account
    async function getAccount() {
       setLoading(false);
@@ -129,6 +129,7 @@ export const AuthContextProvider = (props) => {
                   user: user,
                   setUser: setUser,
                   notify: notify,
+                  getAccount: getAccount,
                   election: election,
                   loading: loading,
                   validAccount: validAccount,

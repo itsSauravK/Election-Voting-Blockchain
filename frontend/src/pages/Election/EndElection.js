@@ -1,26 +1,29 @@
 /**
  * @prettier
  */
-import axios from "axios";
-import { useContext } from "react";
-import AuthContext from "../../store/auth-context";
-import Electioneth from "../../ethereum/election";
-import Factory from "../../ethereum/factory";
-import web3 from "../../ethereum/web3";
-import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { useContext } from 'react';
+import AuthContext from '../../store/auth-context';
+import Electioneth from '../../ethereum/election';
+import Factory from '../../ethereum/factory';
+import web3 from '../../ethereum/web3';
+import { useNavigate } from 'react-router-dom';
 const EndElection = ({ setLoading }) => {
-   const { election, notify, validAccount, setUser, setElection } = useContext(AuthContext);
+   const { user, election, notify, validAccount, setUser, setElection, getAccount } =
+      useContext(AuthContext);
    //fetch api that election has ended
    const navigate = useNavigate();
    const endElectionHandler = async (e) => {
       e.preventDefault();
       setLoading(true);
+      const account = await web3.eth.getAccounts();
       //checking if user is using right ethereum account
-      if (!validAccount) {
-         notify("You are using wrong ethereum account", "error");
+      if (account[0] !== user.eAddress) {
+         notify('You are using wrong ethereum account', 'error');
          setLoading(false);
          return;
       }
+
       const Election = Electioneth(election);
       const accounts = await web3.eth.getAccounts();
 
@@ -34,15 +37,15 @@ const EndElection = ({ setLoading }) => {
             from: accounts[0],
          });
       } catch (err) {
-         notify(err.message, "error");
+         notify(err.message, 'error');
          setLoading(false);
-         navigate("/");
+         navigate('/');
          return;
       }
       //changing electionOngoing to false and hasVoted to false
       try {
          await axios.put(
-            "http://localhost:4000/api/election/endElection",
+            'http://localhost:4000/api/election/endElection',
             {
                address: election,
             },
@@ -51,14 +54,14 @@ const EndElection = ({ setLoading }) => {
             }
          );
          //get updated user back
-         const response = await axios.get("http://localhost:4000/api/election/getUser", {
+         const response = await axios.get('http://localhost:4000/api/election/getUser', {
             withCredentials: true,
          });
          setUser(response.data.user);
-         setElection("0x0000000000000000000000000000000000000000");
-         notify("Election has ended", "success");
+         setElection('0x0000000000000000000000000000000000000000');
+         notify('Election has ended', 'success');
       } catch (err) {
-         notify(err.response.data.errMessage, "error");
+         notify(err.response.data.errMessage, 'error');
          setLoading(false);
          return;
       }
