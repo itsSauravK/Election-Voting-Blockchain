@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 import AuthContext from '../../store/auth-context';
@@ -26,9 +27,27 @@ const AddUser = () => {
       }
    });
 
-   const userRegisterHandler = (e) => {
+   const userRegisterHandler = async (e) => {
       e.preventDefault();
-      console.log('click');
+      try {
+         setLoading(true);
+         await axios.post(
+            'http://localhost:4000/api/election/register',
+            {
+               name,
+               email,
+               eAddress,
+            },
+            {
+               withCredentials: true,
+            }
+         );
+         notify('User has been registered', 'success');
+         navigate('/users');
+      } catch (err) {
+         notify(err.response.data.errMessage, 'error');
+      }
+      setLoading(false);
    };
    return (
       <>
