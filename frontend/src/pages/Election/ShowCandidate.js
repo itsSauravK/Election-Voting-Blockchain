@@ -50,7 +50,7 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
       try {
          //send a put request
          const response = await axios.put(
-            'http://localhost:4000/api/election/vote',
+            '/election/vote',
             {},
             {
                withCredentials: true,

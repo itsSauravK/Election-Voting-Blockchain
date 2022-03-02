@@ -45,7 +45,7 @@ const EndElection = ({ setLoading }) => {
       //changing electionOngoing to false and hasVoted to false
       try {
          await axios.put(
-            'http://localhost:4000/api/election/endElection',
+            'election/endElection',
             {
                address: election,
             },
@@ -54,7 +54,7 @@ const EndElection = ({ setLoading }) => {
             }
          );
          //get updated user back
-         const response = await axios.get('http://localhost:4000/api/election/getUser', {
+         const response = await axios.get('election/getUser', {
             withCredentials: true,
          });
          setUser(response.data.user);

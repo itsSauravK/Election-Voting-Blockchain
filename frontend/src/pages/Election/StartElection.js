@@ -38,11 +38,11 @@ const StartElection = ({ setLoading }) => {
 
       try {
          //changing electionOngoing to true for all user accounts
-         await axios.get('http://localhost:4000/api/election/startElection', {
+         await axios.get('/election/startElection', {
             withCredentials: true,
          });
          //retrive changed user database
-         const response = await axios.get('http://localhost:4000/api/election/getUser', {
+         const response = await axios.get('/election/getUser', {
             withCredentials: true,
          });
          setUser(response.data.user);

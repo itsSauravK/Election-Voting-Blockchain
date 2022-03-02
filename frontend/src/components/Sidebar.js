@@ -8,7 +8,7 @@ const SideBar = (props) => {
 
    const logoutHandler = async () => {
       try {
-         await axios.get('http://localhost:4000/api/election/logout', {
+         await axios.get('api/election/logout', {
             withCredentials: true,
          });
          setUser(null);

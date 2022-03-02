@@ -8,11 +8,11 @@ const ShowUser = ({ id, user, setLoading, loading, setUsers }) => {
       setLoading(true);
       try {
          //deleting user
-         await axios.delete(`http://localhost:4000/api/election/delete/${id}`, {
+         await axios.delete(`/election/delete/${id}`, {
             withCredentials: true,
          });
          //retriving new user list
-         const response = await axios.get('http://localhost:4000/api/election/allUsers', {
+         const response = await axios.get('/election/allUsers', {
             withCredentials: true,
          });
          setUsers(response.data.users);
