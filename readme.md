@@ -25,10 +25,6 @@ CLOUDINARY_API_KEY =
 CLOUDINARY_API_SECRET =  
 > Put your own JWT_SECRET, SMTP_AUTH_USER, SMTP_AUTH_PASS
 
-`npm start` at the root folder to start the backend of the application  
-`npm run client` to start the fronend
-`npm run dev` to start both frontend and backend
-
 Go to root folder and make .env file
 ## .env variables
 
@@ -46,6 +42,12 @@ REACT_APP_Contract =
  node ethereum/compile.js  
  node ethereum/deploy.js
  ```
+### To run the project 
+
+`npm start` at the root folder to start the backend of the application  
+`npm run client` to start the fronend 
+`npm run dev` to start both frontend and backend 
+
 
 # To contribute 
 
