@@ -45,7 +45,7 @@ REACT_APP_Contract =
 ### To run the project 
 
 `npm start` at the root folder to start the backend of the application  
-`npm run client` to start the fronend 
+`npm run client` to start the fronend <br> 
 `npm run dev` to start both frontend and backend 
 
 
