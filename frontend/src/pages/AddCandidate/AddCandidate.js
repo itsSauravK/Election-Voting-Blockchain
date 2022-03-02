@@ -1,22 +1,22 @@
 /**
  * @prettier
  */
-import axios from "axios";
-import { useContext, useState } from "react";
-import { useUserValidation } from "../../components/hooks/user-validation";
-import { useNavigate } from "react-router";
-import Loading from "../../components/Loading";
-import web3 from "../../ethereum/web3";
-import AuthContext from "../../store/auth-context";
-import Electioneth from "../../ethereum/election";
+import axios from 'axios';
+import { useContext, useState } from 'react';
+import { useUserValidation } from '../../components/hooks/user-validation';
+import { useNavigate } from 'react-router';
+import Loading from '../../components/Loading';
+import web3 from '../../ethereum/web3';
+import AuthContext from '../../store/auth-context';
+import Electioneth from '../../ethereum/election';
 
 const AddCandidate = () => {
    const { election, validAccount, notify } = useContext(AuthContext);
    const [loading, setLoading] = useState(false);
-   const [name, setName] = useState("");
-   const [description, setDescription] = useState("");
+   const [name, setName] = useState('');
+   const [description, setDescription] = useState('');
    const [pic, setPic] = useState();
-   const [link, setLink] = useState("");
+   const [link, setLink] = useState('');
    const navigate = useNavigate();
    useUserValidation(true);
 
@@ -24,16 +24,16 @@ const AddCandidate = () => {
       e.preventDefault();
       setLoading(true);
       if (!validAccount) {
-         notify("You are using wrong ethereum account", "error");
+         notify('You are using wrong ethereum account', 'error');
          setLoading(false);
          return;
       }
       //cloudinary
       const formData = new FormData();
-      formData.append("image", pic);
-      const resource = await axios.post("http://localhost:4000/api/upload", formData, {
+      formData.append('image', pic);
+      const resource = await axios.post('/upload', formData, {
          headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
          },
       });
       let url = resource.data.file;
@@ -45,16 +45,16 @@ const AddCandidate = () => {
       try {
          const accounts = await web3.eth.getAccounts();
          if (!url) {
-            notify("err", "error");
+            notify('err', 'error');
          }
 
          await Election.methods.addCandidate(name, description, url).send({
             from: accounts[0],
          });
-         notify("Candidate added", "success");
-         navigate("/election");
+         notify('Candidate added', 'success');
+         navigate('/election');
       } catch (err) {
-         notify(err.message, "error");
+         notify(err.message, 'error');
       }
       setLoading(false);
    };

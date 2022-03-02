@@ -23,7 +23,7 @@ const AllUser = () => {
                //get user data
                try {
                   setLoading(true);
-                  const response = await axios.get('http://localhost:4000/api/election/allUsers', {
+                  const response = await axios.get('/election/allUsers', {
                      withCredentials: true,
                   });
                   console.log(response.data.users);

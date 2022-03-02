@@ -76,7 +76,7 @@ export const AuthContextProvider = (props) => {
       const b = async () => {
          setLoading(true);
          try {
-            const response = await axios.get('http://localhost:4000/api/election/getUser', {
+            const response = await axios.get('/election/getUser', {
                withCredentials: true,
             });
             setUser(response.data.user);

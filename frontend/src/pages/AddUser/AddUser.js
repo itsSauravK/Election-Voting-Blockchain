@@ -33,7 +33,7 @@ const AddUser = () => {
       try {
          setLoading(true);
          await axios.post(
-            'http://localhost:4000/api/election/register',
+            '/election/register',
             {
                name,
                email,
