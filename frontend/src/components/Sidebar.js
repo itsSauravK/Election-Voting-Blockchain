@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useContext } from 'react';
-
+import {GiVote} from 'react-icons/gi'
+import {BiAnchor} from 'react-icons/bi'
 import { Link } from 'react-router-dom';
 import AuthContext from '../store/auth-context';
 const SideBar = (props) => {
@@ -18,9 +19,9 @@ const SideBar = (props) => {
       }
    };
    return (
-      <div className='flex'>
-         <div className='fixed-width 100'>
-            <h2>This is the sidebar</h2>
+      <div className='flex '>
+         <div className='flex w-80 bg-indigo-400 h-screen'>
+            <BiAnchor className = 'h-10 w-10 text-blue-800' /><br />
             <ul>
                {!user && (
                   <li>
@@ -43,7 +44,9 @@ const SideBar = (props) => {
                   <Link to='/addCandidate '>Add candidate</Link>
                </li>
                <li>
-                  <Link to='/election'>Election</Link>
+                  <div>
+                     <GiVote className='inline text-blue-800' /> <Link to='/election' className='text-white'>Election</Link>
+                  </div>
                </li>
                <li>
                   <Link to='/results'>All results</Link>
