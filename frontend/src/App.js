@@ -15,6 +15,7 @@ import AllResults from './pages/AllResults/AllResults';
 import SingleResult from './pages/SingleResult/SingleResult';
 import AllUser from './pages/AllUsers/AllUser';
 import AddUser from './pages/AddUser/AddUser';
+import EditUser from './pages/EditUser/EditUser';
 import axios from 'axios';
 
 axios.defaults.baseURL = process.env.REACT_APP_BE_URL;
@@ -34,6 +35,7 @@ function App() {
                <Route path='/addUser' element={<AddUser />} />
                <Route path='/addElection' element={<AddElection />} />
                <Route path='/addCandidate' element={<AddCandidate />} />
+               <Route path='/editUser' element={<EditUser />} />
                <Route path='/*' element={<p>Wrong page</p>} />
             </Routes>
          </SideBar>

@@ -8,7 +8,7 @@ const SideBar = (props) => {
 
    const logoutHandler = async () => {
       try {
-         await axios.get('api/election/logout', {
+         await axios.get('/election/logout', {
             withCredentials: true,
          });
          setUser(null);
@@ -50,6 +50,9 @@ const SideBar = (props) => {
                </li>
                <li>
                   <Link to='/users'>All users</Link>
+               </li>
+               <li>
+                  <Link to='/editUser'>Edit user</Link>
                </li>
             </ul>
          </div>
