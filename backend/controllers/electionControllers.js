@@ -1,8 +1,8 @@
-const ErrorHandler = require("../utils/errorHandler");
-const catchAsyncError = require("../middlewares/catchAsyncErrors");
-const Election = require("../models/election");
-const User = require("../models/user");
-const sendEmail = require("../utils/sendEmail");
+const ErrorHandler = require('../utils/errorHandler');
+const catchAsyncError = require('../middlewares/catchAsyncErrors');
+const Election = require('../models/election');
+const User = require('../models/user');
+const sendEmail = require('../utils/sendEmail');
 
 //Function to start election
 // => api/election/startElection
@@ -12,7 +12,7 @@ exports.startElection = catchAsyncError(async (req, res, next) => {
    const users = await User.find();
    users.forEach((user) => {
       //sending an email to each user that election has started
-      electionEmail(user, "Election has started. Login to vote", next);
+      electionEmail(user, 'Election has started. Login to vote', next);
 
       //Updating each user ongoing variable to true
       updateUser(user, true);
@@ -36,7 +36,7 @@ exports.endElection = catchAsyncError(async (req, res, next) => {
       //sending an email to each user that election has ended
       electionEmail(
          user,
-         `Election has ended. Visit http://localhost:3000/election/${address}`,
+         `Election has ended. Visit ${req.protocol}://${req.get('host')}/results/${address}`,
          next
       );
 
@@ -109,11 +109,11 @@ async function electionEmail(user, message, next) {
    try {
       await sendEmail({
          email: user.email,
-         subject: "Election",
+         subject: 'Election',
          message,
       });
    } catch (error) {
-      return next(new ErrorHandler("Internal Server Error", 500));
+      return next(new ErrorHandler('Internal Server Error', 500));
    }
 }
 
