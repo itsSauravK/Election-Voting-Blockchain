@@ -1,12 +1,12 @@
-const User = require("../models/user");
+const User = require('../models/user');
 
-const ErrorHandler = require("../utils/errorHandler");
-const catchAsyncError = require("../middlewares/catchAsyncErrors");
-const sendToken = require("../utils/jwtToken");
-const sendEmail = require("../utils/sendEmail");
+const ErrorHandler = require('../utils/errorHandler');
+const catchAsyncError = require('../middlewares/catchAsyncErrors');
+const sendToken = require('../utils/jwtToken');
+const sendEmail = require('../utils/sendEmail');
 
-const crypto = require("crypto");
-const { send } = require("process");
+const crypto = require('crypto');
+const { send } = require('process');
 
 //Access -> Admin
 //Route -> /api/election/register
@@ -58,7 +58,7 @@ exports.generateOTP = catchAsyncError(async (req, res, next) => {
    const user = await User.findOne({ email });
 
    if (!user) {
-      return next(new ErrorHandler("Invalid Email", 404));
+      return next(new ErrorHandler('Invalid Email', 404));
    }
 
    //Generating Otp
@@ -72,7 +72,7 @@ exports.generateOTP = catchAsyncError(async (req, res, next) => {
    try {
       await sendEmail({
          email: user.email,
-         subject: "New Otp",
+         subject: 'New Otp',
          message,
       });
 
@@ -85,7 +85,7 @@ exports.generateOTP = catchAsyncError(async (req, res, next) => {
       user.otpExpire = undefined;
       await user.save({ validateBeforeSave: fasle });
 
-      return next(new ErrorHandler("Internal Server Error", 500));
+      return next(new ErrorHandler('Internal Server Error', 500));
    }
 });
 
@@ -96,25 +96,25 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
    const { email, otp } = req.body;
 
    if (!email || !otp) {
-      return next(new ErrorHandler("Please enter email and otp"));
+      return next(new ErrorHandler('Please enter email and otp'));
    }
 
    //finding user in database
    const user = await User.findOne({
       email,
       otpExpire: { $gt: Date.now() },
-   }).select("+otp");
+   }).select('+otp');
 
    //console.log(user);
    // console.log(user.createdAt + "      " + user.otpExpire);
    if (!user) {
-      return next(new ErrorHandler("Otp is invalid or expired or email id is wrong", 400));
+      return next(new ErrorHandler('Otp is invalid or expired or email id is wrong', 400));
    }
 
    //checking otp is correct or not
    const isOtpMatched = await user.compareOtp(otp);
    if (!isOtpMatched) {
-      return next(new ErrorHandler("Invalid Email or otp", 401));
+      return next(new ErrorHandler('Invalid Email or otp', 401));
    }
    user.otp = null;
    sendToken(user, 200, res);
@@ -124,14 +124,14 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
 //Access -> allusers
 // api/election/logout
 exports.logoutUser = catchAsyncError(async (req, res, next) => {
-   res.cookie("token", null, {
+   res.cookie('token', null, {
       expires: new Date(Date.now()),
       httpOnly: true,
    });
 
    res.status(200).json({
       success: true,
-      message: "Logged out",
+      message: 'Logged out',
    });
 });
 
@@ -183,5 +183,28 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
 
    res.status(200).json({
       success: true,
+   });
+});
+
+//Edit user details
+//Access -> user
+//api/election/edit
+exports.editUser = catchAsyncError(async (req, res, next) => {
+   const userId = req.user._id;
+   const { name, eAddress } = req.body;
+
+   const newUserData = {
+      name,
+      eAddress,
+   };
+   const user = await User.findByIdAndUpdate(userId, newUserData, {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+   });
+
+   res.status(200).json({
+      success: true,
+      user,
    });
 });
