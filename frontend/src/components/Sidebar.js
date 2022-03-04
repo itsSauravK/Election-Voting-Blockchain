@@ -400,7 +400,9 @@ const SideBar = (props) => {
          </div>
          <div
             className={`${
-               showSidebar ? `flex-1` : `transform -translate-x-40 mx-8`
+               showSidebar
+                  ? `flex-1`
+                  : `transform lg:-translate-x-60 -translate-x-48 md:mx-2 sm:mx-3 mx-2`
             } ease-in-out duration-300`}
          >
             {props.children}
