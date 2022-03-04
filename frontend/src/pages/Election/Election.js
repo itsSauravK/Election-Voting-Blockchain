@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router';
 import StartElection from './StartElection';
 import EndElection from './EndElection';
 import { useEndElection } from '../../components/hooks/end-election';
+import { Link } from 'react-router-dom';
 
 const Election = () => {
    const { user, election, notify } = useContext(AuthContext);
@@ -113,14 +114,17 @@ const Election = () => {
                      </tbody>
                   </table>
                   {user && !user.electionOngoing && user.role === 'admin' && (
-                     <StartElection setLoading={setLoading} />
+                     <>
+                        <StartElection setLoading={setLoading} />
+                        <Link to='/addCandidate '>Add candidate</Link>
+                     </>
                   )}
                   {user && user.electionOngoing && user.role === 'admin' && (
                      <EndElection setLoading={setLoading} />
                   )}
                </>
             )}
-         {!loading && <Loading />}
+         {loading && <Loading />}
       </>
    );
 };
