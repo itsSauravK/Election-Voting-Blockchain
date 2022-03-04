@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { GiPodiumWinner, GiVote } from 'react-icons/gi';
 import { SiBlockchaindotcom } from 'react-icons/si';
 import { BiHome, BiLogIn, BiLogOut } from 'react-icons/bi';
@@ -9,7 +9,7 @@ import AuthContext from '../store/auth-context';
 import { AiFillEdit, AiOutlinePlusSquare, AiOutlineUserAdd, AiFillLinkedin } from 'react-icons/ai';
 const SideBar = (props) => {
    const { user, setUser, notify, election } = useContext(AuthContext);
-
+   const [showSidebar, setShowSidebar] = useState(false);
    const logoutHandler = async () => {
       try {
          await axios.get('/election/logout', {
@@ -23,7 +23,39 @@ const SideBar = (props) => {
    };
    return (
       <div className='flex '>
-         <div className=' grid bg-indigo-600 shadow-inner lg:w-60 h-screen px-1 justify-items-center '>
+         {!showSidebar ? (
+            <svg
+               onClick={() => setShowSidebar(!showSidebar)}
+               className='fixed  z-30 flex items-center cursor-pointer left-10 top-7'
+               fill='blue'
+               viewBox='0 0 100 80'
+               width='40'
+               height='40'
+            >
+               <rect width='50' height='5'></rect>
+               <rect y='15' width='50' height='5'></rect>
+               <rect y='30' width='50' height='5'></rect>
+            </svg>
+         ) : (
+            <svg
+               onClick={() => setShowSidebar(!showSidebar)}
+               className='fixed  z-30 flex items-center cursor-pointer left-36 md:left-36 lg:left-48 top-7'
+               fill='white'
+               viewBox='0 0 100 80'
+               width='40'
+               height='40'
+            >
+               <rect width='50' height='5'></rect>
+               <rect y='15' width='50' height='5'></rect>
+               <rect y='30' width='50' height='5'></rect>
+            </svg>
+         )}
+         <div
+            className={`grid bg-indigo-600 lg:w-60 shadow-inner h-screen px-1 ease-in-out duration-300 justify-items-center ${
+               !showSidebar ? 'transform -translate-x-60' : 'transform translate-full'
+            }
+           `}
+         >
             <ul className='relative text-lg'>
                <li>
                   <SiBlockchaindotcom className='h-10 w-10 text-white mx-16 my-5 ' />
@@ -39,7 +71,7 @@ const SideBar = (props) => {
                            <BiLogIn className='inline text-white my-4' />
                            <Link
                               to='/login'
-                              className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                              className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                            >
                               Login
                            </Link>
@@ -48,7 +80,7 @@ const SideBar = (props) => {
                      <li className='relative'>
                         <div>
                            <BiHome className='inline text-white my-4' />
-                           <Link to='/' className='text-gray-200 h-12 px-3  hover:text-gray-600'>
+                           <Link to='/' className='text-gray-200 h-12 px-3  hover:text-indigo-300'>
                               Home Page
                            </Link>
                         </div>
@@ -58,7 +90,7 @@ const SideBar = (props) => {
                            <GiPodiumWinner className='inline text-white my-4' />
                            <Link
                               to='/results'
-                              className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                              className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                            >
                               All results
                            </Link>
@@ -72,7 +104,7 @@ const SideBar = (props) => {
                      <li className='relative'>
                         <div>
                            <BiHome className='inline text-white my-4' />
-                           <Link to='/' className='text-gray-200 h-12 px-3  hover:text-gray-600'>
+                           <Link to='/' className='text-gray-200 h-12 px-3  hover:text-indigo-300'>
                               Home Page
                            </Link>
                         </div>
@@ -82,7 +114,7 @@ const SideBar = (props) => {
                            <GiPodiumWinner className='inline text-white my-4' />
                            <Link
                               to='/results'
-                              className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                              className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                            >
                               All results
                            </Link>
@@ -91,7 +123,10 @@ const SideBar = (props) => {
                      <li className='relative'>
                         <div>
                            <BiLogOut className='inline text-white my-4' />
-                           <button className='text-gray-200 h-12 px-3' onClick={logoutHandler}>
+                           <button
+                              className='text-gray-200 h-12 px-3 hover:text-indigo-300'
+                              onClick={logoutHandler}
+                           >
                               Logout
                            </button>
                         </div>
@@ -104,7 +139,7 @@ const SideBar = (props) => {
                      <li className='relative'>
                         <div>
                            <BiHome className='inline text-white my-4' />
-                           <Link to='/' className='text-gray-200 h-12 px-3  hover:text-gray-600'>
+                           <Link to='/' className='text-gray-200 h-12 px-3  hover:text-indigo-300'>
                               Home Page
                            </Link>
                         </div>
@@ -114,7 +149,7 @@ const SideBar = (props) => {
                            <GiVote className='inline text-white my-4' />
                            <Link
                               to='/election'
-                              className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                              className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                            >
                               Vote
                            </Link>
@@ -125,7 +160,7 @@ const SideBar = (props) => {
                            <GiPodiumWinner className='inline text-white my-4' />
                            <Link
                               to='/results'
-                              className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                              className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                            >
                               All results
                            </Link>
@@ -134,7 +169,10 @@ const SideBar = (props) => {
                      <li className='relative'>
                         <div>
                            <BiLogOut className='inline text-white my-4' />
-                           <button className='text-gray-200 h-12 px-3' onClick={logoutHandler}>
+                           <button
+                              className='text-gray-200 h-12 px-3 hover:text-indigo-300'
+                              onClick={logoutHandler}
+                           >
                               Logout
                            </button>
                         </div>
@@ -147,7 +185,7 @@ const SideBar = (props) => {
                      <li className='relative'>
                         <div>
                            <BiHome className='inline text-white my-4' />
-                           <Link to='/' className='text-gray-200 h-12 px-3  hover:text-gray-600'>
+                           <Link to='/' className='text-gray-200 h-12 px-3  hover:text-indigo-300'>
                               Home Page
                            </Link>
                         </div>
@@ -157,7 +195,7 @@ const SideBar = (props) => {
                            <GiVote className='inline text-white my-4' />
                            <Link
                               to='/election'
-                              className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                              className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                            >
                               Manage Election
                            </Link>
@@ -168,7 +206,7 @@ const SideBar = (props) => {
                            <GiPodiumWinner className='inline text-white my-4' />
                            <Link
                               to='/results'
-                              className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                              className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                            >
                               All results
                            </Link>
@@ -179,7 +217,7 @@ const SideBar = (props) => {
                            <HiUserGroup className='inline text-white my-4' />
                            <Link
                               to='/users'
-                              className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                              className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                            >
                               All users
                            </Link>
@@ -188,7 +226,10 @@ const SideBar = (props) => {
                      <li className='relative'>
                         <div>
                            <BiLogOut className='inline text-white my-4' />
-                           <button className='text-gray-200 h-12 px-3' onClick={logoutHandler}>
+                           <button
+                              className='text-gray-200 h-12 px-3 hover:text-indigo-300'
+                              onClick={logoutHandler}
+                           >
                               Logout
                            </button>
                         </div>
@@ -205,7 +246,10 @@ const SideBar = (props) => {
                         <li className='relative'>
                            <div>
                               <BiHome className='inline text-white my-4' />
-                              <Link to='/' className='text-gray-200 h-12 px-3  hover:text-gray-600'>
+                              <Link
+                                 to='/'
+                                 className='text-gray-200 h-12 px-3  hover:text-indigo-300'
+                              >
                                  Home Page
                               </Link>
                            </div>
@@ -215,7 +259,7 @@ const SideBar = (props) => {
                               <AiOutlinePlusSquare className='inline text-white my-4' />
                               <Link
                                  to='/addElection'
-                                 className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                                 className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                               >
                                  Add Election
                               </Link>
@@ -226,7 +270,7 @@ const SideBar = (props) => {
                               <GiPodiumWinner className='inline text-white my-4' />
                               <Link
                                  to='/results'
-                                 className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                                 className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                               >
                                  All results
                               </Link>
@@ -237,7 +281,7 @@ const SideBar = (props) => {
                               <HiUserGroup className='inline text-white my-4' />
                               <Link
                                  to='/users'
-                                 className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                                 className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                               >
                                  All users
                               </Link>
@@ -246,7 +290,10 @@ const SideBar = (props) => {
                         <li className='relative'>
                            <div>
                               <BiLogOut className='inline text-white my-4' />
-                              <button className='text-gray-200 h-12 px-3' onClick={logoutHandler}>
+                              <button
+                                 className='text-gray-200 h-12 px-3 hover:text-indigo-300'
+                                 onClick={logoutHandler}
+                              >
                                  Logout
                               </button>
                            </div>
@@ -262,7 +309,10 @@ const SideBar = (props) => {
                         <li className='relative'>
                            <div>
                               <BiHome className='inline text-white my-4' />
-                              <Link to='/' className='text-gray-200 h-12 px-3  hover:text-gray-600'>
+                              <Link
+                                 to='/'
+                                 className='text-gray-200 h-12 px-3  hover:text-indigo-300'
+                              >
                                  Home Page
                               </Link>
                            </div>
@@ -272,7 +322,7 @@ const SideBar = (props) => {
                               <GiVote className='inline text-white my-4' />
                               <Link
                                  to='/election'
-                                 className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                                 className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                               >
                                  Manage Election
                               </Link>
@@ -283,7 +333,7 @@ const SideBar = (props) => {
                               <AiOutlineUserAdd className='inline text-white my-4' />
                               <Link
                                  to='/addCandidate'
-                                 className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                                 className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                               >
                                  Add Candidate
                               </Link>
@@ -294,7 +344,7 @@ const SideBar = (props) => {
                               <GiPodiumWinner className='inline text-white my-4' />
                               <Link
                                  to='/results'
-                                 className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                                 className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                               >
                                  All results
                               </Link>
@@ -305,7 +355,7 @@ const SideBar = (props) => {
                               <HiUserGroup className='inline text-white my-4' />
                               <Link
                                  to='/users'
-                                 className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                                 className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                               >
                                  All users
                               </Link>
@@ -314,7 +364,10 @@ const SideBar = (props) => {
                         <li className='relative'>
                            <div>
                               <BiLogOut className='inline text-white my-4' />
-                              <button className='text-gray-200 h-12 px-3' onClick={logoutHandler}>
+                              <button
+                                 className='text-gray-200 h-12 px-3 hover:text-indigo-300'
+                                 onClick={logoutHandler}
+                              >
                                  Logout
                               </button>
                            </div>
@@ -329,7 +382,7 @@ const SideBar = (props) => {
                            <AiFillEdit className='inline text-white my-4' />
                            <Link
                               to='/edituser'
-                              className='text-gray-200 h-12 px-3  hover:text-gray-600'
+                              className='text-gray-200 h-12 px-3  hover:text-indigo-300'
                            >
                               Edit your address
                            </Link>
@@ -345,7 +398,13 @@ const SideBar = (props) => {
                </p>
             </div>
          </div>
-         <div className='flex-1'>{props.children}</div>
+         <div
+            className={`${
+               showSidebar ? `flex-1` : `transform -translate-x-40 mx-8`
+            } ease-in-out duration-300`}
+         >
+            {props.children}
+         </div>
       </div>
    );
 };
