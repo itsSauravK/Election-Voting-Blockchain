@@ -1,15 +1,16 @@
 /**
  * @prettier
  */
-import { useContext, useEffect, useState } from "react";
-import AuthContext from "../../store/auth-context";
-import Electioneth from "../../ethereum/election";
-import ShowCandidate from "./ShowCandidate";
-import Loading from "../../components/Loading";
-import { useNavigate } from "react-router";
-import StartElection from "./StartElection";
-import EndElection from "./EndElection";
-import { useEndElection } from "../../components/hooks/end-election";
+import { useContext, useEffect, useState } from 'react';
+import AuthContext from '../../store/auth-context';
+import Electioneth from '../../ethereum/election';
+import ShowCandidate from './ShowCandidate';
+import Loading from '../../components/Loading';
+import { useNavigate } from 'react-router';
+import StartElection from './StartElection';
+import EndElection from './EndElection';
+import { useEndElection } from '../../components/hooks/end-election';
+import { Link } from 'react-router-dom';
 
 const Election = () => {
    const { user, election, notify } = useContext(AuthContext);
@@ -18,25 +19,25 @@ const Election = () => {
    const navigate = useNavigate();
    const [candidates, setCandidates] = useState([]);
    const [candidateCount, setCount] = useState(0);
-   const [electionName, setElectionName] = useState("");
+   const [electionName, setElectionName] = useState('');
 
    //for validation
    useEffect(() => {
       (async () => {
          if (!user) {
-            notify("Please login first", "error");
-            navigate("/login");
+            notify('Please login first', 'error');
+            navigate('/login');
          } else {
             //get intial value of validAccount, if the user is using right ethereum ot not
             //getAccount();
             //checking if there is no ongoing election
-            if (election === "0x0000000000000000000000000000000000000000") {
-               navigate("/");
+            if (election === '0x0000000000000000000000000000000000000000') {
+               navigate('/');
             }
             //election.ongoing is only true if admin adds an election
-            if (user.electionOngoing === false && user.role !== "admin") {
-               notify("There is no ongoing election", "error");
-               navigate("/");
+            if (user.electionOngoing === false && user.role !== 'admin') {
+               notify('There is no ongoing election', 'error');
+               navigate('/');
             }
          }
       })();
@@ -46,7 +47,7 @@ const Election = () => {
       (async () => {
          //try{
          setLoading(true);
-         if (election !== "0x0000000000000000000000000000000000000000") {
+         if (election !== '0x0000000000000000000000000000000000000000') {
             const Election = Electioneth(election);
             //getting candidate count
             let count = await Election.methods.candidateCount().call();
@@ -74,14 +75,14 @@ const Election = () => {
    }, []);
 
    // //use effect to remove bug where user rejects second transaction while ending election
-   useEndElection("election", setLoading);
+   useEndElection('election', setLoading);
 
    console.log(tempCandidate);
    return (
       <>
          {!loading && candidateCount === 0 && <p>No candidates</p>}
          {!loading &&
-            election !== "0x0000000000000000000000000000000000000000" &&
+            election !== '0x0000000000000000000000000000000000000000' &&
             candidateCount >= 0 && (
                <>
                   <h1>{electionName}</h1>
@@ -112,10 +113,13 @@ const Election = () => {
                            ))}
                      </tbody>
                   </table>
-                  {user && !user.electionOngoing && user.role === "admin" && (
-                     <StartElection setLoading={setLoading} />
+                  {user && !user.electionOngoing && user.role === 'admin' && (
+                     <>
+                        <StartElection setLoading={setLoading} />
+                        <Link to='/addCandidate '>Add candidate</Link>
+                     </>
                   )}
-                  {user && user.electionOngoing && user.role === "admin" && (
+                  {user && user.electionOngoing && user.role === 'admin' && (
                      <EndElection setLoading={setLoading} />
                   )}
                </>

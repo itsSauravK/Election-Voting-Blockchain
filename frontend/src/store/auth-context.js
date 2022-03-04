@@ -90,12 +90,18 @@ export const AuthContextProvider = (props) => {
       return () => b;
    }, [setUser]);
 
-   //this use effect is to get deployed election
+   // this use effect is to get deployed election
    useEffect(() => {
       const getAddress = async () => {
          setLoading(true);
-         let address = await factory.methods.deployedElection().call();
-         setElection(address);
+         let address;
+         try {
+            address = await factory.methods.deployedElection().call();
+            setElection(address);
+         } catch (err) {
+            notify(err, 'error');
+         }
+
          console.log(election);
          setLoading(false);
       };
