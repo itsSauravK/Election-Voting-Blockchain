@@ -7,6 +7,7 @@ import Electioneth from '../../ethereum/election';
 import axios from 'axios';
 import web3 from '../../ethereum/web3';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
    const { user, validAccount, notify, election, setUser } = useContext(AuthContext);
@@ -80,7 +81,11 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
                </td>
             )}
             {/* <td><button onClick={voteHandler}>Vote</button></td> */}
+            {user && user.role === 'admin' && !user.electionOngoing}
             <td>{candidate.url}</td>
+            <td>
+               <Link to='/editCandidate'>Edit Candidate</Link>
+            </td>
          </tr>
       </>
    );

@@ -80,12 +80,12 @@ const Election = () => {
    console.log(tempCandidate);
    return (
       <>
+         {!loading && candidateCount >= 0 && <h1>{electionName}</h1>}
          {!loading && candidateCount === 0 && <p>No candidates</p>}
          {!loading &&
             election !== '0x0000000000000000000000000000000000000000' &&
-            candidateCount >= 0 && (
+            candidateCount > 0 && (
                <>
-                  <h1>{electionName}</h1>
                   <p>Candidates{candidateCount}</p>
 
                   <table>
