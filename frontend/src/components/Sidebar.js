@@ -402,7 +402,7 @@ const SideBar = (props) => {
             className={`${
                showSidebar
                   ? `flex-1`
-                  : `flex-1 transform lg:-translate-x-60 lg:ml-60 md:ml-48 ml-8 -translate-x-48  border-2 border-red-900 bg-gray-50 px-2`
+                  : `flex-1 transform lg:-translate-x-60 lg:ml-60 md:ml-48 ml-14 -translate-x-48  border-2 border-red-900 bg-gray-50 px-2`
             } ease-in-out duration-300`}
          >
             {props.children}
