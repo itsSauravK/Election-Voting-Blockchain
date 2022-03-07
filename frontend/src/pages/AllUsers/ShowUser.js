@@ -26,12 +26,38 @@ const ShowUser = ({ id, user, setLoading, loading, setUsers }) => {
    return (
       <>
          {!loading && (
-            <p>
-               {user.name} {user.email} {user.role} {user.eAddress}
-            </p>
-         )}
-         {!loading && !user.electionOngoing && (
-            <button onClick={deleteUserHandler}>Delete user</button>
+            <tr>
+               <td className='px-6 py-4 whitespace-nowrap'>
+                  <div className='flex items-center'>
+                     <div className=''>
+                        <div className='text-sm font-medium text-gray-900'>{user.name}</div>
+                        <div className='text-sm text-gray-500'>{user.email}</div>
+                     </div>
+                  </div>
+               </td>
+               <td className='px-6 py-4 whitespace-nowrap '>
+                  <div className='text-xs text-gray-900'>{user.eAddress}</div>
+               </td>
+               <td className='px-5 py-4 whitespace-nowrap'>
+                  <span
+                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full  ${
+                        user.hasVoted ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                     }`}
+                  >
+                     {' '}
+                     {user.hasVoted && <>Voted</>}
+                     {!user.hasVoted && <>Not voted</>}{' '}
+                  </span>
+               </td>
+               <td className='px-3 py-4 whitespace-nowrap text-sm text-gray-500'>{user.role}</td>
+               {!user.electionOngoing && (
+                  <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+                     <a onClick={deleteUserHandler} class='text-red-600 hover:text-red-900'>
+                        Delete
+                     </a>
+                  </td>
+               )}
+            </tr>
          )}
       </>
    );

@@ -40,25 +40,73 @@ const AllUser = () => {
    return (
       <>
          {loading && <Loading />}
-         {!loading &&
-            users.length > 0 &&
-            users.map((singleUser, element) => (
-               <ShowUser
-                  key={element}
-                  id={singleUser._id}
-                  user={singleUser}
-                  setLoading={setLoading}
-                  loading={loading}
-                  setUsers={setUsers}
-               />
-            ))}
+         <div className='flex flex-col mt-5'>
+            <div className='-my-2 overflow-x-auto sm:-mx-6 lg:px-8'>
+               <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
+                  <div>
+                     <h2 className='mt-5 text-center text-3xl font-bold mb-8 text-gray-900'>
+                        All users
+                     </h2>
+                  </div>
+                  <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
+                     <table className='min-w-full divide-y divide-gray-300 overflow-x-scroll '>
+                        <thead className='bg-indigo-500'>
+                           <tr>
+                              <th
+                                 scope='col'
+                                 class='px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'
+                              >
+                                 Name
+                              </th>
+                              <th
+                                 scope='col'
+                                 className='px-6 mx-12 py-3 text-left text-xs font-medium text-white uppercase tracking-wider max-w-md'
+                              >
+                                 Ethereum Address
+                              </th>
+                              <th
+                                 scope='col'
+                                 className='px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'
+                              >
+                                 Status
+                              </th>
+                              <th
+                                 scope='col'
+                                 className='px-2 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'
+                              >
+                                 Role
+                              </th>
+                              {user && !user.electionOngoing && (
+                                 <th scope='col' className='relative px-6 py-3'>
+                                    <span className='sr-only'>Delete</span>
+                                 </th>
+                              )}
+                           </tr>
+                        </thead>
+                        <tbody className='bg-white divide-y divide-gray-200'>
+                           {users.length > 0 &&
+                              users.map((singleUser, element) => (
+                                 <ShowUser
+                                    key={element}
+                                    id={singleUser._id}
+                                    user={singleUser}
+                                    setLoading={setLoading}
+                                    loading={loading}
+                                    setUsers={setUsers}
+                                 />
+                              ))}
+                        </tbody>
+                     </table>
+                  </div>
+                  {!loading && user && user.electionOngoing && (
+                     <button className='border border-transparent py-2 mt-5 w-40 rounded-md text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed'>
+                        <Link to='/addUser'> Register user</Link>
+                     </button>
+                  )}
+               </div>
+            </div>
+         </div>
          {!loading && users.length === 0 && <p>No user</p>}
-         {!loading && users && <p>{users.length} users</p>}
-         {!loading && user && !user.electionOngoing && (
-            <button>
-               <Link to='/addUser'> Register user</Link>
-            </button>
-         )}
       </>
    );
 };
