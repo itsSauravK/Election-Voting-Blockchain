@@ -82,7 +82,6 @@ const AddCandidate = () => {
             </form>
          )}
          {loading && <Loading />}
-         <p>{link}</p>
       </>
    );
 };
