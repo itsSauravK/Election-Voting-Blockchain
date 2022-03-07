@@ -6,6 +6,7 @@ import axios from 'axios';
 import Loading from '../components/Loading';
 import { useNavigate } from 'react-router';
 import AuthContext from '../store/auth-context';
+import { AiFillLock, AiOutlineMail } from 'react-icons/ai';
 const Login = () => {
    const { user, setUser, notify } = useContext(AuthContext);
    const [email, setEmail] = useState('');
@@ -17,6 +18,10 @@ const Login = () => {
 
    const sendOTP = async (event) => {
       event.preventDefault();
+      if (email.trim().length === 0) {
+         notify('Enter an email please', 'error');
+         return;
+      }
       setSent(true);
       setLoading(true);
       //sending OTP
@@ -64,17 +69,97 @@ const Login = () => {
    return (
       <>
          {!loading && (
-            <form onSubmit={loginHandler}>
-               <label>Email</label>
-               <input value={email} onChange={(e) => setEmail(e.target.value)}></input>
-               <label>Otp</label>
-               {sent && <input value={otp} onChange={(e) => setOtp(e.target.value)}></input>}
-               <button type='button' onClick={sendOTP}>
-                  Send OTP
-               </button>
-               {sent && <button type='submit'>Login</button>}
-            </form>
+            <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-16 sm:px-6 lg:px-8'>
+               <div className='max-w-md w-full  space-y-8'>
+                  <div>
+                     <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
+                        Login
+                     </h2>
+                  </div>
+                  <form className='mt-8 space-y-6' onSubmit={loginHandler}>
+                     <div className='rounded-md shadow-sm space-y-4'>
+                        {/* Email */}
+                        <div>
+                           <label
+                              htmlFor='email'
+                              className='block text-sm font-medium text-gray-700'
+                           >
+                              Email
+                           </label>
+                           <div className='mt-1 relative rounded-md shadow-sm'>
+                              <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                                 <AiOutlineMail
+                                    className='h-5 w-5 text-gray-400'
+                                    aria-hidden='true'
+                                 />
+                              </div>
+                              <input
+                                 type='email'
+                                 name='email'
+                                 id='email'
+                                 className='focus:ring-pink-500 py-2 focus:border-pink-500 block lg:w-full md:w-full sm:w-32 pl-10 sm:text-sm border-gray-300 rounded-md'
+                                 placeholder='you@example.com'
+                                 value={email}
+                                 onChange={(e) => setEmail(e.target.value)}
+                                 required
+                              />
+                           </div>
+                        </div>
+
+                        {/* OTP */}
+                        {sent && (
+                           <div>
+                              <label
+                                 htmlFor='OTP'
+                                 className='block text-sm font-medium text-gray-700'
+                              >
+                                 OTP
+                              </label>
+
+                              <div className='mt-1 relative rounded-md shadow-sm'>
+                                 <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                                    <AiFillLock
+                                       className='h-5 w-5 text-gray-400'
+                                       aria-hidden='true'
+                                    />
+                                 </div>
+
+                                 <input
+                                    name='otp'
+                                    id='otp'
+                                    className='focus:ring-pink-500 py-2 focus:border-pink-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
+                                    value={otp}
+                                    onChange={(e) => setOtp(e.target.value)}
+                                    required
+                                 />
+                              </div>
+                           </div>
+                        )}
+                     </div>
+                     {sent && (
+                        <div>
+                           <button
+                              type='submit'
+                              className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 disabled:opacity-50 disabled:cursor-not-allowed'
+                           >
+                              Sign In
+                           </button>
+                        </div>
+                     )}
+                     <div>
+                        <button
+                           type='button'
+                           onClick={sendOTP}
+                           className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 disabled:opacity-50 disabled:cursor-not-allowed'
+                        >
+                           Send OTP
+                        </button>
+                     </div>
+                  </form>
+               </div>
+            </div>
          )}
+
          {loading && <Loading />}
       </>
    );

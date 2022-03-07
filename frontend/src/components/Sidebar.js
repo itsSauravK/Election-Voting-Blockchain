@@ -51,8 +51,8 @@ const SideBar = (props) => {
             </svg>
          )}
          <div
-            className={`grid bg-indigo-500 lg:w-60 shadow-inner h-screen px-1 ease-in-out duration-300 justify-items-center ${
-               !showSidebar ? 'transform -translate-x-60' : 'transform translate-full'
+            className={`grid bg-indigo-500 lg:w-60 h-screen px-1 ease-in-out duration-300 justify-items-center ${
+               !showSidebar ? 'transform -translate-x-60' : 'transform translate-full '
             }
            `}
          >
@@ -402,7 +402,7 @@ const SideBar = (props) => {
             className={`${
                showSidebar
                   ? `flex-1`
-                  : `flex-1 transform lg:-translate-x-60 -translate-x-48 md:mx-2 sm:mx-3 mx-2`
+                  : `flex-1 transform lg:-translate-x-60 lg:ml-60 md:ml-48 ml-8 -translate-x-48  border-2 border-red-900 bg-gray-50 px-2`
             } ease-in-out duration-300`}
          >
             {props.children}
