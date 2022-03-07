@@ -12,6 +12,8 @@ const Login = () => {
    const [email, setEmail] = useState('');
    const [otp, setOtp] = useState('');
    const [loading, setLoading] = useState(false);
+   const [disable, setDisable] = useState(false);
+   const [seconds, setSeconds] = useState(10);
    //variable to show otp input and button
    const [sent, setSent] = useState(false);
    const navigate = useNavigate();
@@ -24,12 +26,17 @@ const Login = () => {
       }
       setSent(true);
       setLoading(true);
+      let interval = null;
       //sending OTP
       try {
          await axios.post('/election/generateOtp', {
             email,
          });
          notify('OTP has been sent to the email', 'success');
+         setDisable(true);
+         interval = setInterval(() => {
+            setSeconds((seconds) => seconds > 0 && seconds - 1);
+         }, 1000);
       } catch (err) {
          setSent(false);
          notify(err.response.data.errMessage, 'error');
@@ -65,6 +72,7 @@ const Login = () => {
       if (user) {
          navigate('/');
       }
+      !(seconds > 0) && setDisable(false);
    });
    return (
       <>
@@ -97,7 +105,7 @@ const Login = () => {
                                  type='email'
                                  name='email'
                                  id='email'
-                                 className='focus:ring-pink-500 py-2 focus:border-pink-500 block lg:w-full md:w-full sm:w-32 pl-10 sm:text-sm border-gray-300 rounded-md'
+                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-32 pl-10 sm:text-sm border-gray-300 rounded-md'
                                  placeholder='you@example.com'
                                  value={email}
                                  onChange={(e) => setEmail(e.target.value)}
@@ -127,11 +135,16 @@ const Login = () => {
                                  <input
                                     name='otp'
                                     id='otp'
-                                    className='focus:ring-pink-500 py-2 focus:border-pink-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
+                                    className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
                                     value={otp}
                                     onChange={(e) => setOtp(e.target.value)}
                                     required
                                  />
+                                 {disable && (
+                                    <div className='fixed text-xs text-gray-500'>
+                                       Can send OTP again in : {seconds}
+                                    </div>
+                                 )}
                               </div>
                            </div>
                         )}
@@ -140,21 +153,23 @@ const Login = () => {
                         <div>
                            <button
                               type='submit'
-                              className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 disabled:opacity-50 disabled:cursor-not-allowed'
+                              className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed'
                            >
                               Sign In
                            </button>
                         </div>
                      )}
-                     <div>
-                        <button
-                           type='button'
-                           onClick={sendOTP}
-                           className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 disabled:opacity-50 disabled:cursor-not-allowed'
-                        >
-                           Send OTP
-                        </button>
-                     </div>
+                     {!disable && (
+                        <div>
+                           <button
+                              type='button'
+                              onClick={sendOTP}
+                              className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed'
+                           >
+                              Send OTP
+                           </button>
+                        </div>
+                     )}
                   </form>
                </div>
             </div>
