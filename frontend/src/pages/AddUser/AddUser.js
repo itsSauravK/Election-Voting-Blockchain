@@ -60,7 +60,7 @@ const AddUser = () => {
                <div className='max-w-md w-full  space-y-8'>
                   <div>
                      <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-                        Register a user
+                        Register an user
                      </h2>
                   </div>
                   <form className='mt-8 space-y-6' onSubmit={userRegisterHandler}>
@@ -116,7 +116,7 @@ const AddUser = () => {
                                  id='name'
                                  className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm border-gray-300 rounded-md'
                                  value={name}
-                                 placeholder='Enter your name'
+                                 placeholder="Enter user's name"
                                  onChange={(e) => setName(e.target.value)}
                                  required
                               />
