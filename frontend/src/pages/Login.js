@@ -13,20 +13,23 @@ const Login = () => {
    const [otp, setOtp] = useState('');
    const [loading, setLoading] = useState(false);
    const [disable, setDisable] = useState(false);
-   const [seconds, setSeconds] = useState(10);
+   const [seconds, setSeconds] = useState(15);
    //variable to show otp input and button
    const [sent, setSent] = useState(false);
    const navigate = useNavigate();
-
+   let interval = null;
    const sendOTP = async (event) => {
       event.preventDefault();
       if (email.trim().length === 0) {
          notify('Enter an email please', 'error');
          return;
       }
+      clearInterval(interval);
       setSent(true);
       setLoading(true);
-      let interval = null;
+
+      interval = null;
+      setSeconds(15);
       //sending OTP
       try {
          await axios.post('/election/generateOtp', {
@@ -35,8 +38,14 @@ const Login = () => {
          notify('OTP has been sent to the email', 'success');
          setDisable(true);
          interval = setInterval(() => {
-            setSeconds((seconds) => seconds > 0 && seconds - 1);
+            if (seconds > 0) {
+               setSeconds((seconds) => seconds > 0 && seconds - 1);
+            } else {
+               console.log('clear interval');
+               clearInterval(interval);
+            }
          }, 1000);
+         setSeconds(15);
       } catch (err) {
          setSent(false);
          notify(err.response.data.errMessage, 'error');
