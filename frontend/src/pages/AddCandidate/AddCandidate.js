@@ -9,6 +9,8 @@ import Loading from '../../components/Loading';
 import web3 from '../../ethereum/web3';
 import AuthContext from '../../store/auth-context';
 import Electioneth from '../../ethereum/election';
+import { MdOutlineDriveFileRenameOutline, MdOutlineDescription } from 'react-icons/md';
+import { AiOutlineCloudUpload } from 'react-icons/ai';
 
 const AddCandidate = () => {
    const { election, validAccount, notify } = useContext(AuthContext);
@@ -58,8 +60,117 @@ const AddCandidate = () => {
       }
       setLoading(false);
    };
+
    return (
       <>
+         {!loading && (
+            <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-16 sm:px-6 lg:px-8'>
+               <div className='max-w-md w-full  space-y-8'>
+                  <div>
+                     <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
+                        Add a Candidate
+                     </h2>
+                  </div>
+                  <form className='mt-8 space-y-6' onSubmit={addCandidateHandler}>
+                     <div className='rounded-md shadow-sm space-y-4'>
+                        {/* Name */}
+
+                        <div>
+                           <label
+                              htmlFor='name'
+                              className='block text-sm font-medium text-gray-700'
+                           >
+                              Username
+                           </label>
+
+                           <div className='mt-1 relative rounded-md shadow-sm'>
+                              <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                                 <MdOutlineDriveFileRenameOutline
+                                    className='h-5 w-5 text-gray-400'
+                                    aria-hidden='true'
+                                 />
+                              </div>
+
+                              <input
+                                 name='name'
+                                 id='name'
+                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm border-gray-300 rounded-md'
+                                 value={name}
+                                 placeholder="Enter candidate's name"
+                                 onChange={(e) => setName(e.target.value)}
+                                 required
+                              />
+                           </div>
+                        </div>
+                        {/* Description*/}
+                        <div>
+                           <label
+                              htmlFor='description'
+                              className='block text-sm font-medium text-gray-700'
+                           >
+                              Description
+                           </label>
+                           <div className='mt-1 relative rounded-md shadow-sm'>
+                              <div className='absolute mt-2 left-0 pl-3 flex items-center pointer-events-none'>
+                                 <MdOutlineDescription
+                                    className='h-5 w-5 text-gray-400'
+                                    aria-hidden='true'
+                                 />
+                              </div>
+                              <textarea
+                                 type='text'
+                                 rows='10'
+                                 name='description'
+                                 id='description'
+                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm border-gray-300 rounded-md'
+                                 placeholder="Add candidate's description"
+                                 value={description}
+                                 onChange={(e) => {
+                                    setDescription(e.target.value);
+                                 }}
+                                 required
+                              />
+                           </div>
+                        </div>
+                        <div>
+                           <label
+                              htmlFor='image'
+                              className='block text-sm font-medium text-gray-700'
+                           >
+                              Upload image
+                           </label>
+                           <div className='mt-1 relative bg-gray-50'>
+                              <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                                 <AiOutlineCloudUpload
+                                    className='h-5 w-5 text-gray-400'
+                                    aria-hidden='true'
+                                 />
+                              </div>
+                              <input
+                                 type='file'
+                                 onChange={(e) => setPic(e.target.files[0])}
+                                 accept='image/png, image/jpeg'
+                                 name='image'
+                                 id='image'
+                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm'
+                                 required
+                              />
+                           </div>
+                        </div>
+                     </div>
+
+                     <div>
+                        <button
+                           type='submit'
+                           className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed'
+                        >
+                           Add Candidate
+                        </button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         )}
          {!loading && (
             <form onSubmit={addCandidateHandler}>
                <label>Name</label>
