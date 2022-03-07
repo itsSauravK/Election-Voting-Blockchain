@@ -133,15 +133,7 @@ const EditUser = () => {
                </div>
             </div>
          )}
-         {!loading && (
-            <form onSubmit={editUserHandler}>
-               <label>Name</label>
-               <input value={name} onChange={(e) => setName(e.target.value)}></input>
-               <label>Ethereum Address</label>
-               <input value={eAddress} onChange={(e) => setEAddress(e.target.value)}></input>
-               <button type='submit'>Edit User</button>
-            </form>
-         )}
+
          {loading && <Loading />}
       </>
    );

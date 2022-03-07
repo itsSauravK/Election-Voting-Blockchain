@@ -10,6 +10,7 @@ import web3 from '../../ethereum/web3';
 import AuthContext from '../../store/auth-context';
 import Electioneth from '../../ethereum/election';
 import { MdOutlineDriveFileRenameOutline, MdOutlineDescription } from 'react-icons/md';
+import { AiOutlineCloudUpload } from 'react-icons/ai';
 
 const AddCandidate = () => {
    const { election, validAccount, notify } = useContext(AuthContext);
@@ -140,7 +141,7 @@ const AddCandidate = () => {
                            </label>
                            <div className='mt-1 relative bg-gray-50'>
                               <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-                                 <MdOutlineDescription
+                                 <AiOutlineCloudUpload
                                     className='h-5 w-5 text-gray-400'
                                     aria-hidden='true'
                                  />
