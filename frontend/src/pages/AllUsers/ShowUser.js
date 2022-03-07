@@ -52,7 +52,7 @@ const ShowUser = ({ id, user, setLoading, loading, setUsers }) => {
                <td className='px-3 py-4 whitespace-nowrap text-sm text-gray-500'>{user.role}</td>
                {!user.electionOngoing && (
                   <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                     <a onClick={deleteUserHandler} class='text-red-600 hover:text-red-900'>
+                     <a onClick={deleteUserHandler} className='text-red-600 hover:text-red-900'>
                         Delete
                      </a>
                   </td>

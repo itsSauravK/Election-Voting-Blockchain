@@ -51,7 +51,7 @@ const SideBar = (props) => {
             </svg>
          )}
          <div
-            className={`grid bg-indigo-600 lg:w-60 h-screen px-1 ease-in-out duration-300 justify-items-center ${
+            className={`grid bg-indigo-500 lg:w-60 h-screen px-1 ease-in-out duration-300 justify-items-center ${
                !showSidebar ? 'transform -translate-x-60' : 'transform translate-full '
             }
            `}
