@@ -96,10 +96,9 @@ const Election = () => {
                <>
                   {user && user.electionOngoing && !user.hasVoted && <p>Vote</p>}
                   {/* <th>Vote</th> */}
-
-                  {candidateCount &&
-                     candidates.map((candidate, index) => (
-                        <div className='grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1'>
+                  <div className='grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1'>
+                     {candidateCount &&
+                        candidates.map((candidate, index) => (
                            <ShowCandidate
                               key={index}
                               id={index}
@@ -107,8 +106,8 @@ const Election = () => {
                               candidateCount={candidateCount}
                               setLoading={setLoading}
                            />
-                        </div>
-                     ))}
+                        ))}
+                  </div>
                   <div className='inline-flex mt-3'>
                      {user && !user.electionOngoing && user.role === 'admin' && (
                         <>

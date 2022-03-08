@@ -84,10 +84,7 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
                </div>
 
                <div className='py-4 px-2 flex flex-col justify-start md:max-w-l lg:max-w-md'>
-                  <p className='text-gray-700 mb-4 text-sm'>
-                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
-                     eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p
-                  </p>
+                  <p className='text-gray-700 mb-4 text-sm'>{candidate.description}</p>
                   {user && user.electionOngoing && !user.hasVoted && (
                      <button
                         onClick={voteHandler}

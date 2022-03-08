@@ -44,9 +44,8 @@ const ShowUser = ({ id, user, setLoading, loading, setUsers }) => {
                         user.hasVoted ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                      }`}
                   >
-                     {' '}
                      {user.hasVoted && <>Voted</>}
-                     {!user.hasVoted && <>Not voted</>}{' '}
+                     {!user.hasVoted && <>Not voted</>}
                   </span>
                </td>
                <td className='px-3 py-4 whitespace-nowrap text-sm text-gray-500'>{user.role}</td>

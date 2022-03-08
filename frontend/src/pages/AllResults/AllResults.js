@@ -30,13 +30,13 @@ const AllResults = () => {
                               <tr>
                                  <th
                                     scope='col'
-                                    class='px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'
+                                    className='px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'
                                  >
                                     Name
                                  </th>
                                  <th
                                     scope='col'
-                                    class='px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'
+                                    className='px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider'
                                  >
                                     Address
                                  </th>
@@ -76,6 +76,9 @@ const AllResults = () => {
                            </tbody>
                         </table>
                      </div>
+                     <button className='border border-transparent py-2 mt-5 w-40 rounded-md text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed'>
+                        <Link to='/'> Home Page</Link>
+                     </button>
                   </div>
                </div>
             </div>
