@@ -73,9 +73,9 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
       <>
          <div className='flex justify-center mt-5 mx-5'>
             <div className='flex flex-col lg:flex-row  rounded-none shadow-lg bg-gray-200'>
-               <div className='my-auto mx-auto items-center justify-center pl-2'>
+               <div className='my-auto mx-auto items-center justify-center pl-2 '>
                   <img
-                     className=' lg:h-20 lg:w-20 md:h-16 md:w-16 sm:w-32 sm:h-32 w-32 h-32 rounded-full border-r-8'
+                     className='mt-3 lg:h-20 lg:w-20 md:h-16 md:w-16 sm:w-32 sm:h-32 rounded-full'
                      src={`${candidate.url}`}
                   />
                   <h5 className='text-gray-900 lg:text-lg md:text-md text-center font-medium mb-2'>
@@ -83,7 +83,7 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
                   </h5>
                </div>
 
-               <div className='p-6 flex flex-col justify-start md:max-w-l lg:max-w-md'>
+               <div className='py-4 px-2 flex flex-col justify-start md:max-w-l lg:max-w-md'>
                   <p className='text-gray-700 mb-4 text-sm'>
                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
                      eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p
