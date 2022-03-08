@@ -40,8 +40,8 @@ const AllUser = () => {
    return (
       <>
          {loading && <Loading />}
-         <div className='flex flex-col mt-5'>
-            <div className='-my-2 overflow-x-auto sm:-mx-6 lg:px-8'>
+         <div className='flex flex-col mt-5 overflow-x-hidden overflow-y-hidden'>
+            <div className='-my-2 overflow-x-auto sm:-mx-8 sm:px-4 lg:px-8'>
                <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
                   <div>
                      <h2 className='mt-5 text-center text-3xl font-bold mb-8 text-gray-900'>
@@ -98,6 +98,21 @@ const AllUser = () => {
                         </tbody>
                      </table>
                   </div>
+                  <div className='flex items-center justify-center space-x-1'>
+                     <a
+                        href='#'
+                        className='flex items-center px-4 py-2 text-gray-500 bg-gray-300 rounded-md'
+                     >
+                        Previous
+                     </a>
+                     <a
+                        href='#'
+                        class='px-4 py-2 font-bold text-gray-500 bg-gray-300 rounded-md hover:bg-blue-400 hover:text-white'
+                     >
+                        Next
+                     </a>
+                  </div>
+
                   {!loading && user && !user.electionOngoing && (
                      <button className='border border-transparent py-2 mt-5 w-40 rounded-md text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed'>
                         <Link to='/addUser'> Register user</Link>

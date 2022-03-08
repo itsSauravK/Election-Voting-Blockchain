@@ -80,47 +80,53 @@ const Election = () => {
    console.log(tempCandidate);
    return (
       <>
-         {!loading && candidateCount >= 0 && <h1>{electionName}</h1>}
-         {!loading && candidateCount === 0 && <p>No candidates</p>}
+         {!loading && candidateCount >= 0 && (
+            <h2 className='mt-5 text-center text-3xl font-bold mb-8 text-gray-900'>
+               {electionName}
+            </h2>
+         )}
+         {!loading && candidateCount === 0 && (
+            <h2 className='mt-5 text-center text-3xl font-bold mb-8 text-gray-900'>
+               No Candidates
+            </h2>
+         )}
          {!loading &&
             election !== '0x0000000000000000000000000000000000000000' &&
             candidateCount > 0 && (
                <>
-                  <p>Candidates{candidateCount}</p>
+                  {user && user.electionOngoing && !user.hasVoted && <p>Vote</p>}
+                  {/* <th>Vote</th> */}
 
-                  <table>
-                     <thead>
-                        <tr>
-                           <th>Name</th>
-                           <th>Description</th>
-                           <th>Votes</th>
-                           {user && user.electionOngoing && !user.hasVoted && <th>Vote</th>}
-                           {/* <th>Vote</th> */}
-                           <th>Image</th>
-                        </tr>
-                     </thead>
-
-                     <tbody>
-                        {candidateCount &&
-                           candidates.map((candidate, index) => (
-                              <ShowCandidate
-                                 key={index}
-                                 id={index}
-                                 candidate={candidate}
-                                 candidateCount={candidateCount}
-                                 setLoading={setLoading}
-                              />
-                           ))}
-                     </tbody>
-                  </table>
-                  {user && !user.electionOngoing && user.role === 'admin' && (
-                     <>
-                        <StartElection setLoading={setLoading} />
-                        <Link to='/addCandidate '>Add candidate</Link>
-                     </>
-                  )}
+                  {candidateCount &&
+                     candidates.map((candidate, index) => (
+                        <div className='grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1'>
+                           <ShowCandidate
+                              key={index}
+                              id={index}
+                              candidate={candidate}
+                              candidateCount={candidateCount}
+                              setLoading={setLoading}
+                           />
+                        </div>
+                     ))}
+                  <div className='inline-flex mt-3'>
+                     {user && !user.electionOngoing && user.role === 'admin' && (
+                        <>
+                           <button className='lg:w-40 md:w-30 md:ml-7 lg:ml-7 ml-6 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'>
+                              <StartElection setLoading={setLoading} />
+                           </button>
+                           <Link to='/addCandidate '>
+                              <button className='lg:w-40 md:w-30 ml-2 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'>
+                                 Add Candidate
+                              </button>
+                           </Link>
+                        </>
+                     )}
+                  </div>
                   {user && user.electionOngoing && user.role === 'admin' && (
-                     <EndElection setLoading={setLoading} />
+                     <button className='w-40 ml-6 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'>
+                        <EndElection setLoading={setLoading} />
+                     </button>
                   )}
                </>
             )}

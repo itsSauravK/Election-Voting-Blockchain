@@ -71,7 +71,36 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
    };
    return (
       <>
-         <tr>
+         <div className='flex justify-center mt-5 mx-5'>
+            <div className='flex flex-col lg:flex-row  rounded-none shadow-lg bg-gray-200'>
+               <div className='my-auto mx-auto items-center justify-center pl-2'>
+                  <img
+                     className=' lg:h-20 lg:w-20 md:h-16 md:w-16 sm:w-32 sm:h-32 w-32 h-32 rounded-full border-r-8'
+                     src={`${candidate.url}`}
+                  />
+                  <h5 className='text-gray-900 lg:text-lg md:text-md text-center font-medium mb-2'>
+                     {candidate.name}
+                  </h5>
+               </div>
+
+               <div className='p-6 flex flex-col justify-start md:max-w-l lg:max-w-md'>
+                  <p className='text-gray-700 mb-4 text-sm'>
+                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
+                     eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p
+                  </p>
+                  {user && user.electionOngoing && !user.hasVoted && (
+                     <button
+                        onClick={voteHandler}
+                        className='relative w-full border border-transparent py-2 mt-5  rounded-sm text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'
+                     >
+                        Vote
+                     </button>
+                  )}
+               </div>
+            </div>
+         </div>
+
+         {/* <tr>
             <td>{candidate.name}</td>
             <td>{candidate.description}</td>
             <td>{vote}</td>
@@ -81,12 +110,12 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
                </td>
             )}
             {/* <td><button onClick={voteHandler}>Vote</button></td> */}
-            {user && user.role === 'admin' && !user.electionOngoing}
+         {/* {user && user.role === 'admin' && !user.electionOngoing}
             <td>{candidate.url}</td>
             <td>
                <Link to='/editCandidate'>Edit Candidate</Link>
             </td>
-         </tr>
+         </tr>  */}
       </>
    );
 };

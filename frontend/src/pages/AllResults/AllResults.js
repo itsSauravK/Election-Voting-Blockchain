@@ -16,8 +16,8 @@ const AllResults = () => {
    return (
       <>
          {!loading && results.length !== 0 && (
-            <div className='flex flex-col mt-5'>
-               <div className='-my-2 overflow-x-auto sm:-mx-6 lg:px-8'>
+            <div className='flex flex-col mt-5 overflow-x-hidden overflow-y-hidden'>
+               <div className='-my-2 overflow-x-auto sm:px-4 sm:-mx-6 lg:px-8'>
                   <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
                      <div>
                         <h2 className='mt-5 text-center text-3xl font-bold mb-8 text-gray-900'>
