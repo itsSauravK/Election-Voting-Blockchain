@@ -62,7 +62,7 @@ export const AuthContextProvider = (props) => {
          const accounts = await window.ethereum.enable();
          if (user) {
             //accounts = await web3.eth.getAccounts()
-            console.log(user);
+
             if (accounts[0] && user.eAddress)
                setValidAccount(accounts[0].toUpperCase() === user.eAddress.toUpperCase());
          }
@@ -101,8 +101,6 @@ export const AuthContextProvider = (props) => {
          } catch (err) {
             notify(err, 'error');
          }
-
-         console.log(election);
          setLoading(false);
       };
       getAddress();

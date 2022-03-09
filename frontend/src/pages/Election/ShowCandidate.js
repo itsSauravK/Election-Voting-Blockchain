@@ -72,10 +72,10 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
    return (
       <>
          <div className='flex justify-center mt-5 mx-5'>
-            <div className='flex flex-col lg:flex-row  rounded-none shadow-lg bg-gray-200'>
+            <div className='flex filter drop-shadow-xl flex-col lg:flex-row rounded-lg hover:shadow-xl shadow-lg bg-gray-200'>
                <div className='my-auto mx-auto items-center justify-center pl-2 '>
                   <img
-                     className='mt-3 lg:h-20 lg:w-20 md:h-16 md:w-16 sm:w-32 sm:h-32 rounded-full'
+                     className='mt-3 lg:h-20 max-w-lg lg:w-20 md:h-16 md:w-16 w-32 h-32 rounded-full object-cover'
                      src={`${candidate.url}`}
                   />
                   <h5 className='text-gray-900 lg:text-lg md:text-md text-center font-medium mb-2'>
@@ -88,7 +88,7 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
                   {user && user.electionOngoing && !user.hasVoted && (
                      <button
                         onClick={voteHandler}
-                        className='relative w-full border border-transparent py-2 mt-5  rounded-sm text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'
+                        className='mx-auto relative w-3/4 rounded-lg border border-transparent py-2 mt-5 text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'
                      >
                         Vote
                      </button>
@@ -96,7 +96,6 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
                </div>
             </div>
          </div>
-
          {/* <tr>
             <td>{candidate.name}</td>
             <td>{candidate.description}</td>
