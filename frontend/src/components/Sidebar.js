@@ -23,33 +23,20 @@ const SideBar = (props) => {
    };
    return (
       <div className='flex '>
-         {!showSidebar ? (
-            <svg
-               onClick={() => setShowSidebar(!showSidebar)}
-               className='fixed  z-30 flex items-center cursor-pointer left-10 top-7'
-               fill='blue'
-               viewBox='0 0 100 80'
-               width='40'
-               height='40'
-            >
-               <rect width='50' height='5'></rect>
-               <rect y='15' width='50' height='5'></rect>
-               <rect y='30' width='50' height='5'></rect>
-            </svg>
-         ) : (
-            <svg
-               onClick={() => setShowSidebar(!showSidebar)}
-               className='fixed  z-30 flex items-center cursor-pointer left-36 md:left-36 lg:left-48 top-7'
-               fill='white'
-               viewBox='0 0 100 80'
-               width='40'
-               height='40'
-            >
-               <rect width='50' height='5'></rect>
-               <rect y='15' width='50' height='5'></rect>
-               <rect y='30' width='50' height='5'></rect>
-            </svg>
-         )}
+         <svg
+            onClick={() => setShowSidebar(!showSidebar)}
+            className={`fixed  z-30 flex items-center cursor-pointer left-10 top-7 ease-in-out duration-300 ${
+               showSidebar && 'left-36 md:left-36 lg:left-48'
+            }`}
+            fill={`${showSidebar ? 'white' : 'blue'}`}
+            viewBox='0 0 100 80'
+            width='40'
+            height='40'
+         >
+            <rect width='50' height='5'></rect>
+            <rect y='15' width='50' height='5'></rect>
+            <rect y='30' width='50' height='5'></rect>
+         </svg>
          <div
             className={`grid bg-indigo-500 lg:w-60 h-screen px-1 ease-in-out duration-300 justify-items-center ${
                !showSidebar ? 'transform -translate-x-60' : 'transform translate-full '
@@ -402,7 +389,7 @@ const SideBar = (props) => {
             className={`${
                showSidebar
                   ? `flex-1`
-                  : `flex-1 transform lg:-translate-x-60 lg:ml-60 md:ml-48 ml-14 -translate-x-48 bg-gray-50 px-2`
+                  : `flex-1 transform lg:-translate-x-60 lg:ml-60 md:ml-48 ml-32 -translate-x-48 bg-gray-50 px-2`
             } ease-in-out duration-300`}
          >
             {props.children}

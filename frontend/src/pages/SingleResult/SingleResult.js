@@ -125,7 +125,7 @@ const SingleResult = () => {
                      <ShowResult key={index} id={index} candidate={candidate} isDraw={isDraw} />
                   ))}
                </div>
-               <button className='border  relative border-transparent ml-6 py-2 mt-5 w-40 rounded-md text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'>
+               <button className='border relative border-transparent ml-6 py-2 mt-5 w-40 rounded-md text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'>
                   <Link to='/results'> All results</Link>
                </button>
             </div>

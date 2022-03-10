@@ -7,7 +7,7 @@ const ShowResult = ({ candidate, isDraw, id }) => {
          <div
             className={`flex filter  flex-col lg:flex-row rounded-lg  ${
                id === 0 && !isDraw && candidate.votes > 0
-                  ? 'bg-green-200 drop-shadow-3xl shadow-card'
+                  ? 'bg-winner drop-shadow-3xl shadow-card'
                   : 'bg-gray-200 drop-shadow-md shadow-xl'
             } ${id === 0 && isDraw && 'bg-indigo-200 drop-shadow-xl shadow-xl'}`}
          >
@@ -28,7 +28,7 @@ const ShowResult = ({ candidate, isDraw, id }) => {
                </p>
                <div className='inline-flex'>
                   <p
-                     className={`${!isDraw && id === 0 && 'text-green-900'} ${
+                     className={`${!isDraw && id === 0 && 'text-indigo-700'} ${
                         isDraw && id === 0 && 'text-indigo-900'
                      } ${id !== 0 && 'text-black'}
                       text-lg bold`}
@@ -36,7 +36,7 @@ const ShowResult = ({ candidate, isDraw, id }) => {
                      Votes:{candidate.votes}
                   </p>
                   {id === 0 && !isDraw && candidate.votes > 0 && (
-                     <p className='flex text-green-900 text-lg bold ml-auto pr-4'>Winner</p>
+                     <p className='flex text-indigo-700 text-lg bold ml-auto pr-4'>Winner</p>
                   )}
                   {id === 0 && isDraw && (
                      <p className='flex text-indigo-900 text-lg bold ml-auto pr-4'>Draw</p>

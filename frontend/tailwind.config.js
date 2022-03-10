@@ -4,7 +4,10 @@ module.exports = {
    theme: {
       extend: {
          boxShadow: {
-            card: '14px 14px 28px rgba(79,117,92,1),-14px -14px 28px rgba(229,255,255,0.5)',
+            card: '14px 14px 28px rgba(144,166,186,1),-14px -14px 28px rgba(230,255,255,0.5)',
+         },
+         backgroundColor: {
+            winner: '#bbd8f2',
          },
       },
    },
