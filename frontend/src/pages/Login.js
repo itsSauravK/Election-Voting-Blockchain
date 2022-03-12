@@ -114,7 +114,7 @@ const Login = () => {
                                  type='email'
                                  name='email'
                                  id='email'
-                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm border-gray-300 rounded-md'
+                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
                                  placeholder='you@example.com'
                                  value={email}
                                  onChange={(e) => setEmail(e.target.value)}
@@ -144,7 +144,7 @@ const Login = () => {
                                  <input
                                     name='otp'
                                     id='otp'
-                                    className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm border-gray-300 rounded-md'
+                                    className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
                                     value={otp}
                                     onChange={(e) => setOtp(e.target.value)}
                                     required

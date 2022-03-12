@@ -79,7 +79,7 @@ const AddElection = () => {
                               <input
                                  name='electionName'
                                  id='electionName'
-                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm border-gray-300 rounded-md'
+                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
                                  value={electionName}
                                  onChange={(e) => setElectionName(e.target.value)}
                                  placeholder="Enter Election's name"

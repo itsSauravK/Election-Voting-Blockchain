@@ -86,7 +86,7 @@ const EditUser = () => {
                               <input
                                  name='name'
                                  id='name'
-                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm border-gray-300 rounded-md'
+                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
                                  value={name}
                                  placeholder="Enter user's name"
                                  onChange={(e) => setName(e.target.value)}
@@ -109,7 +109,7 @@ const EditUser = () => {
                               <input
                                  name='eAddress'
                                  id='eAddress'
-                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm border-gray-300 rounded-md'
+                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
                                  placeholder='0x0000000000000000000000000000000000000000'
                                  value={eAddress}
                                  onChange={(e) => {

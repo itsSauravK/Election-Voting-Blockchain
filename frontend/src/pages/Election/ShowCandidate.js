@@ -19,7 +19,6 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
          let newCandidate = await Election.methods.candidates(id).call();
          let candidateVote = newCandidate.votes;
          setVote(candidateVote);
-         console.log(vote);
       };
       b();
       return () => b;
