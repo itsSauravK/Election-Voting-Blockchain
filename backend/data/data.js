@@ -25,29 +25,4 @@ exports.emails = [
       name: 'voter4',
       eAddress: '0xgf73b10B2d4Be26ad3ab231ea3e9A4f900680309',
    },
-   {
-      email: 'voter5@gmail.com',
-      name: 'voter5',
-      eAddress: '0xgft3b10B2d4Be26ad3ab231ea3e9A4f900680309',
-   },
-   {
-      email: 'voter6@gmail.com',
-      name: 'voter6',
-      eAddress: '0x6fhhb10B2d4Be26ad3ab231ea3e9A4f900680309',
-   },
-   {
-      email: 'voter7@gmail.com',
-      name: 'voter7',
-      eAddress: '0x6ef73b10B2d4Be26ad3ab231ea3e9A4f900680309',
-   },
-   {
-      email: 'voter8@gmail.com',
-      name: 'voter8',
-      eAddress: '0xif73b10B2d4Be26ad3ab231ea3e9A4f900680309',
-   },
-   {
-      email: 'voter9@gmail.com',
-      name: 'voter9',
-      eAddress: '0x6if73b10B2d4Be26ad3ab231ea3e9A4f900680309',
-   },
 ];

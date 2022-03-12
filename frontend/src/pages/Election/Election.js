@@ -113,9 +113,8 @@ const Election = () => {
                      <div className='flex mt-3 relative justify-center'>
                         {user && !user.electionOngoing && user.role === 'admin' && (
                            <>
-                              <button className='lg:w-40 md:w-30 md:ml-7 lg:ml-7 ml-6 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'>
-                                 <StartElection setLoading={setLoading} />
-                              </button>
+                              <StartElection setLoading={setLoading} />
+
                               <Link to='/addCandidate '>
                                  <button className='lg:w-40 md:w-30 ml-2 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'>
                                     Add Candidate
@@ -124,7 +123,7 @@ const Election = () => {
                            </>
                         )}
                      </div>
-                     <div class='flex justify-end lg:px-24 md:px-8 px-4 '>
+                     <div className='flex justify-end lg:px-24 md:px-8 px-4 '>
                         {user && user.electionOngoing && user.role === 'admin' && (
                            <button className='w-40 ml-6 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'>
                               <EndElection setLoading={setLoading} />

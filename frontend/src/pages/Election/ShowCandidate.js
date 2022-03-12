@@ -71,7 +71,7 @@ const ShowCandidate = ({ id, candidate, candidateCount, setLoading }) => {
    };
    return (
       <>
-         <div className='flex justify-center mt-5 mx-5'>
+         <div className='flex justify-start mt-5 mx-5'>
             <div className='flex filter drop-shadow-xl flex-col lg:flex-row rounded-lg hover:shadow-xl shadow-lg bg-gray-200'>
                <div className='my-auto mx-auto items-center justify-center pl-2 '>
                   <img

@@ -37,7 +37,8 @@ const AddElection = () => {
             });
          notify('Election added', 'success');
          //test this
-         setElection(await factory.methods.deployedElection().call());
+         let address = await factory.methods.deployedElection().call();
+         setElection(address);
          navigate('/election');
       } catch (err) {
          notify(err.message, 'error');

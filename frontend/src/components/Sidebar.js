@@ -6,7 +6,13 @@ import { BiHome, BiLogIn, BiLogOut } from 'react-icons/bi';
 import { HiUserGroup } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import AuthContext from '../store/auth-context';
-import { AiFillEdit, AiOutlinePlusSquare, AiOutlineUserAdd, AiFillLinkedin } from 'react-icons/ai';
+import {
+   AiFillEdit,
+   AiOutlinePlusSquare,
+   AiOutlineUserAdd,
+   AiFillLinkedin,
+   AiFillMail,
+} from 'react-icons/ai';
 const SideBar = (props) => {
    const { user, setUser, notify, election } = useContext(AuthContext);
    const [showSidebar, setShowSidebar] = useState(false);
@@ -381,14 +387,20 @@ const SideBar = (props) => {
             <div className='mt-auto'>
                <div className='border-t border-white py-4'></div>
                <p className='text-gray-200 my-5'>
-                  Contact developer <AiFillLinkedin className='inline' />
+                  Contact developer{' '}
+                  <a href='https://www.linkedin.com/in/saurav0211/'>
+                     <AiFillLinkedin className='inline' />
+                  </a>
+                  <a href='mailto:ksaurav0211@gmail.com'>
+                     <AiFillMail className='inline' />
+                  </a>
                </p>
             </div>
          </div>
          <div
             className={`${
                showSidebar
-                  ? `flex-1`
+                  ? `flex-1 `
                   : `flex-1 transform lg:-translate-x-60 lg:ml-60 md:ml-48 ml-32 -translate-x-48 bg-gray-50 px-2`
             } ease-in-out duration-300`}
          >

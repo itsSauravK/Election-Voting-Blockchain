@@ -3,7 +3,7 @@
  */
 const ShowResult = ({ candidate, isDraw, id }) => {
    return (
-      <div className='flex justify-center mt-5 mx-5 mb-3'>
+      <div className='flex justify-start mt-5 mx-5 mb-3'>
          <div
             className={`flex filter  flex-col lg:flex-row rounded-lg  ${
                id === 0 && !isDraw && candidate.votes > 0
