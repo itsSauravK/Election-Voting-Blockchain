@@ -123,11 +123,12 @@ const AddCandidate = () => {
                                  name='description'
                                  id='description'
                                  className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm border-gray-300 rounded-md'
-                                 placeholder="Add candidate's description"
+                                 placeholder="Add candidate's description. Max: 150 characters"
                                  value={description}
                                  onChange={(e) => {
                                     setDescription(e.target.value);
                                  }}
+                                 maxLength='150'
                                  required
                               />
                            </div>
@@ -162,7 +163,7 @@ const AddCandidate = () => {
                      <div>
                         <button
                            type='submit'
-                           className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed'
+                           className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'
                         >
                            Add Candidate
                         </button>
@@ -170,27 +171,6 @@ const AddCandidate = () => {
                   </form>
                </div>
             </div>
-         )}
-         {!loading && (
-            <form onSubmit={addCandidateHandler}>
-               <label>Name</label>
-               <br />
-               <input value={name} onChange={(e) => setName(e.target.value)} />
-               <br />
-               <label>Description</label>
-               <br />
-               <input value={description} onChange={(e) => setDescription(e.target.value)} />
-               <br />
-               <label>Image</label>
-               <br />
-               <input
-                  type='file'
-                  onChange={(e) => setPic(e.target.files[0])}
-                  accept='image/png, image/jpeg'
-               />
-               <br />
-               <button type='submit'>Add user</button>
-            </form>
          )}
          {loading && <Loading />}
       </>

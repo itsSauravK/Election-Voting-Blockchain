@@ -9,9 +9,9 @@ election address was created using our currentFactory contract address
 
 */
 
-import { useEffect, useContext } from "react";
-import Factory from "../../ethereum/factory";
-import AuthContext from "../../store/auth-context";
+import { useEffect, useContext } from 'react';
+import Factory from '../../ethereum/factory';
+import AuthContext from '../../store/auth-context';
 export const useGetResults = (setLoading) => {
    const { setResults, setNames, notify } = useContext(AuthContext);
 
@@ -25,7 +25,7 @@ export const useGetResults = (setLoading) => {
             setResults(electionResults);
             setNames(electionNames);
          } catch (err) {
-            notify(err.message, "error");
+            notify(err.message, 'error');
          }
          setLoading(false);
       };

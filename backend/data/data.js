@@ -20,4 +20,9 @@ exports.emails = [
       name: 'voter3',
       eAddress: '0x6f73b10B2d4Be26ad3ab231ea3e9A4f900680309',
    },
+   {
+      email: 'voter4@gmail.com',
+      name: 'voter4',
+      eAddress: '0xgf73b10B2d4Be26ad3ab231ea3e9A4f900680309',
+   },
 ];

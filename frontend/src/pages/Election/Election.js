@@ -44,7 +44,7 @@ const Election = () => {
    });
    //to get all candidates
    useEffect(() => {
-      (async () => {
+      let b = async () => {
          //try{
          setLoading(true);
          if (election !== '0x0000000000000000000000000000000000000000') {
@@ -52,7 +52,6 @@ const Election = () => {
             //getting candidate count
             let count = await Election.methods.candidateCount().call();
             setCount(+count);
-            console.log(election);
 
             //getting election name
             let name = await Election.methods.electionName().call();
@@ -71,36 +70,35 @@ const Election = () => {
             //console.log(tempCandidate);
          }
          setLoading(false);
-      })();
+      };
+      b();
+      return () => {
+         b = null;
+      };
    }, []);
 
    // //use effect to remove bug where user rejects second transaction while ending election
    useEndElection('election', setLoading);
 
-   console.log(tempCandidate);
    return (
       <>
-         {!loading && candidateCount >= 0 && <h1>{electionName}</h1>}
-         {!loading && candidateCount === 0 && <p>No candidates</p>}
+         {!loading && candidateCount >= 0 && (
+            <h2 className='mt-5 text-center text-3xl font-bold mb-8 text-gray-900'>
+               {electionName}
+            </h2>
+         )}
+         {!loading && candidateCount === 0 && (
+            <h2 className='mt-5 text-center text-3xl font-bold mb-8 text-gray-900'>
+               No Candidates
+            </h2>
+         )}
          {!loading &&
             election !== '0x0000000000000000000000000000000000000000' &&
             candidateCount > 0 && (
                <>
-                  <p>Candidates{candidateCount}</p>
-
-                  <table>
-                     <thead>
-                        <tr>
-                           <th>Name</th>
-                           <th>Description</th>
-                           <th>Votes</th>
-                           {user && user.electionOngoing && !user.hasVoted && <th>Vote</th>}
-                           {/* <th>Vote</th> */}
-                           <th>Image</th>
-                        </tr>
-                     </thead>
-
-                     <tbody>
+                  {/* <th>Vote</th> */}
+                  <div className=''>
+                     <div className='grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 '>
                         {candidateCount &&
                            candidates.map((candidate, index) => (
                               <ShowCandidate
@@ -111,17 +109,28 @@ const Election = () => {
                                  setLoading={setLoading}
                               />
                            ))}
-                     </tbody>
-                  </table>
-                  {user && !user.electionOngoing && user.role === 'admin' && (
-                     <>
-                        <StartElection setLoading={setLoading} />
-                        <Link to='/addCandidate '>Add candidate</Link>
-                     </>
-                  )}
-                  {user && user.electionOngoing && user.role === 'admin' && (
-                     <EndElection setLoading={setLoading} />
-                  )}
+                     </div>
+                     <div className='flex mt-3 relative justify-center'>
+                        {user && !user.electionOngoing && user.role === 'admin' && (
+                           <>
+                              <StartElection setLoading={setLoading} />
+
+                              <Link to='/addCandidate '>
+                                 <button className='lg:w-40 md:w-30 ml-2 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'>
+                                    Add Candidate
+                                 </button>
+                              </Link>
+                           </>
+                        )}
+                     </div>
+                     <div className='flex justify-end lg:px-24 md:px-8 px-4 '>
+                        {user && user.electionOngoing && user.role === 'admin' && (
+                           <button className='w-40 ml-6 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'>
+                              <EndElection setLoading={setLoading} />
+                           </button>
+                        )}
+                     </div>
+                  </div>
                </>
             )}
          {loading && <Loading />}

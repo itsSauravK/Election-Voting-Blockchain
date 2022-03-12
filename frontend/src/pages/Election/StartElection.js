@@ -56,7 +56,12 @@ const StartElection = ({ setLoading }) => {
 
    return (
       <>
-         <button onClick={startElectionHandler}>Start Election</button>
+         <button
+            className='lg:w-40 md:w-30 md:ml-7 lg:ml-7 ml-6 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-sm text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'
+            onClick={startElectionHandler}
+         >
+            Start Election
+         </button>
       </>
    );
 };
