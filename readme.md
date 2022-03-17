@@ -74,3 +74,13 @@ After you have pushed your commit. Go to github, repository and create a pull re
 > There might be conflicts which you have to fix manually
 
 # Ouput
+
+## Landing Page
+
+![landing page](https://user-images.githubusercontent.com/47532084/158785605-a27959d8-0bfa-4ed8-9144-33a05b00119e.png)
+
+## Login Page
+
+![login-1](https://user-images.githubusercontent.com/47532084/158785678-3b90575b-b9fa-45c1-86fe-37da09de7eff.png)
+![login-2](https://user-images.githubusercontent.com/47532084/158785696-1cd9c50d-e624-4607-a9a2-59207d0ba72a.png)
+![login-3](https://user-images.githubusercontent.com/47532084/158785703-dbf7b5a8-8521-4058-86a8-c90513867968.png)
