@@ -94,7 +94,7 @@ const AddCandidate = () => {
                               <input
                                  name='name'
                                  id='name'
-                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm border-gray-300 rounded-md'
+                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
                                  value={name}
                                  placeholder="Enter candidate's name"
                                  onChange={(e) => setName(e.target.value)}
@@ -122,7 +122,7 @@ const AddCandidate = () => {
                                  rows='10'
                                  name='description'
                                  id='description'
-                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm border-gray-300 rounded-md'
+                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md'
                                  placeholder="Add candidate's description. Max: 150 characters"
                                  value={description}
                                  onChange={(e) => {
@@ -153,7 +153,7 @@ const AddCandidate = () => {
                                  accept='image/png, image/jpeg'
                                  name='image'
                                  id='image'
-                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block lg:w-full md:w-full sm:w-auto pl-10 sm:text-sm'
+                                 className='focus:ring-indigo-500 py-2 focus:border-indigo-500 block w-full  pl-10 sm:text-sm'
                                  required
                               />
                            </div>

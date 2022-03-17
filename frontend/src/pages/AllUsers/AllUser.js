@@ -97,20 +97,6 @@ const AllUser = () => {
                         </tbody>
                      </table>
                   </div>
-                  <div className='flex items-center justify-center space-x-1'>
-                     <a
-                        href='#'
-                        className='flex items-center px-4 py-2 text-gray-500 bg-gray-300 rounded-md'
-                     >
-                        Previous
-                     </a>
-                     <a
-                        href='#'
-                        className='px-4 py-2 font-bold text-gray-500 bg-gray-300 rounded-md hover:bg-blue-400 hover:text-white'
-                     >
-                        Next
-                     </a>
-                  </div>
 
                   {!loading && user && !user.electionOngoing && (
                      <button className='border border-transparent py-2 mt-5 w-40 rounded-md text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'>

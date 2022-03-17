@@ -13,9 +13,10 @@ import {
    AiFillLinkedin,
    AiFillMail,
 } from 'react-icons/ai';
-const SideBar = ({ setShowSidebar, showSidebar }) => {
+import SideBar from './Sidebar';
+const Layout = ({ children }) => {
    const { user, setUser, notify, election } = useContext(AuthContext);
-
+   const [showSidebar, setShowSidebar] = useState(false);
    const logoutHandler = async () => {
       try {
          await axios.get('/election/logout', {
@@ -28,27 +29,9 @@ const SideBar = ({ setShowSidebar, showSidebar }) => {
       }
    };
    return (
-      <>
-         <svg
-            onClick={() => setShowSidebar(!showSidebar)}
-            className={`fixed md:hidden  z-50 flex items-center cursor-pointer left-10 top-7 ease-in-out duration-300 ${
-               showSidebar && 'left-36 md:left-36 lg:left-48'
-            }`}
-            fill={`${showSidebar ? 'white' : 'blue'}`}
-            viewBox='0 0 100 80'
-            width='40'
-            height='40'
-         >
-            <rect width='50' height='5'></rect>
-            <rect y='15' width='50' height='5'></rect>
-            <rect y='30' width='50' height='5'></rect>
-         </svg>
-         <div
-            className={`grid z-30 md:hidden bg-indigo-500 shadow-2xl h-screen px-3 ease-in-out duration-300 justify-items-center fixed ${
-               showSidebar ? 'transform translate-full' : 'transform -translate-x-60'
-            }
-                `}
-         >
+      <div className='flex max-h-screen overflow-y-hidden'>
+         <SideBar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+         <aside className='hidden md:grid h-screen px-4 bg-indigo-500'>
             <ul className='relative text-lg'>
                <li>
                   <SiBlockchaindotcom className='h-10 w-10 text-white mx-16 my-5 ' />
@@ -396,9 +379,16 @@ const SideBar = ({ setShowSidebar, showSidebar }) => {
                   </a>
                </p>
             </div>
-         </div>
-      </>
+         </aside>
+         <main
+            className={`flex-1 overflow-y-auto h-screen ${
+               showSidebar ? 'bg-gray-400 bg-opacity-80  md:bg-inherit md:bg-opacity-0' : ''
+            }`}
+         >
+            {children}
+         </main>
+      </div>
    );
 };
 
-export default SideBar;
+export default Layout;

@@ -17,13 +17,14 @@ import AllUser from './pages/AllUsers/AllUser';
 import AddUser from './pages/AddUser/AddUser';
 import EditUser from './pages/EditUser/EditUser';
 import axios from 'axios';
+import Layout from './components/Layout';
 
 axios.defaults.baseURL = process.env.REACT_APP_BE_URL;
 
 function App() {
    return (
       <BrowserRouter>
-         <SideBar>
+         <Layout>
             <Routes>
                <Route path='/' element={<LandingPage />} />
                <Route path='/login' element={<Login />} />
@@ -38,7 +39,7 @@ function App() {
                <Route path='/editUser' element={<EditUser />} />
                <Route path='/*' element={<p>Wrong page</p>} />
             </Routes>
-         </SideBar>
+         </Layout>
          <ToastContainer />
       </BrowserRouter>
    );
