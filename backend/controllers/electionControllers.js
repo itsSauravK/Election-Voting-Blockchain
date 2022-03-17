@@ -1,6 +1,5 @@
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncError = require('../middlewares/catchAsyncErrors');
-const Election = require('../models/election');
 const User = require('../models/user');
 const sendEmail = require('../utils/sendEmail');
 
