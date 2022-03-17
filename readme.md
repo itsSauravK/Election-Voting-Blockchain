@@ -114,6 +114,7 @@ After you have pushed your commit. Go to github, repository and create a pull re
 ### Payment
 
 <img width="1440" alt="add election -2" src="https://user-images.githubusercontent.com/47532084/158789253-64efd4dd-a4a3-493b-bbe9-88589b4a00cb.png">
+
 ![add election -3](https://user-images.githubusercontent.com/47532084/158789265-d7008017-8078-447d-b530-eee30199cb08.png)
 
 ## Adding Candidates
