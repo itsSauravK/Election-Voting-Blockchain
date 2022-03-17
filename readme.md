@@ -33,6 +33,8 @@ Go to root folder and make .env file
 ACCOUNT_MNEMONIC= <br>
 RINKEBY_ENDPOINT=
 
+> Frontend designed using Tailwind
+
 Go to React root folder and make .env file.
 
 ## .env variables.
@@ -173,7 +175,7 @@ After you have pushed your commit. Go to github, repository and create a pull re
 
 ## Results
 
-### We can view all results conduncted in past in this page
+### We can view all the results conducted in past in this web application
 
 ![Results-1](https://user-images.githubusercontent.com/47532084/158806050-f7ee66ab-d850-4b50-9203-5c0cba5490ac.png)
 
@@ -187,7 +189,7 @@ After you have pushed your commit. Go to github, repository and create a pull re
 
 ## Starting new Election
 
-> Now the admin can start a new election while making any changes in user list as required
+> Now the admin can start a new election while making any changes in the user list as required
 
 ![after-election1](https://user-images.githubusercontent.com/47532084/158806626-42584f08-e840-4868-a492-9227f9b23446.png)
 
