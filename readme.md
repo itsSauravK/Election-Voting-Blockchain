@@ -156,3 +156,43 @@ After you have pushed your commit. Go to github, repository and create a pull re
 ### All users after voting
 
 ![All user after-vote](https://user-images.githubusercontent.com/47532084/158802211-a7385bcb-88d8-4340-a663-2d0935a7df07.png)
+
+## Ending Election
+
+### Payment
+
+<img width="1440" alt="End election-1" src="https://user-images.githubusercontent.com/47532084/158805535-2f149afd-936b-4bee-8cc5-fe80734e306d.png">
+
+<img width="1440" alt="End-Election-2" src="https://user-images.githubusercontent.com/47532084/158805545-5fb23539-3346-4cd4-87e2-db6ab03067c5.png">
+
+### Email
+
+![end-election-3](https://user-images.githubusercontent.com/47532084/158805558-e98f5fbb-ea68-4768-810f-586ba077b59a.png)
+
+## Results
+
+### We can view all results conduncted in past in this page
+
+![Results-1](https://user-images.githubusercontent.com/47532084/158806050-f7ee66ab-d850-4b50-9203-5c0cba5490ac.png)
+
+### Result of the election
+
+![Result 2](https://user-images.githubusercontent.com/47532084/158806065-0b6f8d10-b20d-492b-8b3a-39f481ef07db.png)
+
+### The election process is transparent. All the transactions are visible in Ether Scan <a href="https://rinkeby.etherscan.io/address/0x4b6556C9db0808DeE6684d9c8e74bc91265b7655">-Link</a>
+
+![result -2](https://user-images.githubusercontent.com/47532084/158806070-1108e50d-abaf-4b92-a6a5-3d2b34e4026f.png)
+
+## Starting new Election
+
+> Now the admin can start a new election while making any changes in user list as required
+
+![after-election1](https://user-images.githubusercontent.com/47532084/158806626-42584f08-e840-4868-a492-9227f9b23446.png)
+
+## Flexible desing
+
+> The interface is flexible for all types of devices
+
+![Flexible-1](https://user-images.githubusercontent.com/47532084/158806791-c24bbe3e-640f-4d74-967a-fdc878cd2857.png)
+
+![flexible2](https://user-images.githubusercontent.com/47532084/158806794-249a2140-70fc-4bc1-9b18-b5f85db06f31.png)
