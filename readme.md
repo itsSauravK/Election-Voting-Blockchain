@@ -102,3 +102,11 @@ After you have pushed your commit. Go to github, repository and create a pull re
 ![Edit profile](https://user-images.githubusercontent.com/47532084/158787362-d504e411-e452-488b-bb63-204120275220.png)
 
 > Ethereum address should be corrected before election has started as the user cannot change it later. Election related functions will only be permitted with the ethereum address they are registered with.
+
+## Adding Election
+
+> The Ethereum account used to add election is the only account authorized to add candidates, start election and end election
+
+![Add Election](https://user-images.githubusercontent.com/47532084/158789206-9076bdbe-1344-4ec4-986c-816792a297ac.png)
+<img width="1440" alt="add election -2" src="https://user-images.githubusercontent.com/47532084/158789253-64efd4dd-a4a3-493b-bbe9-88589b4a00cb.png">
+![add election -3](https://user-images.githubusercontent.com/47532084/158789265-d7008017-8078-447d-b530-eee30199cb08.png)
