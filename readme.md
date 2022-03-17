@@ -146,11 +146,13 @@ After you have pushed your commit. Go to github, repository and create a pull re
 ### Voting from admin account
 
 <img width="1440" alt="Vote 1" src="https://user-images.githubusercontent.com/47532084/158801826-442b8cb4-11b6-4490-a84d-db46bf393d1f.png">
+
 ![vote-2](https://user-images.githubusercontent.com/47532084/158801830-e2deb5e1-a112-4750-8f5a-5312116dd8c0.png)
 
 ### Voting from user account
 
 <img width="1440" alt="VOTE-3" src="https://user-images.githubusercontent.com/47532084/158801843-b3fd43c6-91d7-4a46-8be7-106dc39e9b83.png">
+
 ![vote-4](https://user-images.githubusercontent.com/47532084/158802020-13f75949-52b4-4dfc-8988-0ed7d8686ab6.png)
 
 ### All users after voting
