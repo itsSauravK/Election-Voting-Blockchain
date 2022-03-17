@@ -137,6 +137,7 @@ After you have pushed your commit. Go to github, repository and create a pull re
 ## Payment
 
 <img width="1440" alt="Start-Election 1" src="https://user-images.githubusercontent.com/47532084/158793183-1d8dd0a1-c7d4-4072-be88-9c8e19fc7ab7.png">
+
 <img width="1440" alt="startElection-2" src="https://user-images.githubusercontent.com/47532084/158793285-e8bf855e-6721-4582-a509-ff22b17ee5b3.png">
 
 ## Email
