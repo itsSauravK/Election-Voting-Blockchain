@@ -38,7 +38,7 @@ const LandingPage = () => {
                <div className='py-4 px-8 flex flex-col my-auto md:max-w-l lg:max-w-md'>
                   <p className='text-gray-700 mb-4 text-sm'>
                      Welecome to Online Voting System, a secured voting system built using Ethereum
-                     blockchain. Your vote will be confidentail and will not be revealed to anyone
+                     blockchain. Your vote will be confidential and will not be revealed to anyone
                   </p>
                   {/* No user */}
                   {!loading && !user && (
