@@ -193,7 +193,7 @@ After you have pushed your commit. Go to github, repository and create a pull re
 
 ![after-election1](https://user-images.githubusercontent.com/47532084/158806626-42584f08-e840-4868-a492-9227f9b23446.png)
 
-## Flexible desing
+## Flexible designing
 
 > The interface is flexible for all types of devices
 
