@@ -84,3 +84,21 @@ After you have pushed your commit. Go to github, repository and create a pull re
 ![login-1](https://user-images.githubusercontent.com/47532084/158785678-3b90575b-b9fa-45c1-86fe-37da09de7eff.png)
 ![login-2](https://user-images.githubusercontent.com/47532084/158785696-1cd9c50d-e624-4607-a9a2-59207d0ba72a.png)
 ![login-3](https://user-images.githubusercontent.com/47532084/158785703-dbf7b5a8-8521-4058-86a8-c90513867968.png)
+
+## All users , Register User and Edit Profile
+
+### Deleting user and registering new user can only be performed by admin before election starts. Profile editing can be done by all users before election starts.
+
+### All users
+
+![all-users page before starting](https://user-images.githubusercontent.com/47532084/158787034-ddd6d0ed-342b-48ae-a1b1-bdc27d37aa93.png)
+
+### Register User
+
+![Register user](https://user-images.githubusercontent.com/47532084/158787043-8a0ca171-74b2-4442-b9de-ecb39af3c08a.png)
+
+### Edit Profile
+
+![Edit profile](https://user-images.githubusercontent.com/47532084/158787362-d504e411-e452-488b-bb63-204120275220.png)
+
+> Ethereum address should be corrected before election has started as the user cannot change it later. Election related functions will only be permitted with the ethereum address they are registered with.
