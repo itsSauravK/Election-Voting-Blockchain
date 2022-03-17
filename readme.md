@@ -108,5 +108,22 @@ After you have pushed your commit. Go to github, repository and create a pull re
 > The Ethereum account used to add election is the only account authorized to add candidates, start election and end election
 
 ![Add Election](https://user-images.githubusercontent.com/47532084/158789206-9076bdbe-1344-4ec4-986c-816792a297ac.png)
+
+### Payment
+
 <img width="1440" alt="add election -2" src="https://user-images.githubusercontent.com/47532084/158789253-64efd4dd-a4a3-493b-bbe9-88589b4a00cb.png">
 ![add election -3](https://user-images.githubusercontent.com/47532084/158789265-d7008017-8078-447d-b530-eee30199cb08.png)
+
+## Adding Candidates
+
+![addCandidate1](https://user-images.githubusercontent.com/47532084/158790306-c38fb6f6-3ae1-444a-a62a-10ae1d273656.png)
+
+### Payment
+
+<img width="1440" alt="Add Candidate-2" src="https://user-images.githubusercontent.com/47532084/158790291-9558b1e6-a62d-4e9e-856f-a20e88a59bd1.png">
+
+> If any election functionality like adding election, starting election, adding candidates, voting and ending election is done with different ethereum address than what the user is registered with, then the user will get this error
+
+![add candidate-3](https://user-images.githubusercontent.com/47532084/158790598-c8c61703-e834-4b6c-8145-546e77db6aa1.png)
+
+![add candidate-4](https://user-images.githubusercontent.com/47532084/158791174-0d90ed1a-9d49-4ff9-b35e-e9246e43487b.png)
