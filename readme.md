@@ -127,3 +127,16 @@ After you have pushed your commit. Go to github, repository and create a pull re
 ![add candidate-3](https://user-images.githubusercontent.com/47532084/158790598-c8c61703-e834-4b6c-8145-546e77db6aa1.png)
 
 ![add candidate-4](https://user-images.githubusercontent.com/47532084/158791174-0d90ed1a-9d49-4ff9-b35e-e9246e43487b.png)
+
+# Starting Election
+
+> After starting an election, admin will not be able to add candidates and, register and delete users, and all users will not be able to edit their profile
+
+## Payment
+
+<img width="1440" alt="Start-Election 1" src="https://user-images.githubusercontent.com/47532084/158793183-1d8dd0a1-c7d4-4072-be88-9c8e19fc7ab7.png">
+<img width="1440" alt="startElection-2" src="https://user-images.githubusercontent.com/47532084/158793285-e8bf855e-6721-4582-a509-ff22b17ee5b3.png">
+
+## Email
+
+![start-election3](https://user-images.githubusercontent.com/47532084/158793400-86f911e9-2791-41e5-a688-62a00afa05dc.png)
