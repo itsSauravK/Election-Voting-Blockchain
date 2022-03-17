@@ -60,7 +60,7 @@ const EditUser = () => {
                <div className='max-w-md w-full  space-y-8'>
                   <div>
                      <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-                        Edit an user
+                        Edit Profile
                      </h2>
                   </div>
                   <form className='mt-8 space-y-6' onSubmit={editUserHandler}>
@@ -126,7 +126,7 @@ const EditUser = () => {
                            type='submit'
                            className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400'
                         >
-                           Edit User
+                           Edit Profile
                         </button>
                      </div>
                   </form>
