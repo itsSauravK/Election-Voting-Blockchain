@@ -8,7 +8,7 @@
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "prod": "NODE_ENV=production concurrently \"npm run server\" \"npm run client\""
+    "prod": "NODE_ENV=production npm start"
   },
   "author": "Saurav, irfan, prateek",
   "license": "ISC",

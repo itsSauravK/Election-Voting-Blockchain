@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 const errorMiddleware = require('./middlewares/error');
 
@@ -40,10 +41,12 @@ const routes = require('./routes/election');
 app.use('/api/election', users);
 app.use('/api/election', routes);
 
-app.use(express.static(path.join(__dirname, '../frontend/build'))) /
-   app.get('*', (req, res) =>
-      res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'))
-   );
+if (process.env.NODE_ENV == 'production') {
+   app.use(express.static(path.join(__dirname, '../frontend/build'))) /
+      app.get('*', (req, res) =>
+         res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'))
+      );
+}
 
 //Middleware to handle errors
 app.use(errorMiddleware);
