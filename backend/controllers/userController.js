@@ -4,7 +4,7 @@ const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncError = require('../middlewares/catchAsyncErrors');
 const sendToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail');
-
+const sendEmailProd = require('../utils/sendEmailProd');
 const crypto = require('crypto');
 const { send } = require('process');
 
@@ -70,11 +70,19 @@ exports.generateOTP = catchAsyncError(async (req, res, next) => {
    //Sending otp email
    const message = `Your otp to login is ${otp}. It will expire in 5 minutes`;
    try {
-      await sendEmail({
-         email: user.email,
-         subject: 'New Otp',
-         message,
-      });
+      if (process.env.NODE_ENV == 'production') {
+         await sendEmailProd({
+            to: user.email,
+            subject: 'New Otp',
+            html: `<p>${message}</p>`,
+         });
+      } else {
+         await sendEmail({
+            email: user.email,
+            subject: 'New Otp',
+            message,
+         });
+      }
 
       res.status(200).json({
          success: true,
