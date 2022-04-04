@@ -2,7 +2,7 @@ const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncError = require('../middlewares/catchAsyncErrors');
 const User = require('../models/user');
 const sendEmail = require('../utils/sendEmail');
-
+const sendEmailProd = require('../utils/sendEmailProd');
 //Function to start election
 // => api/election/startElection
 // admin access
@@ -106,11 +106,19 @@ async function updateUserVote(user) {
 //function to send email that election has started
 async function electionEmail(user, message, next) {
    try {
-      await sendEmail({
-         email: user.email,
-         subject: 'Election',
-         message,
-      });
+      if (process.env.NODE_ENV == 'production') {
+         await sendEmailProd({
+            to: user.email,
+            subject: 'Election',
+            html: `<p>${message}</p>`,
+         });
+      } else {
+         await sendEmail({
+            email: user.email,
+            subject: 'Election',
+            message,
+         });
+      }
    } catch (error) {
       return next(new ErrorHandler('Internal Server Error', 500));
    }
