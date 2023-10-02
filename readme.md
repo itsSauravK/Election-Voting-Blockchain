@@ -78,6 +78,16 @@ After you have pushed your commit. Go to github, repository and create a pull re
 
 > There might be conflicts which you have to fix manually
 
+# Problem Statement
+
+# Problem Statement
+Elections and voting are the basic mechanisms of a democratic system. There have been various attempts to make modern elections more flexible by using digital technologies. Basic characteristics of free and fair elections are intractability, immutable, transparency and the privacy of the involved actors. This corresponds to a few of the many features of blockchain-like decentralized ownership, the immutability of chain, anonymity and distributed ledger. My problem statement is “To create a robust blockchain based election mechanism that will not only be reliable and secure but also flexible according to the current needs”. The main aim of this proposal is to present a robust blockchain-based election mechanism that not only will be reliable but also flexible according to present needs.
+
+# Architecture
+
+<img width="405" alt="image" src="https://github.com/itsSauravK/Election-Voting-Blockchain/assets/47532084/1563e0df-bf60-48ec-ac5c-6c621b72bb2a">
+
+
 # Ouput
 
 ## Landing Page
